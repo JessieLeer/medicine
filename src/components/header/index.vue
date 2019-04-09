@@ -13,7 +13,7 @@
 			</el-col>
 			<el-col :md='10' :sm='10' class='f-tar'>
 			  <el-menu-item index="/publish" class='f-ib'>
-					<el-button type='primary' size='small'>发布报价</el-button>
+					<el-button type='primary' size='small'>发布询价</el-button>
 				</el-menu-item>
 				<el-menu-item index="/register" class='f-ib' v-if='!user.id'>注册</el-menu-item>
 				<el-menu-item index="/login" class='f-ib' v-if='!user.id'>登录</el-menu-item>
@@ -29,7 +29,6 @@
 						<img v-bind:src='user.headpic ? user.headpic : "http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg"' width='40' class='headpic'>
 					</template>
 					<el-menu-item index="/user">个人中心</el-menu-item>
-					<el-menu-item index="/user/setting">设置</el-menu-item>
 					<el-menu-item index="#" v-on:click='logout'>退出</el-menu-item>
 				</el-submenu>
 			</el-col>

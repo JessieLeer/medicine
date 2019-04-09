@@ -40,7 +40,7 @@
 							</el-col>
 							<el-col :span='4' class='f-tar'>
 								<el-form-item>
-								  <router-link to='/quote'>
+								  <router-link to='/quote/edit'>
 									  <el-button type='primary' size='small'>我要报价</el-button>
 									</router-link>
 								</el-form-item>

@@ -20,6 +20,7 @@ export default {
 			},
 			goods: [
 				{
+					id: '1',
 					name: '阿莫西林胶囊',
 					number: '2000',
 					available: '',
@@ -29,6 +30,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '2',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -38,6 +40,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '3',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -47,6 +50,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '4',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -56,6 +60,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '5',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -65,6 +70,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '6',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -74,6 +80,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '7',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -83,6 +90,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '8',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -92,6 +100,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '9',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',
@@ -101,6 +110,7 @@ export default {
 					flag: 'default'
 				},
 				{
+					id: '10',
 					name: '感冒灵颗粒',
 					number: '1000',
 					available: '',

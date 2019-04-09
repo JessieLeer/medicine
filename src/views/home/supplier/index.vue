@@ -59,7 +59,6 @@
 </template>
 
 <style lang='stylus' scoped>
-@import url("//unpkg.com/element-ui@2.6.3/lib/theme-chalk/index.css")
 @import './index.styl'
 </style>
 

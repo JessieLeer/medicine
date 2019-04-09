@@ -120,7 +120,7 @@
 									<el-form-item label='上传图片'>
 										<el-upload
 											action="https://jsonplaceholder.typicode.com/posts/"
-											v-bind:file-list='form.images'
+											v-bind:file-list='form.image'
 											list-type="picture-card">
 											<i class="el-icon-plus"></i>
 										</el-upload>

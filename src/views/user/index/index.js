@@ -214,21 +214,25 @@ export default {
 			activeName: 'first',
 			inquiries: [
 				{
+					id: '1',
 					name: '阿莫西林颗粒',
 					times: '2201',
 					manufacturer: '新华制药有限公司'
 				},
 				{
+					id: '2',
 					name: '阿莫西林颗粒',
 					times: '2201',
 					manufacturer: '新华制药有限公司'
 				},
 				{
+					id: '3',
 					name: '阿莫西林颗粒',
 					times: '2201',
 					manufacturer: '新华制药有限公司'
 				},
 				{
+					id: '4',
 					name: '阿莫西林颗粒',
 					times: '2201',
 					manufacturer: '新华制药有限公司'
