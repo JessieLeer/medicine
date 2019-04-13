@@ -9,36 +9,11 @@ export default {
 				name: '',
 				status: ''
 			},
+			curpage: 1,
 			customers: [
-				{
-					id: '1',
-					name: '山东东美医药有限公司',
-					description: '这是一家不错的公司',
-					status: '正常',
-					created_at: '2019-09-09 18:09:09'
-				},
-				{
-					id: '2',
-					name: '山东东美医药有限公司',
-					description: '这是一家不错的公司',
-					status: '冻结',
-					created_at: '2019-09-09 18:09:09'
-				},
-				{
-					id: '3',
-					name: '山东东美医药有限公司',
-					description: '这是一家不错的公司',
-					status: '未激活',
-					created_at: '2019-09-09 18:09:09'
-				},
-				{
-					id: '4',
-					name: '山东东美医药有限公司',
-					description: '这是一家不怎么样的公司',
-					status: '正常',
-					created_at: '2019-09-09 18:09:09'
-				},
+				
 			],
+			total: 0,
 			selectedCustomers: [
 				
 			],
@@ -46,22 +21,49 @@ export default {
 		}
 	},
 	computed: {
-		filterCustomers() {
-			return this.customers.filter((item) => {
-				return item.name.indexOf(this.search.name) != -1 && item.status.indexOf(this.search.status) != -1
-			})
+		user() {
+			return this.$store.state.user
 		}
+	},
+	created() {
+		this.index(1)
 	},
 	components: {
 		cheader,
 		caside
 	},
 	methods: {
+		index(page) {
+			this.$http.get('/api/ucenter/customer', {params: {userId: this.user.id, page: page, pageSize: 10, search: this.search}}).then((res) => {
+				this.customers = res.data.data
+				this.total = res.data.total
+			})
+		},
 		resetForm(form) {
 			this.$refs[form].resetFields()
+			this.index(1)
 		},
 		handleSelectionChange(val) {
       this.selectedCustomers = val
-    }
+    },
+		del() {
+			this.$confirm('确定删除?', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+				let arr = []
+        for(let item of this.selectedCustomers) {
+				  arr.push(item.id)
+		  	}
+				this.$http.delete('/api/ucenter/customerDel', {data: {userId: this.user.id, customers: arr}}).then((res) => {
+					console.log(res)
+					this.$message.info(res.data.message)
+					this.index(this.curpage)
+				})
+      }).catch(() => {
+        
+      })
+		}
 	}
 }

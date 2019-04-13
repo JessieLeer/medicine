@@ -104,9 +104,21 @@ export default {
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					this.$router.push({
-						name: 'register1',
-						params: this.form
+					this.$http.post('/api/user/register',this.form).then((res) => {
+						if(res.data.success) {
+							this.$message({
+								message: res.data.message,
+								type: 'success'
+							})
+							this.$store.commit('register',this.form)
+							window.setTimeout(() => {
+								this.$router.push({
+									name: 'register1'
+								})
+							},1500)
+						}else{
+							this.$message.error(res.data.message)
+						}
 					})
         } else {
           return false

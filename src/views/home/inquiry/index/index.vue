@@ -6,13 +6,21 @@
 	  <el-main>
 		  <el-row>
 			  <el-col :span='20'>
-				  <el-input size='small' placeholder="请输入商品或供应商名称" v-model="search.name" class="input-inquiry-select">
-						<el-select v-model="search.range" slot="prepend" placeholder="请选择">
-							<el-option label="全部" value="whole"></el-option>
-							<el-option label="部分" value="part"></el-option>
-						</el-select>
-						<el-button slot="append" icon="el-icon-search"></el-button>
-					</el-input>
+				  <el-form inline>
+						<el-form-item>
+							<el-input size='small' placeholder="请输入商品或供应商名称" v-model="search.name" class="input-inquiry-select">
+								<el-select v-model="search.range" slot="prepend" placeholder="请选择">
+									<el-option label="全网" value="whole"></el-option>
+									<el-option label="部分" value="wholeMine"></el-option>
+								</el-select>
+								<el-button slot="append" icon="el-icon-search" v-on:click='index'></el-button>
+							</el-input>
+						</el-form-item>
+						<el-form-item>
+						  <!--这个只在用户类型为供应商的时候才有,需要做判断-->
+							<el-checkbox v-model="search.quoted" value='true'>我的报价</el-checkbox>
+						</el-form-item>
+					</el-form>
 				</el-col>
 				<el-col :span='4' class='f-tar'>
 				  <el-button type='primary' size='small' v-on:click='isWayShow = true'>新增询价</el-button>

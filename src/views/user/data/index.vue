@@ -9,63 +9,86 @@
 				  <caside active='/user/data'></caside>
 				</el-aside>
 				<el-main class='pt-0'>
-				  <el-form ref='form' :model='form' v-bind:rules='rules' label-width='80px' label-position="left" size='small'>
+				  <el-form ref='form' :model='form' v-bind:rules='rules' size='small'>
 					  <el-row :gutter='20'>
 							<el-col :md='12' :sm='24'>
 								<el-card>
 									<header slot="header" class="clearfix">个人信息</header>
-									<el-form-item label='头像' prop='headpic'>
+									<el-form-item prop='headpic'>
 										<el-upload
 											class="avatar-uploader"
-											action="https://jsonplaceholder.typicode.com/posts/"
+											action="nourl"
+						          :http-request='uploadAvatar'
 											v-bind:show-file-list="false">
 											<img v-if="form.headpic" v-bind:src="form.headpic" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<i slot="tip" class="el-upload__tip">头像</i>
 										</el-upload>
 									</el-form-item>
-									<el-form-item label='用户名' prop='name'>
-										<el-input v-model='form.name'></el-input>
+									<el-form-item prop='name'>
+										<el-input placeholder='用户名' v-model='form.name'></el-input>
 									</el-form-item>
-									<el-form-item label='手机号' prop='phone'>
-										<el-input v-model='form.phone'></el-input>
+									<el-form-item prop='phone'>
+										<el-input placeholder='手机号' v-model='form.phone'></el-input>
 									</el-form-item>
-									<el-form-item label='邮箱' prop='email'>
-										<el-input v-model='form.email' type='email'></el-input>
+									<el-form-item prop='email'>
+										<el-input placeholder='邮箱' v-model='form.email' type='email'></el-input>
 									</el-form-item>
-									<el-form-item label='密码' prop='password'>
-										<el-input v-model='form.password' type='password'></el-input>
+									<el-form-item prop='password'>
+										<el-input placeholder='密码' v-model='form.password' type='password'></el-input>
 									</el-form-item>
-									<el-form-item label='确认密码' prop='password_repeat'>
-										<el-input v-model='form.password_repeat' type='password'></el-input>
+									<el-form-item prop='password_repeat'>
+										<el-input placeholder='确认密码' v-model='form.password_repeat' type='password'></el-input>
 									</el-form-item>
 								</el-card>
 						  </el-col>
 						  <el-col :md='12' :sm='24'>
 								<el-card>
 									<header slot="header" class="clearfix">公司信息</header>
-									<el-form-item label='公司名称' prop='company'>
-										<el-input v-model='form.company'></el-input>
+									<el-form-item prop='company'>
+										<el-input v-model='form.company' placeholder='公司名称'></el-input>
 									</el-form-item>
-									<el-form-item label='单位简称' prop='unit'>
-										<el-input v-model='form.unit'></el-input>
+									<el-form-item prop='unit'>
+										<el-input v-model='form.unit' placeholder='单位简称'></el-input>
 									</el-form-item>
-									<el-form-item label='营业执照' prop='license'>
+									<el-form-item prop='license'>
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
+											:http-request='uploadLicense'
 											:show-file-list="false">
 											<img v-if="form.license" :src="form.license" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<i slot="tip" class="el-upload__tip">营业执照</i>
 										</el-upload>
 									</el-form-item>
-									<el-form-item label='gsp证书' prop='gsp'>
+									<el-form-item prop='gsp'>
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
+											:http-request='uploadGsp'
 											:show-file-list="false">
 											<img v-if="form.gsp" :src="form.gsp" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<i slot="tip" class="el-upload__tip">gsp证书</i>
 										</el-upload>
+									</el-form-item>
+									<el-form-item prop='commission'>
+										<el-upload
+											class="avatar-uploader"
+											action="nourl"
+											:http-request='uploadCommission'
+											:show-file-list="false">
+											<img v-if="form.commission" :src="form.commission" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<i slot="tip" class="el-upload__tip">业务员委托书</i>
+										</el-upload>
+									</el-form-item>
+									<el-form-item prop='regnum'>
+										<el-input v-model="form.regnum" placeholder='工商注册号'></el-input>
+									</el-form-item>
+									<el-form-item prop='regaddress'>
+										<el-input v-model="form.regaddress" placeholder='注册地址'></el-input>
 									</el-form-item>
 								</el-card>
 						  </el-col>

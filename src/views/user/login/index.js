@@ -71,10 +71,35 @@ export default {
 				}
 			})
 		},
-		submit(form) {
+		submit(form,url) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					
+					let params = url == 'loginto' ? this.form.account : this.form.phone
+					this.$http.post(`/api/user/${url}`, params).then((res) => {
+						if(res.data.success) {
+							let user = {}
+							user.id = res.data.data.id
+							user.name = res.data.data.name
+							user.phone = res.data.data.phone
+							user.headpic = res.data.data.photo ? res.data.data.photo : 'http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg'
+							user.type = res.data.data.customerType
+							user.company = res.data.data.group.company
+							user.unit = res.data.data.group.unit
+							user.license = res.data.data.group.license
+							user.gsp = res.data.data.group.gsp
+							user.firstService = res.data.data.group.firstService
+							user.commission = res.data.data.group.commission
+							user.regnum = res.data.data.group.regnum
+							user.regaddress = res.data.data.group.regaddress
+							this.$store.commit('login',user)
+							this.$message.success(res.data.message)
+							window.setTimeout(() => {
+								this.$router.push('/')
+							},1000)
+						}else{
+							this.$message.warning(res.data.message)
+						}
+					})
         } else {
           return false
         }

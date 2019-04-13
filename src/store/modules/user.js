@@ -3,7 +3,6 @@ import axios from 'axios'
 
 // initial state
 const state = {
-	id: 1
 }
 
 // getters
@@ -17,10 +16,13 @@ const actions = {
 
 // mutations
 const mutations = {
-	login(state,user){
-		state.id = 1
+	register(state,user) {
+		state = Object.assign(state,user)
 	},
-	logout(state){
+	login(state,user) {
+		state = Object.assign(state,user)
+	},
+	logout(state) {
 		for(let key in state){
 			delete state[key]
 		}

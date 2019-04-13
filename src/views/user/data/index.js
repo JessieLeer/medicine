@@ -12,6 +12,14 @@ export default {
         return callback(new Error('请输入正确的手机号'))
       }
     }
+		let emailVerify = (rule, value, callback) => {
+			const reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+			if (reg.test(value) || value == undefined || value == '') {
+				callback()
+			} else {
+				return callback(new Error('请输入正确格式的邮箱'))
+			}
+		}
 		let confirmPass = (rule, value, callback) => {
       if (value !== this.form.password) {
         callback(new Error('两次输入密码不一致!'))
@@ -20,9 +28,7 @@ export default {
       }
     }
 		return {
-			form: {
-				
-			},
+			form: this.$store.state.user,
 			rules: {
 				headpic: {
 					required: true,
@@ -40,16 +46,11 @@ export default {
 					trigger: 'blur' 
 				},
 				email: {
-					required: true,
-					message: '请输入邮箱',
+					required: false,
+					validator: emailVerify,
 					trigger: 'blur'
 				},
 				password: [
-					{
-						required: true, 
-            message: '请输入密码',
-            trigger: 'blur'
-					},
 					{
 						min: 6, 
             message: '密码长度不得小于6位',
@@ -62,7 +63,6 @@ export default {
 					}
 				],
 				password_repeat: {
-					required: true,
 					validator: confirmPass, 
 					trigger: 'blur' 
 				},
@@ -94,10 +94,79 @@ export default {
 		caside
 	},
 	methods: {
+		/*上传头像*/
+		uploadAvatar(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.headpic = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		/*上传营业执照*/
+		uploadLicense(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.license = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		/*上传gsp证书*/
+		uploadGsp(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.gsp = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		/*上传业务员委托书*/
+		uploadCommission(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.commission = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					
+					this.$http.post('/api/ucenter/update', this.form).then((res) => {
+						if(res.data.success){
+						  let user = {}
+							user.id = res.data.data.id
+							user.name = res.data.data.name
+							user.phone = res.data.data.phone
+							user.headpic = res.data.data.photo ? res.data.data.photo : 'http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg'
+							user.type = res.data.data.customerType
+							user.company = res.data.data.group.company
+							user.unit = res.data.data.group.unit
+							user.license = res.data.data.group.license
+							user.gsp = res.data.data.group.gsp
+							user.firstService = res.data.data.group.firstService
+							user.commission = res.data.data.group.commission
+							user.regnum = res.data.data.group.regnum
+							user.regaddress = res.data.data.group.regaddress
+							this.$store.commit('login',user)
+							this.$message.success(res.data.message)
+						}else{
+							this.$message.warning(res.data.message)
+						}
+					})
         } else {
           return false
         }

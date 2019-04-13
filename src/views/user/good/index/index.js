@@ -7,154 +7,15 @@ export default {
 		return {
 			search: {
 				name: '',
-				status: '',
-				update_at: ''
+				status: ''
 			},
 			selectedGoods: [],
-			goods: [
-				{
-					id: '1',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '待审核',
-					update_at: '2019-08-12 23:45:12'
-				},
-				{
-					id: '2',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '待审核',
-					update_at: '2019-08-13 23:45:12'
-				},
-				{
-					id: '3',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '已审核',
-					update_at: '2019-08-14 23:45:12'
-				},
-				{
-					id: '4',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '待审核',
-					update_at: '2019-08-15 23:45:12'
-				},
-				{
-					id: '5',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '待审核',
-					update_at: '2019-08-16 23:45:12'
-				},
-				{
-					id: '6',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '已审核',
-					update_at: '2019-08-17 23:45:12'
-				},
-				{
-					id: '7',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '待审核',
-					update_at: '2019-08-18 23:45:12'
-				},
-				{
-					id: '8',
-					name: '阿莫西林胶囊',
-					manufacturer: '山东淄博新达制药邮箱有限公司',
-					specification: '40g*12/盒',
-					status: '待审核',
-					update_at: '2019-08-19 23:45:12'
-				},
-			],
-			cates: [
-				{
-					value: 'food',
-					label: '食物',
-					children: [
-						{
-							value: 'vegetable',
-							label: '蔬菜',
-							children: [
-								{
-									value: 'cabbage',
-									label: '白菜'
-								},
-								{
-									value: 'radish',
-									label: '萝卜'
-								},
-								{
-									value: 'eggplant',
-									label: '茄子'
-								},
-							]
-						},
-						{
-						  value: 'fruit',
-							label: '水果',
-							children: [
-								{
-									value: 'orange',
-									label: '橘子'
-								},
-								{
-									value: 'banana',
-									label: '香蕉'
-								},
-								{
-									value: 'watermelon',
-									label: '西瓜'
-								},
-							]
-						}
-					]
-				},
-				{
-					value: 'cloth',
-					label: '服装',
-					children: [
-						{
-							value: 'mens',
-							label: '男装',
-							children: [
-								{
-									value: 'shirt',
-									label: 'T桖'
-								},
-								{
-									value: 'jacket',
-									label: '夹克'
-								}
-							]
-						},
-						{
-							value: 'womens',
-							label: '女装',
-							children: [
-								{
-									value: 'dress',
-									label: '连衣裙'
-								},
-								{
-									value: 'leggings',
-									label: '打底裤'
-								}
-							]
-						}
-					]
-				}
-			],
+			goods: [],
+			total: 0,
+			curpage: 1,
+			cates: [],
+			brands: [],
+			presclass: [],
 			editFormVisiable: false,
 			form: {
 				
@@ -224,35 +85,93 @@ export default {
 		}
 	},
 	computed: {
-		filterGoods() {
-			return this.goods.filter((item) => {
-				return item.name.indexOf(this.search.name) != -1 && item.status.indexOf(this.search.status) != -1 && item.update_at.indexOf(this.search.update_at) != -1 || item.manufacturer.indexOf(this.search.name) != -1 && item.status.indexOf(this.search.status) != -1 && item.update_at.indexOf(this.search.update_at) != -1
-			})
+		user() {
+			return this.$store.state.user
 		}
 	},
 	components: {
 		cheader,
 		caside
 	},
+	created() {
+		this.index(1)
+		this.cateIndex()
+		this.brandIndex()
+		this.presclassIndex()
+	},
 	methods: {
+		index(page) {
+			this.$http.get('/api/ucenter/product', {params: {userId: this.user.id, search: this.search, page: page, pageSize: 10}}).then((res) => {
+				for(let item of res.data.data) {
+					if(item.image == ''){
+						item.image = []
+					}else {
+						item.image = item.image.split('|')
+					}
+					if(item.cates == ''){
+						item.cates = []
+					}else{
+						item.cates = item.cates.split(',')
+					}
+					if(item.brand) {
+						item.brand = item.brand.id
+					}else{
+						item.brand = ''
+					}
+				}
+				this.goods = res.data.data
+				this.total = res.data.total
+			})
+		},
 		resetForm(form) {
 			this.$refs[form].resetFields()
+			this.index(1)
 		},
 		handleSelectionChange(val) {
       this.selectedGoods = val
     },
-		dayChange(val) {
+		cateIndex() {
+			this.$http.get('/api/category').then((res) => {
+				this.cates = res.data.data
+			})
+		},
+		brandIndex() {
+			this.$http.get('/api/brand').then((res) => {
+				this.brands = res.data.data
+			})
+		},
+		presclassIndex() {
+			this.$http.get('/api/chuffl').then((res) => {
+				this.presclass = res.data.data
+			})
 		},
 		handlEdit(good) {
 			this.form = good
 			this.editFormVisiable = true
 		},
+		uploadImage(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.image.push(res.data.message)
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					console.log('right')
+					this.$http.post('/api/ucenter/productAdd', this.form).then((res) => {
+						if(res.data.success){
+							this.$message.success(res.data.message)
+							this.index(this.curpage)
+						}else{
+							this.$message.error(res.data.message)
+						}
+					})
         } else {
-					console.log('error')
           return false
         }
       })

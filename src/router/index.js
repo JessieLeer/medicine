@@ -66,7 +66,7 @@ export default new Router({
       component: QuoteEdit
     },
 		{
-      path: '/quote/qualification',
+      path: '/quote/qualification/:id',
       name: 'quote_qualification',
       component: QuoteQualification
     },
@@ -103,10 +103,9 @@ export default new Router({
 			  if(from.name == 'register'){
 					next()
 				}else{
-					/*next({
+					next({
 						path: '/register'
-					})*/
-					next()
+					})
 				}
 			}
     },
@@ -118,10 +117,9 @@ export default new Router({
 			  if(from.name == 'register1'){
 					next()
 				}else{
-					/*next({
+					next({
 						path: '/register'
-					})*/
-					next()
+					})
 				}
 			}
     },

@@ -13,12 +13,12 @@
 						<el-row>
 							<el-col :md='12' :sm='12'>
 								<img v-bind:src='user.headpic ? user.headpic : "http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg"' width='30' class='headpic f-fl'>
-								<i class='name f-fsn f-fl'>Hello<b> {{user.name ? user.name : 'Smoky'}}</b>！<i class='f-fs1 f-fsn'>({{user.type ? user.type : '供应商'}})</i></i>
+								<i class='name f-fsn f-fl'>Hello<b> {{user.name}}</b>！<i class='f-fs1 f-fsn'>({{user.type}})</i></i>
 							</el-col>
 							<el-col :md='12' :sm='12' class='f-tar'>
 							  <el-form inline class='form-nomar'>
 								  <el-form-item label='排名'>{{ranking}}</el-form-item>
-									<el-form-item label='项目访问'>{{visits}}</el-form-item>
+									<el-form-item label='客户数量'>{{cusNum}}</el-form-item>
 								</el-form>
 							</el-col>
 						</el-row>
@@ -27,7 +27,7 @@
 					<el-row :gutter='20'>
 					  <el-col :md='6' :sm='12' :xs='24'>
 						  <el-card class='user-card'>
-							  <el-form slot="header" inline class='info-form f-fs2'>
+							  <el-form slot="header" class='info-form f-fs2'>
 								  <el-form-item label='总成交额'>
 									  <b>{{turnover.total}}</b>
 									</el-form-item>
@@ -40,7 +40,7 @@
 						</el-col>
 						<el-col :md='6' :sm='12' :xs='24'>
 						  <el-card class='user-card'>
-							  <el-form slot="header" inline class='info-form f-fs2'>
+							  <el-form slot="header" class='info-form f-fs2'>
 								  <el-form-item label='总访问量'>
 									  <b>{{views.total}}</b>
 									</el-form-item>
@@ -53,7 +53,7 @@
 						</el-col>
 						<el-col :md='6' :sm='12' :xs='24'>
 						  <el-card class='user-card'>
-							  <el-form slot="header" inline class='info-form f-fs2'>
+							  <el-form slot="header" class='info-form f-fs2'>
 								  <el-form-item label='总成单量'>
 									  <b>{{order.total}}</b>
 									</el-form-item>
@@ -66,12 +66,15 @@
 						</el-col>
 						<el-col :md='6' :sm='12' :xs='24'>
 						  <el-card class='user-card'>
-							  <el-form slot="header" inline class='info-form f-fs2'>
+							  <el-form slot="header" class='info-form f-fs2'>
+								  <el-form-item label='已达成订单'>
+									  <b>{{order.reach.total}}</b>
+									</el-form-item>
 								  <el-form-item label='订单达成率'>
-									  <b>{{order.rate}}%</b>
+									  <b>{{Math.round(order.reach.success/order.reach.total*100)}}%</b>
 									</el-form-item>
 								</el-form>
-								<el-progress v-bind:percentage="order.rate"></el-progress>
+								<echart v-bind:options="order.reach" class='w-100 intro-canvas'/>
 							</el-card>	
 						</el-col>
 					</el-row>
@@ -79,7 +82,7 @@
 						<el-tab-pane label="成交额" name="first" lazy>
 						  <el-row>
 							  <el-col :span='24' class='f-tar'>
-								  <el-date-picker size='small' v-model="turnover.data.xAxis.data" type="monthrange" range-separator="-" start-placeholder="开始月份"end-placeholder="结束月份" value-format="yyyy-MM"></el-date-picker>
+								  <el-date-picker size='small' v-model="turnover.duration" type="monthrange" range-separator="-" start-placeholder="开始月份"end-placeholder="结束月份" value-format="yyyy-MM" v-on:change='turnoverIndex'></el-date-picker>
 								</el-col>
 							</el-row>
 						  <echart v-bind:options="turnover.data" class='w-100 intro-canvas'/>
@@ -87,7 +90,7 @@
 						<el-tab-pane label="订单数" name="second" lazy>
 						  <el-row>
 							  <el-col :span='24' class='f-tar'>
-								  <el-date-picker size='small' v-model="order.data.xAxis.data" type="monthrange" range-separator="-" start-placeholder="开始月份"end-placeholder="结束月份" value-format="yyyy-MM"></el-date-picker>
+								  <el-date-picker size='small' v-model="order.duration" type="monthrange" range-separator="-" start-placeholder="开始月份"end-placeholder="结束月份" value-format="yyyy-MM" v-on:change='orderIndex'></el-date-picker>
 								</el-col>
 							</el-row>
 						  <echart v-bind:options="order.data" class='w-100 intro-canvas'/>
@@ -99,12 +102,11 @@
 						  <el-card class="user-inquiry">
 							  <header slot='header'>我的询价</header>
 								<el-table v-bind:data="inquiries">
-                  <el-table-column type="index" width="20"></el-table-column>
-									<el-table-column prop='name' label='产品名称'></el-table-column>
-									<el-table-column prop='times' label='询价次数'></el-table-column>
-									<el-table-column prop='manufacturer' label='生产厂家'></el-table-column>
+									<el-table-column prop='name' label='产品名称' show-overflow-tooltip></el-table-column>
+									<el-table-column prop='times' label='询价次数' width='80'></el-table-column>
+									<el-table-column prop='manufacturer' label='生产厂家' show-overflow-tooltip></el-table-column>
 								</el-table>	
-								<el-pagination class='mt-10 f-tac' layout="prev, pager, next" v-bind:total="50"></el-pagination>
+								<el-pagination class='mt-10 f-tac' layout="prev, pager, next" v-bind:total="inquiryTotal" v-on:current-change='inquiry'></el-pagination>
 							</el-card>
 						</el-col>
 						<el-col :md='12' :sm='12' :xs='24'>

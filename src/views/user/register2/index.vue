@@ -7,11 +7,13 @@
 				<el-step title="完成"></el-step>
 			</el-steps>
 			<br><br>
-			<el-alert title="操作成功，等待后台审核" type="success" center show-icon description="登录账号：17076467717，单位名称：阿里巴巴"></el-alert>
+			<el-alert title="操作成功，等待后台审核" type="success" center show-icon></el-alert>
 			<br><br>
 			<el-row>
-			  <el-col class='f-tac'>
-				  <el-button type="primary" size='small'>返回首页</el-button>
+			  <el-col :span='24' class='f-tac'>
+				  <router-link to='/'>
+				    <el-button type="primary" size='small'>返回首页</el-button>
+					</router-link>
 				</el-col>
 			</el-row>
 		</el-main>

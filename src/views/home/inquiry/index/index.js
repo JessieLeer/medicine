@@ -6,7 +6,8 @@ export default {
 		return {
 			search: {
 				name: '',
-				range: 'whole'
+				range: 'whole',
+				quoted: false
 			},
 			activeName: 'all',
 			datas: [
@@ -48,6 +49,9 @@ export default {
 	created() {
 	},
 	methods: {
+		index() {
+			console.log(this.search)
+		},
 		handleChange(val) {},
 		handleRemove(file, fileList) {
     },

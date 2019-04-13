@@ -12,11 +12,12 @@ export default {
 	name: 'user',
 	data() {
 		return {
-			ranking: '8/24',
-			visits: '2002',
+			ranking: '',
+			cusNum: '',
 			turnover: {
-				total: 10000,
-				daily: 1000,
+				total: 0,
+				daily: 0,
+				duration: [],
 				trend: {
 					title: {
 						text: '本周成交走势',
@@ -27,7 +28,7 @@ export default {
 					},
 					xAxis: {
 						type: 'category',
-						data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						data: [],
 						position: 'bottom'
 					},
 					yAxis: {
@@ -38,7 +39,7 @@ export default {
 					},
 					series: [
 						{
-						  data: [820, 932, 901, 934, 1290, 1330, 1320],
+						  data: [],
 						  type: 'line',
 					  }
 					],
@@ -52,14 +53,14 @@ export default {
 				data: {
 					xAxis: {
 						type: 'category',
-						data: ['2019-01', '2019-01', '2019-03', '2019-04', '2019-05', '2019-06', '2019-07', '2019-08', '2019-09', '2019-10', '2019-11', '2019-12']
+						data: []
 					},
 					yAxis: {
 						type: 'value'
 					},
 					series: [
 						{
-						  data: [120, 200, 150, 80, 70, 110, 130, 140, 90, 100, 80, 100],
+						  data: [],
 						  type: 'bar'
 					  }
 					],
@@ -75,8 +76,8 @@ export default {
 				}
 			},
 			views: {
-				total: 10000,
-				daily: 1000,
+				total: 0,
+				daily: 0,
 				trend: {
 					title: {
 						text: '本周访问走势',
@@ -87,7 +88,7 @@ export default {
 					},
 					xAxis: {
 						type: 'category',
-						data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						data: [],
 						position: 'bottom'
 					},
 					yAxis: {
@@ -98,7 +99,7 @@ export default {
 					},
 					series: [
 						{
-						  data: [820, 932, 901, 934, 1290, 1330, 1320],
+						  data: [],
 						  type: 'line',
 					  }
 					],
@@ -111,9 +112,9 @@ export default {
 				}
 			},
 			order: {
-				total: 10000,
-				daily: 1000,
-				rate: 70,
+				total: 0,
+				daily: 0,
+				duration: [],
 				trend: {
 					title: {
 						text: '本周访问走势',
@@ -124,7 +125,7 @@ export default {
 					},
 					xAxis: {
 						type: 'category',
-						data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						data: [],
 						position: 'bottom'
 					},
 					yAxis: {
@@ -149,14 +150,14 @@ export default {
 				data: {
 					xAxis: {
 						type: 'category',
-						data: ['2019-01', '2019-01', '2019-03', '2019-04', '2019-05', '2019-06', '2019-07', '2019-08', '2019-09', '2019-10', '2019-11', '2019-12']
+						data: []
 					},
 					yAxis: {
 						type: 'value'
 					},
 					series: [
 						{
-						  data: [120, 200, 150, 80, 70, 110, 130, 140, 90, 100, 80, 100],
+						  data: [],
 						  type: 'bar'
 					  }
 					],
@@ -178,7 +179,7 @@ export default {
 					legend: {
 						orient: 'vertical',
 						left: 'left',
-						data: ['线上','erp','导入']
+						data: []
 					},
 					series : [
 						{
@@ -186,19 +187,7 @@ export default {
 							type: 'pie',
 							radius: '90%',
 							center: ['50%', '50%'],
-							data:[
-								{
-									value: 335, 
-									name: '线上'
-							  },
-								{
-									value: 310, 
-									name: 'erp'
-								},
-								{
-									value: 234, 
-									name: '导入'
-								}
+							data: [
 							],
 							itemStyle: {
 								emphasis: {
@@ -209,36 +198,81 @@ export default {
 						  }
 						}
 					]
-				}
+				},
+				reach: {
+					total: 0,
+					success: 0,
+					tooltip : {
+						trigger: 'item',
+						formatter: "{a} <br/>{b} : {c} ({d}%)",
+						position: ['20%', '0%']
+					},
+					legend: {
+						orient: 'horizontal',
+						left: 'left',
+						data: ['已达成','未达成']
+					},
+					series : [
+						{
+							name: '订单达成率',
+							type: 'pie',
+							radius: ['50%', '70%'],
+              avoidLabelOverlap: false,
+							label: {
+                normal: {
+                  show: false,
+                  position: 'center'
+                },
+                emphasis: {
+                  show: true,
+                  textStyle: {
+                    fontSize: '14',
+                    fontWeight: 'bold'
+                  }
+                }
+              },
+							center: ['45%', '58%'],
+							labelLine: {
+                normal: {
+                  show: false
+                }
+              },
+							data: [
+								{
+									value: 0, 
+									name: '未达成'
+								},
+								{
+									value: 0, 
+									name: '已达成'
+								}
+							],
+							itemStyle: {
+								emphasis: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							}
+						}
+					]
+				},
 			},
-			activeName: 'first',
-			inquiries: [
-				{
-					id: '1',
-					name: '阿莫西林颗粒',
-					times: '2201',
-					manufacturer: '新华制药有限公司'
-				},
-				{
-					id: '2',
-					name: '阿莫西林颗粒',
-					times: '2201',
-					manufacturer: '新华制药有限公司'
-				},
-				{
-					id: '3',
-					name: '阿莫西林颗粒',
-					times: '2201',
-					manufacturer: '新华制药有限公司'
-				},
-				{
-					id: '4',
-					name: '阿莫西林颗粒',
-					times: '2201',
-					manufacturer: '新华制药有限公司'
-				}
-			]
+			activeName: '',
+			inquiries: [],
+			inquiryTotal: 0
 		}
+	},
+	created() {
+		this.rank()
+		this.info()
+		this.turnoverIndex()
+		this.orderIndex()
+		this.inquiry(1)
+		this.orderSource()
+	},
+	mounted() {
+		this.activeName = 'first'
 	},
 	computed: {
 		user() {
@@ -249,5 +283,67 @@ export default {
 		cheader,
 		caside,
 		echart
+	},
+	methods: {
+		/*获取排名，客户数量*/
+		rank() {
+			this.$http.get('/api/ucenter/getRank', {params: {userId: this.user.id}}).then((res) => {
+				this.ranking = `${res.data.data.rank}/${res.data.data.total}`
+				this.cusNum = res.data.data.customer
+			})
+		},
+		/*获取成交额/访问量/浏览量等信息*/
+		info() {
+			this.$http.get('/api/ucenter/tvor',{params: {userId: this.user.id}}).then((res) => {
+				if(res.data.success) {
+					let result = res.data.data
+					let objs = ['turnover','views','order']
+					for(let obj of objs){
+						this[obj].total = result[obj].total
+						this[obj].daily = result[obj].daily
+						this[obj].trend.xAxis.data = result[obj].days
+						this[obj].trend.series[0].data = result[obj].datas
+					}		
+					this.order.reach.total = result.reach.total
+					this.order.reach.success = result.reach.success
+					this.order.reach.series[0].data[0].value = result.reach.total - result.reach.success
+					
+					this.order.reach.series[0].data[1].value = result.reach.success
+				}
+			})
+		},
+		/*获取成交额*/
+		turnoverIndex() {
+			this.$http.get('/api/ucenter/turnover',{params: {userId: this.user.id, duration: this.turnover.duration}}).then((res) => {
+				this.turnover.data.xAxis.data = res.data.data.month
+				this.turnover.data.series[0].data = res.data.data.datas
+			})
+		},
+		/*获取订单数*/
+		orderIndex() {
+			this.$http.get('/api/ucenter/orderamount', {params: {userId: this.user.id, duration: this.order.duration}}).then((res) => {
+				this.order.data.xAxis.data = res.data.data.month
+				this.order.data.series[0].data = res.data.data.datas
+			})
+		},
+		/*获取我的询价*/
+		inquiry(page) {
+			this.$http.get('/api/ucenter/myxjp', {params: {userId: this.user.id, page: page, pageSize: 4}}).then((res) => {
+				this.inquiries = res.data.data
+				this.inquiryTotal = res.data.total
+			})
+		},
+		/*获取订单来源*/
+		orderSource() {
+			this.$http.get('/api/ucenter/source', {params: {userId: this.user.id}}).then((res) => {
+				this.order.source.legend.data = res.data.data.source
+				for(let i = 0; i < res.data.data.source.length; i++){
+					this.order.source.series[0].data.push({
+						name: res.data.data.source[i],
+						value: res.data.data.data[i]
+					})
+				}
+			})
+		}
 	}
 }

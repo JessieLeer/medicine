@@ -5,90 +5,13 @@ export default {
 	name: 'user_good_create',
 	data() {
 	  return {
+			total: 0,
+			curpage: 1,
+			cates: [],
+			brands: [],
+			presclass: [],
 			form: {
-				
-			},
-			cates: [
-				{
-					value: 'food',
-					label: '食物',
-					children: [
-						{
-							value: 'vegetable',
-							label: '蔬菜',
-							children: [
-								{
-									value: 'cabbage',
-									label: '白菜'
-								},
-								{
-									value: 'radish',
-									label: '萝卜'
-								},
-								{
-									value: 'eggplant',
-									label: '茄子'
-								},
-							]
-						},
-						{
-						  value: 'fruit',
-							label: '水果',
-							children: [
-								{
-									value: 'orange',
-									label: '橘子'
-								},
-								{
-									value: 'banana',
-									label: '香蕉'
-								},
-								{
-									value: 'watermelon',
-									label: '西瓜'
-								},
-							]
-						}
-					]
-				},
-				{
-					value: 'cloth',
-					label: '服装',
-					children: [
-						{
-							value: 'mens',
-							label: '男装',
-							children: [
-								{
-									value: 'shirt',
-									label: 'T桖'
-								},
-								{
-									value: 'jacket',
-									label: '夹克'
-								}
-							]
-						},
-						{
-							value: 'womens',
-							label: '女装',
-							children: [
-								{
-									value: 'dress',
-									label: '连衣裙'
-								},
-								{
-									value: 'leggings',
-									label: '打底裤'
-								}
-							]
-						}
-					]
-				}
-			],
-			editFormVisiable: false,
-			form: {
-				
+				image: []
 			},
 			rules: {
 				name: {
@@ -154,17 +77,53 @@ export default {
 			},
 		}	
 	},
+	created() {
+		this.cateIndex()
+		this.brandIndex()
+		this.presclassIndex()
+	},
 	components: {
 		cheader,
 		caside
 	},
 	methods: {
+		cateIndex() {
+			this.$http.get('/api/category').then((res) => {
+				this.cates = res.data.data
+			})
+		},
+		brandIndex() {
+			this.$http.get('/api/brand').then((res) => {
+				this.brands = res.data.data
+			})
+		},
+		presclassIndex() {
+			this.$http.get('/api/chuffl').then((res) => {
+				this.presclass = res.data.data
+			})
+		},
+		uploadImage(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.image.push(res.data.message)
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					console.log('right')
+					this.$http.post('/api/ucenter/productAdd', this.form).then((res) => {
+						if(res.data.success){
+							this.$message.success(res.data.message)
+						}else{
+							this.$message.error(res.data.message)
+						}
+					})
         } else {
-					console.log('error')
           return false
         }
       })

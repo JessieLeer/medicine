@@ -16,12 +16,11 @@ export default {
 		}
 	},
 	created() {
-		this.$store.commit('login')
 	},
 	methods: {
 		logout() {
 			this.$store.commit('logout')
-			this.$router.go(0)
+			location.reload()
 		}
 	}
 }

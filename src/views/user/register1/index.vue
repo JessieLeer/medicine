@@ -17,11 +17,11 @@
 				<el-form-item prop='license'>
 					<el-upload
 						class="upload-demo"
-						action="https://jsonplaceholder.typicode.com/posts/"
+						:http-request='uploadLicense'
+						action='nourl'
 						:on-preview="handlePreview"
 						:on-remove="handleRemove"
 						:before-remove="beforeRemove"
-						multiple
 						:limit="1"
 						:on-exceed="handleExceed"
 						:file-list="license">
@@ -33,11 +33,11 @@
 				<el-form-item prop='gsp'>
 					<el-upload
 						class="upload-demo"
-						action="https://jsonplaceholder.typicode.com/posts/"
+						action="nourl"
+						:http-request='uploadGsp'
 						:on-preview="handlePreview"
 						:on-remove="handleRemove"
 						:before-remove="beforeRemove"
-						multiple
 						:limit="1"
 						:on-exceed="handleExceed"
 						:file-list="gsp">
@@ -52,11 +52,11 @@
 				<el-form-item prop='commission'>
 					<el-upload
 						class="upload-demo"
-						action="https://jsonplaceholder.typicode.com/posts/"
+						action="nourl"
+						:http-request='uploadCommission'
 						:on-preview="handlePreview"
 						:on-remove="handleRemove"
 						:before-remove="beforeRemove"
-						multiple
 						:limit="1"
 						:on-exceed="handleExceed"
 						:file-list="commission">

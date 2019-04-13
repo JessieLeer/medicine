@@ -4,7 +4,10 @@ export default {
 		return {
 			active: 1,
 			form: {
-				
+				firstService: '',
+				commission: '',
+				regnum: '',
+				regaddress: ''
 			},
 			rules: {
 				company: {
@@ -20,59 +23,84 @@ export default {
 				license: {
 					required: true, 
           message: '请上传营业执照',
-          trigger: 'change'
+          trigger: 'blur'
 				},
 				gsp: {
 					required: true, 
           message: '请上传GSP证书',
-          trigger: 'change'
+          trigger: 'blur'
 				}
 			},
 			license: [
-				{
-					name: 'food.jpeg', 
-					url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-				}
 			],
 			gsp: [
-				{
-					name: 'food.jpeg', 
-					url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-				}
 			],
 			commission: [
-				{
-					name: 'food.jpeg', 
-					url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-				}
 			]
 		}
 	},
 	created() {
-		this.form = {...this.$route.params}
+		this.form = Object.assign(this.form,this.$store.state.user)
 	},
 	methods: {
 		back() {
 			this.$router.back()
 		},
 		handleRemove(file, fileList) {
-      console.log(file, fileList)
     },
     handlePreview(file) {
-      console.log(file)
     },
     handleExceed(files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
+      this.$message.warning('超出可以上传的数量限制，请先移除不需要的文件再上传')
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${ file.name }？`)
     },
+		uploadLicense(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.license = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		uploadGsp(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.gsp = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		uploadCommission(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.commission = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					
+					this.$http.post('/api/user/register1', this.form).then((res) => {
+						if(res.data.success) {
+							window.setTimeout(() => {
+								this.$router.push('/register2')
+							},1000)
+						}
+					})
         } else {
-          return false
+          this.$message.warning(res.data.message)
         }
       })
 		}

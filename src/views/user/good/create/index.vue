@@ -18,9 +18,8 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 								<el-form-item prop='brand'>
-									<el-select v-model="form.brand" placeholder="品牌">
-										<option label='苹果' value='apple'></option>
-										<option label='三星' value='sumsun'></option>
+									<el-select v-model="form.brand" placeholder="品牌" value-key='id'>
+										<el-option v-for='(item, index) in brands' v-bind:key='index' v-bind:label='item.name' v-bind:value='item.id'></el-option>
 									</el-select>
 								</el-form-item>
 							</el-col>
@@ -56,9 +55,8 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 								<el-form-item prop='presclass'>
-									<el-select v-model="form.presclass" placeholder="处方分类">
-										<option label='处方' value='prescription'></option>
-										<option label='非处方' value='overprescription'></option>
+									<el-select v-model="form.presclass" placeholder="处方分类" value-key='value'>
+										<el-option v-for='(item, index) in presclass' v-bind:key='index' v-bind:label='item.label' v-bind:value='item.value'></el-option>
 									</el-select>
 								</el-form-item>
 							</el-col>
@@ -82,6 +80,7 @@
 									<el-upload
 										action="https://jsonplaceholder.typicode.com/posts/"
 										v-bind:file-list='form.images'
+										:http-request='uploadImage'
 										list-type="picture-card">
 										<i class="el-icon-plus"></i>
 									</el-upload>

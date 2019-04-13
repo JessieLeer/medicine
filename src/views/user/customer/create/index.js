@@ -12,9 +12,17 @@ export default {
         return callback(new Error('请输入正确的手机号'))
       }
     }
+		let emailVerify = (rule, value, callback) => {
+			const reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+			if (reg.test(value) || value == undefined || value == '') {
+				callback()
+			} else {
+				return callback(new Error('请输入正确格式的邮箱'))
+			}
+		}
 		return {
 			form: {
-				
+				creator: this.$store.state.user.id
 			},
 			rules: {
 				name: {
@@ -28,8 +36,8 @@ export default {
 					trigger: 'blur' 
 				},
 				email: {
-					required: true,
-					message: '请输入邮箱',
+					required: false,
+					validator: emailVerify,
 					trigger: 'blur'
 				},
 				company: {
@@ -52,18 +60,63 @@ export default {
 					message: '请上传gsp证书',
 					trigger: 'change'
 				}
-			}
+			},
+			license: [],
+			gsp: []
 		}
 	},
 	components: {
 		cheader,
 		caside
 	},
+	computed: {
+		user() {
+			return this.$store.state.user
+		}
+	},
 	methods: {
+		handleRemove(file, fileList) {
+    },
+    handlePreview(file) {
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning('超出可以上传的数量限制，请先移除不需要的文件再上传')
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${ file.name }？`)
+    },
+		uploadLicense(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.license = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		uploadGsp(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.gsp = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					
+					this.$http.post('/api/ucenter/customerAdd', this.form).then((res) => {
+						if(res.data.success){
+							this.$message.success(res.data.message)
+						}else{
+							this.$message.error(res.data.message)
+						}
+					})
         } else {
           return false
         }
