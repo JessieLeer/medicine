@@ -13,6 +13,8 @@ export default {
     }
 		return {
 			form: {
+				userId: this.$store.state.user.id,
+				source: this.$route.params.source,
 				name: '',
 				cutoff: {
 					type: '',
@@ -109,107 +111,16 @@ export default {
 					name: ''
 				}
 			},
-			cates: [
-				{
-					value: 'food',
-					label: '食物',
-					children: [
-						{
-							value: 'vegetable',
-							label: '蔬菜',
-							children: [
-								{
-									value: 'cabbage',
-									label: '白菜'
-								},
-								{
-									value: 'radish',
-									label: '萝卜'
-								},
-								{
-									value: 'eggplant',
-									label: '茄子'
-								},
-							]
-						},
-						{
-						  value: 'fruit',
-							label: '水果',
-							children: [
-								{
-									value: 'orange',
-									label: '橘子'
-								},
-								{
-									value: 'banana',
-									label: '香蕉'
-								},
-								{
-									value: 'watermelon',
-									label: '西瓜'
-								},
-							]
-						}
-					]
-				},
-				{
-					value: 'cloth',
-					label: '服装',
-					children: [
-						{
-							value: 'mens',
-							label: '男装',
-							children: [
-								{
-									value: 'shirt',
-									label: 'T桖'
-								},
-								{
-									value: 'jacket',
-									label: '夹克'
-								}
-							]
-						},
-						{
-							value: 'womens',
-							label: '女装',
-							children: [
-								{
-									value: 'dress',
-									label: '连衣裙'
-								},
-								{
-									value: 'leggings',
-									label: '打底裤'
-								}
-							]
-						}
-					]
-				}
-			],
-			goods: [
-				{
-					id: '1',
-					cates: ['food','fruit','banana'],
-					name: '海南香蕉',
-					numbering: 'zp613',
-					manufacturer: '山东淄博新华制药有限公司',
-					specification: '0.25g * 20s/盒',
-					offer: '盒',
-					approve: '国药准字2738927',
-					expected: '',
-					package: '30'
-				}
-			],
+			brands: [],
+			presclass: [],
+			cates: [],
+			goods: [],
+			goodTotal: 0,
+			offerTotal: 0,
+			goodCur: 1,
+			offerCur: 1,
 			offersDialogShow: false,
-			offers: [
-				{
-					id: '1',
-					name: '新华制药',
-					type: '零售连锁企业',
-					update_at: '2019-09-09'
-				}
-			],
+			offers: [],
 			goodCreateVisable: false,
 			form1: {
 				name: '',
@@ -286,40 +197,159 @@ export default {
 					required: true,
 					message: '请输入erp编码',
 					trigger: 'blur'
+				},
+				bagShl: {
+					required: true,
+					message: '请输入件包装',
+					trigger: 'blur'
 				}
 			},
 			dialogResultVisible: false
 		}
 	},
 	computed: {
-		filterGoods() {
-			return this.goods.filter((item) => {
-				return item.name.indexOf(this.search.good.name) != -1
-			})
-		},
-		filterOffers() {
-			return this.offers.filter((item) => {
-				return item.name.indexOf(this.search.offer.name) != -1
-			})
+		user() {
+			return this.$store.state.user
+		}
+	},
+	watch: {
+		'form.cutoff.type'() {
+			this.form.cutoff.value = ''
 		}
 	},
 	components: {
 		cheader
 	},
+	created() {
+		this.cateIndex()
+		this.brandIndex()
+		this.presclassIndex()
+		this.goodInit()
+	},
 	methods: {
 		cateChange(val) {
+		},
+		/*-- 获取产品分类 --*/
+		cateIndex() {
+			this.$http.get('/api/category').then((res) => {
+				this.cates = res.data.data
+			})
+		},
+		/*-- 获取产品品牌 --*/
+		brandIndex() {
+			this.$http.get('/api/brand').then((res) => {
+				this.brands = res.data.data
+			})
+		},
+		/*-- 获取产品处方分类 --*/
+		presclassIndex() {
+			this.$http.get('/api/chuffl').then((res) => {
+				this.presclass = res.data.data
+			})
+		},
+		/*-- 产品初始化 --*/
+		goodInit() {
+			if(this.$route.params.sid == 'none') {
+			}else{
+				let url
+				switch(this.$route.params.source) {
+					case 'erp':
+						url = '/api/inquiry/procurementPlanInfo'
+					  break
+					case 'history':
+						url = '/api/inquiry/myInquiryInfo'
+						break
+					case 'excel':
+						url = '/api/excelInquiryInfo'
+						break
+				}
+				this.$http.get(url, {params: {id: this.$route.params.sid}}).then((res) => {
+					if(this.$route.params.source == 'erp') {
+						for(let item of res.data.data) {
+							item.product.expected = item.expected
+							this.form.goods.push(item.product)
+						}
+					}else{
+						this.form.name = res.data.data.name
+						this.form.cutoff.type = res.data.data.type
+						this.form.cutoff.value = res.data.data.endValue
+						this.form.aimType = res.data.data.aimType
+						this.form.isTicket = res.data.data.isTicket
+						this.form.contact = res.data.data.contact
+						this.form.phone = res.data.data.phone
+						this.form.pay = res.data.data.pay.value
+						this.form.address = res.data.data.address
+						this.form.remark = res.data.data.remark
+						for(let item of res.data.data.productList) {
+							item.product.expected = item.expected
+							this.form.goods.push(item.product)
+						}
+					}
+				})
+			}
+		},
+		goodIndex(page) {
+			this.goodsDialogShow = true
+			let cates = this.search.good.cate
+			this.$http.get('/api/inquiry/product', {params: {cate: cates[cates.length - 1], name: this.search.good.name, page: page, pageSize: 10}}).then((res) => {
+				this.goods = res.data.data
+				for(let item of this.goods){
+					item.expected = 1
+				}
+				this.goodTotal = res.data.total
+			})
+		},
+		offerIndex(page) {
+			this.offersDialogShow = true
+			this.$http.get('/api/inquiry/supplier', {params: {userId: this.user.id, name: this.search.offer.name, page: page, pageSize: 10}}).then((res) => {
+				this.offers = res.data.data
+				this.offerTotal = res.data.total
+			})
 		},
 		appendForm(field,item) {
 			this.form[field].push(item)
 		},
-		deleteForm(field,item){
+		deleteForm(field,item) {
 			let i = this.form[field].indexOf(item)
 			this.form[field].splice(i,1)
 		},
-		submit(form) {
+		uploadImage(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.form.image.push(res.data.message)
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		goodCreate(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					console.log('right')
+					this.$http.post('/api/ucenter/productAdd', this.form1).then((res) => {
+						if(res.data.success){
+							this.$message.success(res.data.message)
+						}else{
+							this.$message.error(res.data.message)
+						}
+					})
+        } else {
+					console.log('error')
+          return false
+        }
+      })
+		},
+		inquiryCreate(form) {
+			this.$refs[form].validate((valid) => {
+        if (valid) {
+					this.$http.post('/api/inquiry/save', this.form).then((res) => {
+						if(res.data.success){
+							this.dialogResultVisible = true
+						}else{
+							this.$message.error(res.data.message)
+						}
+					})
         } else {
 					console.log('error')
           return false

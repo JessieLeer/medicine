@@ -13,44 +13,42 @@
 									<el-option label="全网" value="whole"></el-option>
 									<el-option label="部分" value="wholeMine"></el-option>
 								</el-select>
-								<el-button slot="append" icon="el-icon-search" v-on:click='index'></el-button>
+								<el-button slot="append" icon="el-icon-search" v-on:click='index(1)'></el-button>
 							</el-input>
 						</el-form-item>
-						<el-form-item>
-						  <!--这个只在用户类型为供应商的时候才有,需要做判断-->
-							<el-checkbox v-model="search.quoted" value='true'>我的报价</el-checkbox>
+						<el-form-item v-if='user.type == "供应商"'>
+							<el-checkbox v-model="search.quoted">我的报价</el-checkbox>
 						</el-form-item>
 					</el-form>
 				</el-col>
-				<el-col :span='4' class='f-tar'>
+				<el-col :span='4' class='f-tar' v-if='user.type == "采购商"'>
 				  <el-button type='primary' size='small' v-on:click='isWayShow = true'>新增询价</el-button>
 				</el-col>
 			</el-row>
 			<br>
 			<el-collapse v-model="shows" @change="handleChange" class='inquiry-collapse'>
-				<el-collapse-item v-for='(item,index) in datas' v-bind:title="item.title" v-bind:name="item.id" v-bind:key='index'>
+				<el-collapse-item v-for='(item,index) in datas' v-bind:title="item.name" v-bind:name="item.id" v-bind:key='index'>
 					<el-form v-bind:inline="true">
 					  <el-row>
 						  <el-col :span='20'>
 							  <el-form-item label="创建时间">
-									{{item.created_at}}
+									{{item.createDate}}
 								</el-form-item>
 								<el-form-item label="截止日期">
-									{{item.deadline}}
+									{{item.endValue}}
 								</el-form-item>
 								<el-form-item label="状态">
-									{{item.status}}
+									{{item.status == '1' ? '报价中' : '已定单'}}
 								</el-form-item>
-								<br>
+								<br v-if='item.remarks != ""'>
 								<el-form-item label="" class='remark'>
-									{{item.remark}}
+									{{item.remarks}}
 								</el-form-item>
 							</el-col>
 							<el-col :span='4' class='f-tar'>
 								<el-form-item>
-								  <router-link to='/quote/edit'>
-									  <el-button type='primary' size='small'>我要报价</el-button>
-									</router-link>
+									<el-button v-on:click='go(`/quote/edit/${item.id}`)' type='primary' size='small' v-if='user.type == "供应商"'>我要报价</el-button>
+									<el-button v-on:click='go(`/order/${item.id}`)' type='primary' size='small' v-if='user.type == "采购商"'>查看报价</el-button>
 								</el-form-item>
 							</el-col>
 						</el-row>
@@ -76,7 +74,7 @@
 								<el-row>
 									<el-col :span='16'>线上手动询价</el-col>
 									<el-col :span='8' class='f-tar'>
-									  <router-link to='/inquiry/create'>
+									  <router-link to='/inquiry/create/manual/none'>
 										  <el-button type="text" class='chose'>选择</el-button>
 										</router-link>
 									</el-col>
@@ -91,7 +89,7 @@
 								<el-row>
 									<el-col :span='16'>ERP采购计划导入</el-col>
 									<el-col :span='8' class='f-tar'>
-									  <router-link to='/shopping'>
+									  <router-link to='/shopping/erp'>
 										  <el-button type="text" class='chose'>选择</el-button>
 										</router-link>
 									</el-col>
@@ -106,7 +104,7 @@
 								<el-row>
 									<el-col :span='16'>历史采购计划倒入</el-col>
 									<el-col :span='8' class='f-tar'>
-									  <router-link to='/shopping'>
+									  <router-link to='/shopping/history'>
 									  	<el-button type="text" class='chose'>选择</el-button>
 										</router-link>
 									</el-col>
@@ -121,8 +119,20 @@
 								<el-row>
 									<el-col :span='12'>EXCEL模版导入</el-col>
 									<el-col :span='12' class='f-tar'>
-										<el-button type="text" class='chose'>下载</el-button>
-										<el-upload class='f-ib 'action="https://jsonplaceholder.typicode.com/posts/" v-bind:on-preview="handlePreview" v-bind:on-remove="handleRemove" v-bind:before-remove="beforeRemove"v-bind:limit="1" v-bind:on-exceed="handleExceed" v-bind:file-list="fileList">
+										<a href='http://192.168.1.65:8088/static/doc/询价导入模板.xlsx'>
+										  <el-button type="text" class='chose'>下载</el-button>
+									  </a>
+										<el-upload 
+										  class='f-ib'
+											:http-request='uploadTemplate'
+						          action='nourl'
+											accept='.xlsx'
+											v-bind:on-preview="handlePreview" 
+											v-bind:on-remove="handleRemove" 
+											v-bind:before-remove="beforeRemove" 
+											v-bind:limit="1" 
+											v-bind:on-exceed="handleExceed" 
+											v-bind:file-list="fileList">
 										  <el-button type="text" class='chose'>导入</el-button>
 										</el-upload>	
 									</el-col>

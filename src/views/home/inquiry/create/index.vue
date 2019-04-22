@@ -9,13 +9,13 @@
 					<el-input v-model="form.name"></el-input>
 				</el-form-item>
 				<el-form-item label="截止条件" prop='cutoff.type'>
-				  <el-radio-group v-model="form.cutoff.type">
+				  <el-radio-group  v-model="form.cutoff.type">
 					  <el-radio label="deadline">日期</el-radio>
             <el-radio label="maxnumber">最大报价量</el-radio>
 					</el-radio-group>
 				</el-form-item>
 				<el-form-item label='' prop='cutoff.value' v-if='form.cutoff.type != ""'>
-				  <el-date-picker v-if='form.cutoff.type == "deadline"' v-model="form.cutoff.value" type="date" placeholder="选择截止日期"></el-date-picker>
+				  <el-date-picker value-format='yyyy-MM-dd' v-if='form.cutoff.type == "deadline"' type='date' v-model="form.cutoff.value" placeholder="选择截止日期"></el-date-picker>
 					<el-input-number v-if='form.cutoff.type == "maxnumber"' v-model="form.cutoff.value" controls-position="right" v-bind:min="1" v-bind:max="10"></el-input-number>
 				</el-form-item>
 				<el-form-item label='选择产品' prop='goods'>
@@ -31,26 +31,26 @@
 										</el-col>
 										<el-col :sm='12' :xs='24'>
 											<el-form-item label='单位'>
-												{{scope.row.offer}}
+												{{scope.row.prounit}}
 											</el-form-item>
 										</el-col>
 										<el-col :sm='12' :xs='24'>
 											<el-form-item label='批准文号'>
-												{{scope.row.approve}}
+												{{scope.row.recnumber}}
 											</el-form-item>
 										</el-col>
 										<el-col :sm='12' :xs='24'>
 											<el-form-item label='件包装'>
-												{{scope.row.package}}
+												{{scope.row.bagShl}}
 											</el-form-item>
 										</el-col>
 									</el-row>
 								</el-form>
 							</template>
 						</el-table-column>
-						<el-table-column prop="name" label="商品名称"></el-table-column>
-						<el-table-column prop="numbering" label="编号" width='100'></el-table-column>
-						<el-table-column prop="manufacturer" label="生产厂家"></el-table-column>
+						<el-table-column prop="name" label="商品名称" show-overflow-tooltip></el-table-column>
+						<el-table-column prop="numbering" label="编号" width='100' show-overflow-tooltip></el-table-column>
+						<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="expected" label="计划采购数量" width='140'>
 						  <template slot-scope='scope'>
 							  <el-input-number v-model="scope.row.expected" v-bind:min="1"  controls-position="right"></el-input-number>
@@ -62,7 +62,7 @@
 							</template>
 						</el-table-column>
 					</el-table>
-					<el-button type="primary" icon="el-icon-plus" v-on:click='goodsDialogShow = true'>选择产品</el-button>
+					<el-button type="primary" icon="el-icon-plus" v-on:click='goodIndex(goodCur)'>选择产品</el-button>
 				</el-form-item>
 				<el-form-item label='目标公开' prop='aimType'>
 				  <el-radio-group v-model="form.aimType">
@@ -80,7 +80,7 @@
 							</template>
 						</el-table-column>
 					</el-table>
-				  <el-button type="primary" icon="el-icon-plus" v-on:click='offersDialogShow = true'>选择供应商</el-button>
+				  <el-button type="primary" icon="el-icon-plus" v-on:click='offerIndex(offerCur)'>选择供应商</el-button>
 				</el-form-item>
 				<el-form-item label='发票' prop='isTicket'>
 				  <el-radio-group v-model="form.isTicket">
@@ -109,8 +109,7 @@
 				  <el-input v-model='form.remark' type='textarea'></el-input>
 				</el-form-item>
 				<el-form-item>
-				  <el-button type='primary' size='small' v-on:click='submit("form")'>提交</el-button>
-					<el-button type='default' size='small' v-on:click='dialogResultVisible = true'>测试返回结果</el-button>
+				  <el-button type='primary' size='small' v-on:click='inquiryCreate("form")'>提交</el-button>
 				</el-form-item>
 			</el-form>
 			<el-dialog title="选择产品" :visible.sync="goodsDialogShow" class='cate-dialog'>
@@ -119,15 +118,15 @@
 					  <el-cascader placeholder="选择或输入分类名" v-bind:options="cates" filterable change-on-select v-model='search.good.cate' v-on:change='cateChange'></el-cascader>
 					</el-form-item>
 					<el-form-item>
-						<el-input placeholder="输入商品名" v-model="search.good.name" class="input-with-select">
-							<el-button slot="append" icon="el-icon-search"></el-button>
+						<el-input placeholder="输入商品名/生产厂家" v-model="search.good.name" class="input-with-select">
+							<el-button slot="append" icon="el-icon-search" v-on:click='goodIndex(1)'></el-button>
 						</el-input>
 					</el-form-item>
 					<el-form-item class='f-fr'>
 					  <el-button type='text' size='small' v-on:click='goodCreateVisable = true'>手动添加</el-button>
 					</el-form-item>
 				</el-form>
-				<el-table v-bind:data="filterGoods" class='goods-table'>
+				<el-table v-bind:data="goods" class='goods-table'>
 				  <el-table-column type="expand" width='40'>
             <template slot-scope="scope">
 						  <el-form label-position="left" inline class='good-other'>
@@ -139,26 +138,26 @@
 									</el-col>
 									<el-col :sm='12' :xs='24'>
 									  <el-form-item label='单位'>
-											{{scope.row.offer}}
+											{{scope.row.prounit}}
 										</el-form-item>
 									</el-col>
 									<el-col :sm='12' :xs='24'>
 									  <el-form-item label='批准文号'>
-											{{scope.row.approve}}
+											{{scope.row.recnumber}}
 										</el-form-item>
 									</el-col>
 									<el-col :sm='12' :xs='24'>
 									  <el-form-item label='件包装'>
-											{{scope.row.package}}
+											{{scope.row.bagShl}}
 										</el-form-item>
 									</el-col>
 								</el-row>
 							</el-form>
 			      </template>
 			    </el-table-column>
-					<el-table-column prop="name" label="商品名称"></el-table-column>
-					<el-table-column prop="numbering" label="编号" width='90'></el-table-column>
-					<el-table-column prop="manufacturer" label="生产厂家"></el-table-column>
+					<el-table-column prop="name" label="商品名称" show-overflow-tooltip></el-table-column>
+					<el-table-column prop="numbering" label="编号" width='90' show-overflow-tooltip></el-table-column>
+					<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 					<el-table-column label="操作" fixed="right" width='50'>
 					  <template slot-scope='scope'>
 						  <el-button type="text" size='small' v-on:click='appendForm("goods",scope.row)' v-bind:disabled='form.goods.indexOf(scope.row) == -1 ? false : true' v-bind:title='form.goods.indexOf(scope.row) == -1 ? "" : "已选择"'>选择</el-button>
@@ -166,7 +165,7 @@
 					</el-table-column>
 				</el-table>
 				<br>
-				<el-pagination class='f-tac' layout="prev, pager, next" v-bind:total="1000"></el-pagination>
+				<el-pagination class='f-tac' layout="prev, pager, next" v-bind:total="goodTotal" v-bind:current-page='goodCur' v-on:current-change='goodIndex'></el-pagination>
 				<el-dialog width="50%" title="创建产品" :visible.sync="goodCreateVisable" append-to-body class='cate-dialog'>
 				  <el-form ref="form1" :model="form1" v-bind:rules='rules1' size='small'>
 					  <el-row v-bind:gutter="20">
@@ -177,9 +176,8 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 							  <el-form-item prop='brand'>
-									<el-select v-model="form1.brand" placeholder="品牌">
-										<option label='苹果' value='apple'></option>
-										<option label='三星' value='sumsun'></option>
+									<el-select v-model="form1.brand" placeholder="品牌" value-key='id'>
+										<el-option v-for='(item, index) in brands' v-bind:key='index' v-bind:label='item.name' v-bind:value='item.id'></el-option>
 									</el-select>
 								</el-form-item>
 							</el-col>
@@ -215,9 +213,8 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 							  <el-form-item prop='presclass'>
-									<el-select v-model="form1.presclass" placeholder="处方分类">
-										<option label='处方' value='prescription'></option>
-										<option label='非处方' value='overprescription'></option>
+									<el-select v-model="form1.presclass" placeholder="处方分类" value-key='value'>
+										<el-option v-for='(item, index) in presclass' v-bind:key='index' v-bind:label='item.label' v-bind:value='item.value'></el-option>
 									</el-select>
 								</el-form-item>
 							</el-col>
@@ -236,11 +233,17 @@
 									<el-input v-model="form1.erp" placeholder='ERP编码'></el-input>
 								</el-form-item>
 							</el-col>
-							<el-col :span='24'>
+							<el-col :sm='12' :xs='24'>
+							  <el-form-item prop='bagShl'>
+								  <el-input v-model="form1.bagShl" placeholder='件包装'></el-input>
+								</el-form-item>
+							</el-col>
+							<el-col :sm='12' :xs='24'>
 							  <el-form-item label='上传图片'>
 									<el-upload
 										action="https://jsonplaceholder.typicode.com/posts/"
 										v-bind:file-list='form1.images'
+										:http-request='uploadImage'
 										list-type="picture-card">
 										<i class="el-icon-plus"></i>
 									</el-upload>
@@ -248,7 +251,7 @@
 							</el-col>
 							<el-col :span='24' class='f-tac'>
 							  <el-form-item>
-								  <el-button type='primary' size='small' v-on:click='submit("form1")'>提交</el-button>
+								  <el-button type='primary' size='small' v-on:click='goodCreate("form1")'>提交</el-button>
 								</el-form-item>
 							</el-col>
 						</el-row>
@@ -257,15 +260,15 @@
 			</el-dialog>
 			<el-dialog title="选择供应商" :visible.sync="offersDialogShow" class='cate-dialog'>
 			  <el-input placeholder="输入供应商名称" v-model="search.offer.name" class="input-with-select" size='small'>
-					<el-button slot="append" icon="el-icon-search"></el-button>
+					<el-button slot="append" icon="el-icon-search" v-on:click='offerIndex(1)'></el-button>
 				</el-input>
 				<br><br>
-				<el-table v-bind:data="filterOffers" class='goods-table'>
+				<el-table v-bind:data="offers" class='goods-table'>
 				  <el-table-column prop="name" label="名称"></el-table-column>
 					</el-table-column>
-					<el-table-column prop="type" label="客户类型"></el-table-column>
+					<el-table-column prop="user.type" label="客户类型"></el-table-column>
 					</el-table-column>
-					<el-table-column prop="update_at" label="修改日期"></el-table-column>
+					<el-table-column prop="updateDate" label="修改日期"></el-table-column>
 					</el-table-column>
 					<el-table-column label="操作" fixed="right" width='50'>
 					  <template slot-scope='scope'>
@@ -273,6 +276,8 @@
 						</template>
 					</el-table-column>
 				</el-table>
+				<br>
+				<el-pagination class='f-tac' layout="prev, pager, next" v-bind:total="offerTotal" v-bind:current-page='offerCur' v-on:current-change='offerIndex'></el-pagination>
 			</el-dialog>
 			<el-dialog title="操作反馈" :visible.sync="dialogResultVisible" class='cate-dialog'>
 			  <el-alert title="操作成功，请耐心等待" type="success" center show-icon description=""></el-alert>

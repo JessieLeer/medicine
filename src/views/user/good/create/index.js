@@ -73,6 +73,11 @@ export default {
 					required: true,
 					message: '请输入erp编码',
 					trigger: 'blur'
+				},
+				bagShl: {
+					required: true,
+					message: '请输入件包装',
+					trigger: 'blur'
 				}
 			},
 		}	

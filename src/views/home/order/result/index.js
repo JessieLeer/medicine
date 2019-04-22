@@ -5,58 +5,6 @@ export default {
 	data() {
 		return {
 			orders: [
-				{
-					id: '1',
-					supplier: '山东东美医药有限公司',
-					goods: [
-						{
-							name: '阿莫西林胶囊',
-						  specification: '0.25g*20s/盒',
-							manufacturer: '山东淄博新达制药有限公司',
-							ticket: '5.0',
-							unticket: '4.9',
-							expected: '100',
-							supply: '200',
-							offer: '无'
-						},
-						{
-							name: '阿莫西林胶囊',
-						  specification: '0.25g*20s/盒',
-							manufacturer: '江苏淄博新达制药有限公司',
-							ticket: '5.0',
-							unticket: '4.9',
-							expected: '100',
-							supply: '200',
-							offer: '无'
-						},
-					]
-				},
-				{
-					id: '2',
-					supplier: '山东西世界医药有限公司',
-					goods: [
-						{
-							name: '感冒灵颗粒',
-						  specification: '0.25g*20s/盒',
-							manufacturer: '山东淄博新达制药有限公司',
-							ticket: '5.0',
-							unticket: '4.9',
-							expected: '100',
-							supply: '200',
-							offer: '无'
-						},
-						{
-							name: '感冒灵颗粒',
-						  specification: '0.25g*20s/盒',
-							manufacturer: '江苏淄博新达制药有限公司',
-							ticket: '5.0',
-							unticket: '4.9',
-							expected: '100',
-							supply: '200',
-							offer: '无'
-						},
-					]
-				}
 			],
 		}
 	},
@@ -64,7 +12,7 @@ export default {
 		shows: {
 			get() {
 				return this.orders.map((item) => {
-					return item.id
+					return item.supplier.user.id
 				})
 			},
 			set() {
@@ -73,8 +21,8 @@ export default {
 		total() {
 			let total = 0
 			for(let order of this.orders){
-				for(let good of order.goods){
-					total += good.supply*good.ticket
+				for(let good of order.productList){
+					total += good.available * good.ticket
 				}
 			}
 			return total
@@ -83,6 +31,22 @@ export default {
 	components: {
 		cheader
 	},
+	created() {
+		this.show()
+	},
 	methods: {
+		go(url) {
+			this.$router.push(url)
+		},
+		show() {
+			this.$http.get('/api/inquiry/getEnquiry', {params: {id: this.$route.params.id}}).then((res) => {
+				this.orders = res.data.data.supplierProductList
+			})
+		},
+		importer() {
+			this.$http.get('/api/inquiry/exportEnquiry',{params: {id: this.$route.params.id}}).then((res) => {
+				window.location.href = `http://192.168.1.65:8088/${res.data.data}`
+			})
+		}
 	}
 }

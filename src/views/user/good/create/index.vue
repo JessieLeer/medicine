@@ -40,7 +40,7 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 								<el-form-item prop='recnumber'>
-									<el-input v-model="form.recnumber" placeholder='推荐文号'></el-input>
+									<el-input v-model="form.recnumber" placeholder='批准文号'></el-input>
 								</el-form-item>
 							</el-col>
 							<el-col :sm='12' :xs='24'>
@@ -75,7 +75,12 @@
 									<el-input v-model="form.erp" placeholder='ERP编码'></el-input>
 								</el-form-item>
 							</el-col>
-							<el-col :span='24'>
+							<el-col :sm='12' :xs='24'>
+							  <el-form-item prop='bagShl'>
+								  <el-input v-model="form1.bagShl" placeholder='件包装'></el-input>
+								</el-form-item>
+							</el-col>
+							<el-col :sm='12' :xs='24'>
 								<el-form-item label='上传图片'>
 									<el-upload
 										action="https://jsonplaceholder.typicode.com/posts/"

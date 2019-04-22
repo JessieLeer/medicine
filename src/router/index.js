@@ -46,22 +46,22 @@ export default new Router({
       component: InquiryImport
     },
 		{
-      path: '/shopping',
+      path: '/shopping/:type',
       name: 'shopping',
       component: Shopping
     },
 		{
-			path: '/inquiry/create',
+			path: '/inquiry/create/:source/:sid',
       name: 'inquiry_create',
       component: InquiryCreate
 		},
 		{
-      path: '/quote/show',
+      path: '/quote/show/:id',
       name: 'quote_show',
       component: QuoteShow
     },
 		{
-      path: '/quote/edit',
+      path: '/quote/edit/:id',
       name: 'quote_edit',
       component: QuoteEdit
     },
@@ -71,12 +71,12 @@ export default new Router({
       component: QuoteQualification
     },
 		{
-      path: '/order',
+      path: '/order/:id',
       name: 'order',
       component: Order
     },
 		{
-      path: '/order/result',
+      path: '/order/result/:id',
       name: 'ordeResult',
       component: OrdeResult
     },

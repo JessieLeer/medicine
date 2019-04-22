@@ -10,23 +10,21 @@
 				  <el-col v-bind:span='18'>
 					  <el-form label-width="80px">
 							<el-form-item label="" label-width='12px'>
-								<b>{{order.title}}</b>
+								<b>{{order.name}}</b>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='order.image' width='40' class='f-pa'>
-								<router-link to='/quote/qualification' title='查看资质'>
-									<el-button type="text" class='card-opera'>
-										<i class='unit f-fsn'>{{order.unit}}</i>
-									</el-button>	
-								</router-link>
+								<img v-bind:src='order.createBy.photo' width='40' class='f-pa'>
+								<el-button type="text" class='card-opera' v-on:click='go(`/quote/qualification/${order.createBy.id}`)'>
+									<i class='unit f-fsn'>{{order.createBy.name}}</i>
+								</el-button>	
 							</el-form-item>
-							<el-form-item label="物资信息">{{order.info}}</el-form-item>
-							<el-form-item label="截止日期">{{order.deadline}}</el-form-item>
+							<el-form-item label="联系人">{{order.contact}} / {{order.phone}}</el-form-item>
+							<el-form-item label="截止日期">{{order.endValue}}</el-form-item>
 							<el-form-item label="" label-width='12px' class='remark'>{{order.remark}}</el-form-item>
 						</el-form>
 					</el-col>
 					<el-col v-bind:span='6'>
-					  <el-steps v-bind:active="1" finish-status="success">
+					  <el-steps v-bind:active="parseInt(order.status)" finish-status="success">
 						  <el-step title="已询价"></el-step>
 							<el-step title="报价中"></el-step>
 							<el-step title="已定单"></el-step>
@@ -50,9 +48,9 @@
 					</el-row>
 				</header>
 				<el-table v-bind:data="goodsFilter" class='w-100' max-height="500">
-					<el-table-column prop="name" label="商品名称"></el-table-column>
-					<el-table-column prop="number" label="需求数量" width="120"></el-table-column>
-					<el-table-column prop="ticket" label="可供应数量" width='140'>
+					<el-table-column prop="product.name" label="商品名称"></el-table-column>
+					<el-table-column prop="expected" label="需求数量" width="120"></el-table-column>
+					<el-table-column prop="expected" label="可供应数量" width='140'>
 					  <template slot-scope='scope'>
 						  <el-input v-model="scope.row.available" type='number' size='small' min='0'></el-input>
 						</template>
@@ -86,7 +84,7 @@
 					</el-form-item>
 					<br>
 					<el-form-item>
-						<el-button type="primary">提交</el-button>
+						<el-button type="primary" v-bind:disabled='subGoods.length == "0"' v-on:click='save'>提交</el-button>
 					</el-form-item>
 				</el-form>
 			</el-card>

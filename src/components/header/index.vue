@@ -1,5 +1,5 @@
 <template>
-  <el-menu v-bind:default-active="activeIndex" class="el-menu-demo" mode="horizontal" v-on:select='' router>
+  <el-menu v-bind:default-active="activeIndex" class="el-menu" mode="horizontal" v-on:select='' router>
 	  <el-row>
 		  <el-col :md='4' :sm='3'>
 			  <el-menu-item index="/" class='f-ib'>
@@ -12,7 +12,7 @@
 		    <el-menu-item index="/supplier" class='f-ib'>优选供应商</el-menu-item>
 			</el-col>
 			<el-col :md='10' :sm='10' class='f-tar'>
-			  <el-menu-item index="/publish" class='f-ib'>
+			  <el-menu-item index="/inquiry/create/manual/none" class='f-ib' v-if='user.type == "采购商"'>
 					<el-button type='primary' size='small'>发布询价</el-button>
 				</el-menu-item>
 				<el-menu-item index="/register" class='f-ib' v-if='!user.id'>注册</el-menu-item>

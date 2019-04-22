@@ -10,24 +10,7 @@ export default {
 				quoted: false
 			},
 			activeName: 'all',
-			datas: [
-				{
-					id: '1',
-					title: '阿莫西林询价',
-					created_at: '2017-10-10',
-					deadline: '2-19-01-01',
-					remark: '请于两个工作日前确认',
-					status: '报价中'
-				},
-				{
-					id: '2',
-					title: '阿莫西林询价',
-					created_at: '2017-10-10',
-					deadline: '2-19-01-01',
-					remark: '请于两个工作日前确认',
-					status: '报价中'
-				},
-			],
+			datas: [],
 			isWayShow: false,
 			fileList: []
 		}
@@ -36,6 +19,9 @@ export default {
 		cheader
 	},
 	computed: {
+		user() {
+			return this.$store.state.user
+		},
 		shows: {
 			get() {
 				return this.datas.map((item) => {
@@ -47,10 +33,27 @@ export default {
 		}
 	},
 	created() {
+		this.index(1)
 	},
 	methods: {
-		index() {
-			console.log(this.search)
+		go(url) {
+			this.$router.push(url)
+		},
+		index(page) {
+			this.$http.get('/api/inquiry', {params: {userId: this.user.id, keywords: this.search.name, quoted: this.search.quoted, aimType: this.search.range, page: page, pageSize: 10}}).then((res) => {
+				this.datas = res.data.data ? res.data.data : []
+			})
+		},
+		uploadTemplate(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/excelUpload',formData).then((res) => {
+				if(res.data.success){
+					this.$router.push(`/inquiry/create/excel/${res.data.data}`)
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
 		},
 		handleChange(val) {},
 		handleRemove(file, fileList) {

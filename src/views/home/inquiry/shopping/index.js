@@ -4,34 +4,38 @@ export default {
 	name: 'shopping',
 	data() {
 		return {
-			shoppings: [
-				{
-					id: '1',
-					numbering: 'JHFZDA00000199',
-					variety: '25',
-					expected: '15500'
-				},
-				{
-					id: '2',
-					numbering: 'JHFZDA00000199',
-					variety: '125',
-					expected: '15500'
-				},
-			],
+			shoppings: [],
 			detailShow: false,
-			details: [
-				{
-					id: '1',
-					name: '医用退热贴',
-					manufacturer: '浙江银达生物技术有限公司',
-					specification: '120mm*50mm*2贴',
-					offer: '盒',
-					expected: '3000'
-				}
-			]
+			details: []
 		}
 	},
 	components: {
 		cheader
+	},
+	computed: {
+		user() {
+			return this.$store.state.user
+		}
+	},
+	created() {
+		this.index()
+	},
+	methods: {
+		go(url) {
+			this.$router.push(url)
+		},
+		index() {
+			let url = this.$route.params.type == 'erp' ? '/api/inquiry/procurementPlan' : '/api/inquiry/myInquiry'
+			this.$http.get(url,{params: {userId: this.user.id}}).then((res) => {
+				this.shoppings = res.data.data
+			})
+		},
+		show(id) {
+			this.detailShow = true
+			let url = this.$route.params.type == 'erp' ? '/api/inquiry/procurementPlanInfo' : '/api/inquiry/myInquiryInfo'
+			this.$http.get(url, {params: {id: id}}).then((res) => {				
+				this.details = this.$route.params.type == 'erp' ? res.data.data : res.data.data.productList
+			})
+		}
 	}
 }
