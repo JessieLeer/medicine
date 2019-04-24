@@ -265,11 +265,8 @@
 				<br><br>
 				<el-table v-bind:data="offers" class='goods-table'>
 				  <el-table-column prop="name" label="名称"></el-table-column>
-					</el-table-column>
 					<el-table-column prop="user.type" label="客户类型"></el-table-column>
-					</el-table-column>
 					<el-table-column prop="updateDate" label="修改日期"></el-table-column>
-					</el-table-column>
 					<el-table-column label="操作" fixed="right" width='50'>
 					  <template slot-scope='scope'>
 						  <el-button type="text" size='small' v-on:click='appendForm("aims",scope.row)' v-bind:disabled='form.aims.indexOf(scope.row) == -1 ? false : true' v-bind:title='form.aims.indexOf(scope.row) == -1 ? "" : "已选择"'>选择</el-button>
