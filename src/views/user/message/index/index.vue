@@ -12,11 +12,11 @@
 				  <el-tabs v-model="activeName">
 						<el-tab-pane label="通知" name="first">
 						  <el-form inline size='small' ref='form' class='f-tar'>
-							  <el-form-item class='f-fl' v-if='selectedNotice.length > 0'>
-									<el-button type='primary'>批量已读</el-button>
+							  <el-form-item class='f-fl' v-if='notice.selected.length > 0'>
+									<el-button type='primary' v-on:click='edit("")'>批量已读</el-button>
 								</el-form-item>
-								<el-form-item class='f-fl' v-if='selectedNotice.length > 0'>
-									<el-button type='danger'>批量删除</el-button>
+								<el-form-item class='f-fl' v-if='notice.selected.length > 0'>
+									<el-button type='danger' v-on:click='del("")'>批量删除</el-button>
 								</el-form-item>
 								<el-form-item prop='name'>
 									<el-input v-model="notice.search" placeholder="输入标题">
@@ -28,12 +28,12 @@
 							  <el-table-column type="selection" width="30"></el-table-column>
 								<el-table-column label="标题">
 								  <template slot-scope='scope'>
-									  <router-link to='/user/message/show' v-if='scope.row.status == "未读"'>
+									  <router-link v-bind:to='`/user/message/show/${scope.row.id}`' v-if='scope.row.status == "未读"'>
 											<el-badge is-dot class='message-badge'>
 												{{scope.row.title}}
 											</el-badge>
 										</router-link>
-										<router-link to='/user/message/show' v-if='scope.row.status == "已读"'>
+										<router-link v-bind:to='`/user/message/show/${scope.row.id}`' v-if='scope.row.status == "已读"'>
 											{{scope.row.title}}
 										</router-link>
 									</template>
@@ -41,8 +41,8 @@
 								<el-table-column prop="createDate" label="" width='160'></el-table-column>
 								<el-table-column label="操作" width='150'>
 									<template slot-scope="scope">
-										<el-button size="mini" type='primary'>已读</el-button>
-										<el-button size="mini" type="danger">删除</el-button>
+										<el-button size="mini" type='primary' v-if='scope.row.status == "未读"' v-on:click='edit(scope.row.id)'>已读</el-button>
+										<el-button size="mini" type="danger" v-on:click='del(scope.row.id)'>删除</el-button>
 									</template>
 								</el-table-column>
 							</el-table>	
@@ -51,39 +51,21 @@
 						</el-tab-pane>
 						<el-tab-pane label="系统消息" name="second">
 						  <el-form inline size='small' ref='form' class='f-tar'>
-							  <el-form-item class='f-fl' v-if='selectedSystem.length > 0'>
-									<el-button type='primary'>批量已读</el-button>
-								</el-form-item>
-								<el-form-item class='f-fl' v-if='selectedSystem.length > 0'>
-									<el-button type='danger'>批量删除</el-button>
-								</el-form-item>
 								<el-form-item prop='name'>
 									<el-input v-model="system.search" placeholder="输入标题">
 									  <el-button slot="append" icon="el-icon-search" v-on:click='systemIndex(1)'></el-button>
 									</el-input>
 								</el-form-item>
 							</el-form>
-							<el-table v-bind:data="system.data" @selection-change="systemSelect">
-							  <el-table-column type="selection" width="30"></el-table-column>
+							<el-table v-bind:data="system.data">
 								<el-table-column label="标题">
 								  <template slot-scope='scope'>
-									  <router-link to='/user/message/show' v-if='scope.row.status == "未读"'>
-											<el-badge is-dot class='message-badge'>
-												{{scope.row.title}}
-											</el-badge>
-										</router-link>
-										<router-link to='/user/message/show' v-if='scope.row.status == "已读"'>
+									  <router-link v-bind:to='`/user/message/show/${scope.row.id}`'>
 											{{scope.row.title}}
 										</router-link>
 									</template>
 								</el-table-column>
-								<el-table-column prop="createDate" label="" width='160'></el-table-column>
-								<el-table-column label="操作" width='150'>
-									<template slot-scope="scope">
-										<el-button size="mini" type='primary'>已读</el-button>
-										<el-button size="mini" type="danger">删除</el-button>
-									</template>
-								</el-table-column>
+								<el-table-column prop="created_at" label="" width='160'></el-table-column>
 							</el-table>	
 							<br>
 							<el-pagination class='f-tac' layout="prev, pager, next" v-bind:total="system.total" v-on:current-change='systemIndex' v-bind:current-page='system.curpage'></el-pagination>

@@ -16,7 +16,7 @@
 								  <b>{{article.title}}</b>
 								</el-col>
 								<el-col :span='4' class='f-tar'>
-								  <el-button type="text" size='mini'>返回</el-button>
+								  <el-button type="text" size='mini' v-on:click='back'>返回</el-button>
 								</el-col>
 							</el-row>
 						</header>

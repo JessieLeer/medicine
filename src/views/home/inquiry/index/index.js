@@ -12,7 +12,9 @@ export default {
 			activeName: 'all',
 			datas: [],
 			isWayShow: false,
-			fileList: []
+			fileList: [],
+			total: 0,
+			curpage: 1
 		}
 	},
 	components: {
@@ -42,6 +44,7 @@ export default {
 		index(page) {
 			this.$http.get('/api/inquiry', {params: {userId: this.user.id, keywords: this.search.name, quoted: this.search.quoted, aimType: this.search.range, page: page, pageSize: 10}}).then((res) => {
 				this.datas = res.data.data ? res.data.data : []
+				this.total = res.data.total
 			})
 		},
 		uploadTemplate(param) {

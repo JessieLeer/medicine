@@ -3,6 +3,7 @@
 	  <el-header class='w-100'>
 		  <cheader activeIndex='/inquiry'></cheader>
 		</el-header>
+		<router-view/>
 	  <el-main>
 		  <el-card class="box-card">
 			  <header slot='header'>订单信息</header>

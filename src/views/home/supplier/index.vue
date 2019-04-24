@@ -5,31 +5,26 @@
 		</el-header>
 	  <el-main>
 		  <el-carousel indicator-position="outside">
-				<el-carousel-item v-for='(item,index) in banners' v-bind:key='index' v-bind:style='`background: url(${item.image}) no-repeat center;`'>
-				</el-carousel-item>
+				<a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index'>
+				  <el-carousel-item  v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center;`'></el-carousel-item>
+				</a>
 			</el-carousel>
 			<el-container>
 			  <el-main>
 					<el-card class="box-card">
 						<header slot="header" class="clearfix">
 							<el-input placeholder="输入供应商名称" v-model="search.name" size='small'>
-								<el-button slot="append" icon="el-icon-search"></el-button>
+								<el-button slot="append" icon="el-icon-search" v-on:click='index(1)'></el-button>
 							</el-input>
 						</header>
 						<el-row>
-							<el-col :md='8' :sm='12' :xs='24' v-for='(item,index) in suppliers' v-bind:key='index' v-if='item.name.indexOf(search.name) != -1'>
+							<el-col :md='8' :sm='12' :xs='24' v-for='(item,index) in suppliers' v-bind:key='index'>
 								<el-form label-width="60px" class='index-hot' label-position="left">
 									<el-form-item label="" label-width='0' class='f-pr'>
-										<router-link to='/' title='查看资质'>
-											<img v-bind:src='item.logo' width='40' class='logo f-pa'>
-											<el-button type='text' size=''>
-												<b class='name'>{{item.name}}</b>
-											</el-button>
-										</router-link>
-									</el-form-item>
-									<el-form-item label="订单数">{{item.orderNum}}</el-form-item>
-									<el-form-item label="评分">
-										<el-rate v-model='item.evalution*5' disabled text-color="#ff9900"></el-rate>
+										<img v-bind:src='item.image' width='40' class='logo f-pa'>
+										<el-button type='text' size='' title='查看资质' v-on:click='go(`/quote/qualification/${item.id}`)'>
+											<b class='name'>{{item.name}}</b>
+										</el-button>
 									</el-form-item>
 								</el-form>
 								<hr color='#e5e5e5'>
@@ -37,7 +32,10 @@
 						</el-row>
 						<el-pagination
 							layout="prev, pager, next"
-							:total="50"
+							:page-size='9'
+							:total="total"
+							v-on:current-change='index'
+							v-bind:current-page='curpage'
 							class='f-tac'>
 						</el-pagination>
 					</el-card>

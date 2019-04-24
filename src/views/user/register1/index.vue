@@ -14,11 +14,12 @@
 				<el-form-item prop='unit'>
 					<el-input v-model="form.unit" placeholder='单位名称'></el-input>
 				</el-form-item>
-				<el-form-item prop='license'>
+				<el-form-item prop='license' v-if='form.type != "业务员"'>
 					<el-upload
 						class="upload-demo"
 						:http-request='uploadLicense'
 						action='nourl'
+						accept=".jpg,.jpeg,.png,.gif"
 						:on-preview="handlePreview"
 						:on-remove="handleRemove"
 						:before-remove="beforeRemove"
@@ -30,10 +31,11 @@
 						<i slot="tip" class="el-upload__tip">只能上传jpg/png文件</i>
 					</el-upload>
 				</el-form-item>
-				<el-form-item prop='gsp'>
+				<el-form-item prop='gsp' v-if='form.type != "业务员"'>
 					<el-upload
 						class="upload-demo"
 						action="nourl"
+						accept=".jpg,.jpeg,.png,.gif"
 						:http-request='uploadGsp'
 						:on-preview="handlePreview"
 						:on-remove="handleRemove"
@@ -53,6 +55,7 @@
 					<el-upload
 						class="upload-demo"
 						action="nourl"
+						accept=".jpg,.jpeg,.png,.gif"
 						:http-request='uploadCommission'
 						:on-preview="handlePreview"
 						:on-remove="handleRemove"
@@ -65,10 +68,10 @@
 						<i slot="tip" class="el-upload__tip">只能上传jpg/png文件</i>
 					</el-upload>
 				</el-form-item>
-				<el-form-item prop='regnum'>
+				<el-form-item prop='regnum' v-if='form.type != "业务员"'>
 					<el-input v-model="form.regnum" placeholder='工商注册号'></el-input>
 				</el-form-item>
-				<el-form-item prop='regaddress'>
+				<el-form-item prop='regaddress' v-if='form.type != "业务员"'>
 					<el-input v-model="form.regaddress" placeholder='注册地址'></el-input>
 				</el-form-item>
 				<el-form-item>

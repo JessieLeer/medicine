@@ -19,7 +19,7 @@
 				<el-menu-item index="/login" class='f-ib' v-if='!user.id'>登录</el-menu-item>
 				<el-menu-item index="#" class='f-ib' v-if='user.id'>
 				  <router-link to='/user/message'>
-				    <el-badge is-dot class="bell-my item">
+				    <el-badge v-bind:is-dot='unread > 0 ? true : false' class="bell-my item">
 					  	<i class='bell el-icon-bell'></i>
 					  </el-badge>
 					</router-link>

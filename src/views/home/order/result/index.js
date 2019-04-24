@@ -4,6 +4,7 @@ export default {
 	name: 'ordeResult',
 	data() {
 		return {
+			serverUrl: this.$store.state.config.serverUrl,
 			orders: [
 			],
 		}
@@ -45,7 +46,7 @@ export default {
 		},
 		importer() {
 			this.$http.get('/api/inquiry/exportEnquiry',{params: {id: this.$route.params.id}}).then((res) => {
-				window.location.href = `http://192.168.1.65:8088/${res.data.data}`
+				window.location.href = this.serverUrl + res.data.data
 			})
 		}
 	}

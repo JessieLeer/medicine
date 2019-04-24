@@ -169,7 +169,7 @@ export default new Router({
 			component: UserMessage
 		},
 		{
-			path: '/user/message/show',
+			path: '/user/message/show/:id',
 			name: 'user_message_show',
 			component: UserMessageShow
 		},

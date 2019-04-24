@@ -36,6 +36,7 @@ export default {
 		},
 		index() {
 			this.$http.get('/api/inquiry/viewOffer', {params: {id: this.$route.params.id, userId: this.user.id}}).then((res) => {
+				res.data.data.supplierProductList ? '' : res.data.data.supplierProductList = []
 				this.order = res.data.data
 				for(let item of this.order.supplierProductList){
 					item.available = item.available ? item.available : item.expected

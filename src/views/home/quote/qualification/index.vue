@@ -24,12 +24,12 @@
 					</el-col>
 					<el-col :md='8' :sm='12'>
 					  <el-form-item label="成立日期">
-							{{company.created_at}}
+							{{company.createAt}}
 						</el-form-item>
 					</el-col>
 					<el-col :md='8' :sm='12'>
 					  <el-form-item label="经营状态">
-							{{company.status}}
+							{{company.openStatus}}
 						</el-form-item>
 					</el-col>
 					<el-col :md='8' :sm='12'>
@@ -54,7 +54,7 @@
 					</el-col>
 					<el-col :md='8' :sm='12'>
 					  <el-form-item label="公司类型">
-							{{company.type}}
+							{{company.genre}}
 						</el-form-item>
 					</el-col>
 					<el-col :md='8' :sm='12'>
@@ -74,7 +74,7 @@
 					</el-col>
 					<el-col :md='8' :sm='12'>
 					  <el-form-item label="核准日期">
-							{{company.approved_at}}
+							{{company.approvedAt}}
 						</el-form-item>
 					</el-col>
 					<el-col :md='8' :sm='12'>

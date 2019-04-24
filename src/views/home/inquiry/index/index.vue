@@ -16,7 +16,7 @@
 								<el-button slot="append" icon="el-icon-search" v-on:click='index(1)'></el-button>
 							</el-input>
 						</el-form-item>
-						<el-form-item v-if='user.type == "供应商"'>
+						<el-form-item v-if='user.type == "供应商" || user.type == "业务员"'>
 							<el-checkbox v-model="search.quoted">我的报价</el-checkbox>
 						</el-form-item>
 					</el-form>
@@ -59,10 +59,11 @@
 			<el-row>
 			  <el-col :span='24' class='f-tac'>
 				  <el-pagination
-						v-bind:page-size="20"
-						v-bind:pager-count="11"
 						layout="prev, pager, next"
-						v-bind:total="1000">
+						:total="total"
+						v-on:current-change='index'
+						v-bind:current-page='curpage'
+						class='f-tac'>
 					</el-pagination>
 				</el-col>
 			</el-row>

@@ -18,6 +18,7 @@
 										<el-upload
 											class="avatar-uploader"
 											action="nourl"
+											accept=".jpg,.jpeg,.png,.gif"
 						          :http-request='uploadAvatar'
 											v-bind:show-file-list="false">
 											<img v-if="form.headpic" v-bind:src="form.headpic" class="avatar">
@@ -55,6 +56,7 @@
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
+											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadLicense'
 											:show-file-list="false">
 											<img v-if="form.license" :src="form.license" class="avatar">
@@ -66,6 +68,7 @@
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
+											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadGsp'
 											:show-file-list="false">
 											<img v-if="form.gsp" :src="form.gsp" class="avatar">
@@ -77,6 +80,7 @@
 										<el-upload
 											class="avatar-uploader"
 											action="nourl"
+											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadCommission'
 											:show-file-list="false">
 											<img v-if="form.commission" :src="form.commission" class="avatar">
