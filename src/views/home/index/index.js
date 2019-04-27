@@ -43,6 +43,7 @@ export default {
 		this.orderIndex()
 	},
 	mounted() {
+		
 	},
 	methods: {
     slide (data) {},
@@ -74,6 +75,7 @@ export default {
 		supplierIndex() {
 			this.$http.get('/api/supplier').then((res) => {
 				for(let item of res.data.data) {
+					item.image == '' ? item.image = '/static/a.jpg' : item.image = item.image
 					this.suppliers.push({
 						id: item.id,
 						style: {

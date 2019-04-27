@@ -13,6 +13,7 @@ import './assets/css/mine.styl'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+axios.defaults.baseURL = 'http://192.168.1.63:8080/'
 Vue.prototype.$http = axios
 
 /* eslint-disable no-new */

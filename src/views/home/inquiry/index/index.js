@@ -4,15 +4,15 @@ export default {
 	name: 'inquiry',
 	data() {
 		return {
+			serverUrl: this.$store.state.config.serverUrl,
 			search: {
 				name: '',
-				range: 'whole',
+				range: 'all',
 				quoted: false
 			},
 			activeName: 'all',
 			datas: [],
-			isWayShow: false,
-			fileList: [],
+			
 			total: 0,
 			curpage: 1
 		}
@@ -44,29 +44,10 @@ export default {
 		index(page) {
 			this.$http.get('/api/inquiry', {params: {userId: this.user.id, keywords: this.search.name, quoted: this.search.quoted, aimType: this.search.range, page: page, pageSize: 10}}).then((res) => {
 				this.datas = res.data.data ? res.data.data : []
+				console.log(this.datas)
 				this.total = res.data.total
 			})
 		},
-		uploadTemplate(param) {
-			let formData = new FormData()
-			formData.append('file',param.file)
-			this.$http.post('/api/excelUpload',formData).then((res) => {
-				if(res.data.success){
-					this.$router.push(`/inquiry/create/excel/${res.data.data}`)
-				}else{
-					this.$message.warning(res.data.message)
-				}
-			})
-		},
 		handleChange(val) {},
-		handleRemove(file, fileList) {
-    },
-    handlePreview(file) {
-    },
-    handleExceed(files, fileList) {
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${ file.name }？`)
-    }
 	}
 }

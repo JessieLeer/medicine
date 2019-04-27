@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/views/home/index/index.vue'
 import Inquiry from '@/views/home/inquiry/index/index.vue'
 import InquiryImport from '@/views/home/inquiry/import/index.vue'
+import GoodShow from '@/views/home/good/show/index.vue'
 import Shopping from '@/views/home/inquiry/shopping/index.vue'
 import InquiryCreate from '@/views/home/inquiry/create/index.vue'
 import QuoteEdit from '@/views/home/quote/edit/index.vue'
@@ -54,6 +55,11 @@ export default new Router({
 			path: '/inquiry/create/:source/:sid',
       name: 'inquiry_create',
       component: InquiryCreate
+		},
+		{
+			path: '/good/show/:id',
+			name: 'good_show',
+			component: GoodShow
 		},
 		{
       path: '/quote/show/:id',

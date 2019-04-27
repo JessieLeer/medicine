@@ -15,7 +15,7 @@
 					</el-radio-group>
 				</el-form-item>
 				<el-form-item label='' prop='cutoff.value' v-if='form.cutoff.type != ""'>
-				  <el-date-picker value-format='yyyy-MM-dd' v-if='form.cutoff.type == "deadline"' type='date' v-model="form.cutoff.value" placeholder="选择截止日期"></el-date-picker>
+				  <el-date-picker value-format='yyyy-MM-dd' v-if='form.cutoff.type == "deadline"' type='date' v-model="form.cutoff.value" placeholder="选择截止日期" v-bind:picker-options="picker"></el-date-picker>
 					<el-input-number v-if='form.cutoff.type == "maxnumber"' v-model="form.cutoff.value" controls-position="right" v-bind:min="1" v-bind:max="10"></el-input-number>
 				</el-form-item>
 				<el-form-item label='选择产品' prop='goods'>
@@ -67,13 +67,14 @@
 				<el-form-item label='目标公开' prop='aimType'>
 				  <el-radio-group v-model="form.aimType">
 				    <el-radio label="whole">全网</el-radio>
-            <el-radio label="wholeMine">我的全部</el-radio>
+            <el-radio label="wholeMine">我的全部（{{offerTotal}}）</el-radio>
 					  <el-radio label="partMine">我的部分</el-radio>
 					</el-radio-group>
 				</el-form-item>
 				<el-form-item label='' v-if='form.aimType == "partMine"' prop='aims'>
 				  <el-table v-bind:data="form.aims" class='goods-table mt-20' v-if='form.aims.length > 0'>
 					  <el-table-column prop='name' label='名称'></el-table-column>
+						<el-table-column prop='company' label='公司'></el-table-column>
 						<el-table-column width='50' label='操作'>
 						  <template slot-scope='scope'>
 							  <el-button type="danger" v-on:click='deleteForm("aims",scope.row)'>删除</el-button>
@@ -264,9 +265,27 @@
 				</el-input>
 				<br><br>
 				<el-table v-bind:data="offers" class='goods-table'>
+				  <el-table-column type="expand">
+						<template slot-scope="props">
+							<el-form label-position="left" inline class='good-other'>
+							  <el-row>
+								  <el-col :md='12' :sm='24'>
+									  <el-form-item label="客户类型">
+											{{ props.row.user.type }}
+										</el-form-item>
+									</el-col>
+									<el-col :md='12' :sm='24'>
+									  <el-form-item label="修改日期">
+											{{ props.row.updateDate }}
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</el-form>
+						</template>
+					</el-table-column>
 				  <el-table-column prop="name" label="名称"></el-table-column>
-					<el-table-column prop="user.type" label="客户类型"></el-table-column>
-					<el-table-column prop="updateDate" label="修改日期"></el-table-column>
+					<el-table-column prop="company" label="公司名称"></el-table-column>
+					<el-table-column prop="phone" label="联系方式" width='110'></el-table-column>
 					<el-table-column label="操作" fixed="right" width='50'>
 					  <template slot-scope='scope'>
 						  <el-button type="text" size='small' v-on:click='appendForm("aims",scope.row)' v-bind:disabled='form.aims.indexOf(scope.row) == -1 ? false : true' v-bind:title='form.aims.indexOf(scope.row) == -1 ? "" : "已选择"'>选择</el-button>

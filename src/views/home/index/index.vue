@@ -13,14 +13,18 @@
 			<el-card class="box-card">
 			  <header slot="header" class="clearfix">优选商品</header>
 				<slider ref="slider" v-bind:options="options" @slide='slide' @tap='onTap' @init='onInit'>
-          <slideritem v-for="(item,index) in goods" v-bind:key="index" v-bind:style="item.style" class='f-fl' style='width: 160px; height: 160px;'></slideritem>
+				  <a v-bind:href='`/#/good/show/${item.id}`' target='_blank' v-for="(item,index) in goods" v-bind:key="index">
+            <slideritem v-bind:style="item.style" class='f-fl' style='width: 160px; height: 160px;'></slideritem>
+					</a>	
         </slider>
 		  </el-card>
 			<br>
 			<el-card class="box-card">
 			  <header slot="header" class="clearfix">优选供应商</header>
 				<slider ref="slider" v-bind:options="options" @slide='slide' @tap='onTap' @init='onInit'>
-          <slideritem v-for="(item,index) in suppliers" v-bind:key="index" v-bind:style="item.style" class='f-fl' style='width: 160px; height: 160px;'></slideritem>
+				  <a v-for="(item,index) in suppliers" v-bind:href='`/#/quote/qualification/${item.id}`' target='_blank' v-bind:key="index">
+            <slideritem v-bind:style="item.style" class='f-fl' style='width: 160px; height: 160px;'></slideritem>
+					</a>
         </slider>
 		  </el-card>
 			<br>
@@ -73,7 +77,7 @@
 				  <el-col :md='6' :sm='8' :xs='12' v-for='(item,index) in orders' v-bind:key='index' >
 					  <el-form label-width="80px" class='index-hot w-100 f-ib'>
 							<el-form-item label="" label-width='12px'>
-								<el-button type="text" class='card-opera'>
+								<el-button type="text" class='card-opera' v-on:click='go(`/order/${item.id}`)'>
 								  <b>{{item.title}}</b>
 							  </el-button>
 							</el-form-item>

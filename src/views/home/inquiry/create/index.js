@@ -12,6 +12,11 @@ export default {
       }
     }
 		return {
+			picker: {
+				disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7
+        },
+			},
 			form: {
 				userId: this.$store.state.user.id,
 				source: this.$route.params.source,
@@ -221,6 +226,8 @@ export default {
 		cheader
 	},
 	created() {
+		this.contactInit()
+		this.supplierCount()
 		this.cateIndex()
 		this.brandIndex()
 		this.presclassIndex()
@@ -228,6 +235,20 @@ export default {
 	},
 	methods: {
 		cateChange(val) {
+		},
+		/*-- 获取用户联系方式 --*/
+		contactInit() {
+			this.$http.get("/api/inquiry/getLatestContact", {params: {userId: this.user.id}}).then((res) => {
+				this.form.contact = res.data.data.contact
+				this.form.phone = res.data.data.phone
+				this.form.address = res.data.data.address
+			})
+		},
+		/*-- 获取用户的供应商数量 --*/
+		supplierCount() {
+			this.$http.get('/api/inquiry/supplier', {params: {userId: this.user.id, name: this.search.offer.name, page: 1, pageSize: 10}}).then((res) => {
+				this.offerTotal = res.data.total
+			})
 		},
 		/*-- 获取产品分类 --*/
 		cateIndex() {

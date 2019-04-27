@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // initial state
 const state = {
-	serverUrl: 'http://192.168.1.65:8088'
+	serverUrl: 'http://192.168.1.63:8080'
 }
 
 // getters

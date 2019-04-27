@@ -77,7 +77,7 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 							  <el-form-item prop='bagShl'>
-								  <el-input v-model="form1.bagShl" placeholder='件包装'></el-input>
+								  <el-input v-model="form.bagShl" placeholder='件包装'></el-input>
 								</el-form-item>
 							</el-col>
 							<el-col :sm='12' :xs='24'>
