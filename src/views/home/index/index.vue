@@ -69,7 +69,9 @@
 						  <h4 class='card-title f-ib'>{{user.type == '供应商' ? '我的报价' : '我的询价'}}</h4>
 					  </el-col>
 						<el-col :span='12' class='f-tar'>
-						  <el-button type="text" class='card-opera'>查看更多</el-button>	
+						  <router-link to='/inquiry'>
+						    <el-button type="text" class='card-opera'>查看更多</el-button>
+							</router-link>
 						</el-col>
 					</el-row>
 				</header>

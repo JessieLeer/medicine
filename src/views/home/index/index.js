@@ -79,7 +79,7 @@ export default {
 					this.suppliers.push({
 						id: item.id,
 						style: {
-							background: `url(${item.image}) no-repeat`
+							background: `url(${this.serverUrl}${item.image}) no-repeat`
 						}
 					})
 				}
