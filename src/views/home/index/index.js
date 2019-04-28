@@ -43,7 +43,6 @@ export default {
 		this.orderIndex()
 	},
 	mounted() {
-		
 	},
 	methods: {
     slide (data) {},

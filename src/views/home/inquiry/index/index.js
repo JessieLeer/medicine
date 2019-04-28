@@ -12,7 +12,6 @@ export default {
 			},
 			activeName: 'all',
 			datas: [],
-			
 			total: 0,
 			curpage: 1
 		}
@@ -44,7 +43,6 @@ export default {
 		index(page) {
 			this.$http.get('/api/inquiry', {params: {userId: this.user.id, keywords: this.search.name, quoted: this.search.quoted, aimType: this.search.range, page: page, pageSize: 10}}).then((res) => {
 				this.datas = res.data.data ? res.data.data : []
-				console.log(this.datas)
 				this.total = res.data.total
 			})
 		},

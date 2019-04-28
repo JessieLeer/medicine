@@ -1,5 +1,8 @@
 <template>
   <el-container>
+	  <el-header class='w-100'>
+		  <cheader activeIndex='/'></cheader>
+		</el-header>
 	  <el-main>
 		  <el-tabs v-model="activeName">
 				<el-tab-pane label="账号密码登录" name="first">
@@ -12,7 +15,7 @@
 						</el-form-item>
 						<el-form-item>
 							<el-button type="primary" size='small' v-on:click='submit("form.account","loginto")'>登录</el-button>
-							<el-button type="text" size='small'>忘记密码？</el-button>
+							<!--<el-button type="text" size='small'>忘记密码？</el-button>-->
 						</el-form-item>
 					</el-form>
 				</el-tab-pane>
@@ -22,7 +25,7 @@
 							<el-input v-model="form.phone.phone" type='tel' placeholder='手机号'></el-input>
 						</el-form-item>
 						<el-form-item prop='vcode'>
-							<el-input v-model="form.phone.vcode" type='number' placeholder='验证码' min='0'>
+							<el-input v-model="form.phone.vcode" type='text' placeholder='验证码' min='0'>
 								<el-button slot="append" v-bind:disabled='!ableSend' v-on:click='sendCode'>{{btntext}}</el-button>
 							</el-input>
 						</el-form-item>

@@ -1,3 +1,5 @@
+import cheader from '@/components/header/index.vue'
+
 export default {
 	name: 'register',
 	data() {
@@ -80,6 +82,9 @@ export default {
 		ableSend() {
 			return this.countdown == 0 && this.phoneVerify == true ? true : false
 		}
+	},
+	components: {
+		cheader
 	},
 	methods: {
 		go(url){

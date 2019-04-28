@@ -1,5 +1,8 @@
 <template>
   <el-container>
+	  <el-header class='w-100'>
+		  <cheader activeIndex='/'></cheader>
+		</el-header>
 	  <el-main>
 			<el-steps v-bind:active="active" finish-status="success">
 				<el-step title="填写账号信息"></el-step>
@@ -17,6 +20,7 @@
 				<el-form-item prop='license' v-if='form.type != "业务员"'>
 					<el-upload
 						class="upload-demo"
+						v-model='form.license'
 						:http-request='uploadLicense'
 						action='nourl'
 						accept=".jpg,.jpeg,.png,.gif"

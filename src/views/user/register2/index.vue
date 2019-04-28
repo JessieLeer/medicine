@@ -1,5 +1,8 @@
 <template>
   <el-container>
+	  <el-header class='w-100'>
+		  <cheader activeIndex='/'></cheader>
+		</el-header>
 	  <el-main>
 			<el-steps v-bind:active="active" finish-status="success">
 				<el-step title="填写账号信息"></el-step>

@@ -7,7 +7,7 @@
 		  <el-form inline>
 				<el-form-item>
 					<el-input size='small' placeholder="请输入商品或供应商名称" v-model="search.name" class="input-inquiry-select">
-						<el-select v-model="search.range" slot="prepend" placeholder="请选择">
+						<el-select v-model="search.range" slot="prepend" placeholder="请选择" v-on:change='index(1)'>
 						  <el-option label="全部" value="all"></el-option>
 							<el-option label="全网" value="whole"></el-option>
 							<el-option label="部分" value="wholeMine"></el-option>

@@ -209,7 +209,8 @@ export default {
 					trigger: 'blur'
 				}
 			},
-			dialogResultVisible: false
+			dialogResultVisible: false,
+			emptyText: '记载中...'
 		}
 	},
 	computed: {
@@ -313,6 +314,10 @@ export default {
 			this.goodsDialogShow = true
 			let cates = this.search.good.cate
 			this.$http.get('/api/inquiry/product', {params: {cate: cates[cates.length - 1], name: this.search.good.name, page: page, pageSize: 10}}).then((res) => {
+				res.data.data = res.data.data ? res.data.data : []
+				if(res.data.data.length == 0) {
+					this.emptyText = '暂无数据'
+				}
 				this.goods = res.data.data
 				for(let item of this.goods){
 					item.expected = 1

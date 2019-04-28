@@ -1,3 +1,5 @@
+import cheader from '@/components/header/index.vue'
+
 export default {
 	name: 'register2',
 	data() {
@@ -7,5 +9,8 @@ export default {
 	},
 	methods: {
 		
+	},
+	components: {
+		cheader
 	}
 }

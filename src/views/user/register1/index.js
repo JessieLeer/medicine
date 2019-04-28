@@ -1,3 +1,5 @@
+import cheader from '@/components/header/index.vue'
+
 export default {
 	name: 'resgiter1',
 	data() {
@@ -7,7 +9,9 @@ export default {
 				firstService: '',
 				commission: '',
 				regnum: '',
-				regaddress: ''
+				regaddress: '',
+				license: '',
+				gsp: ''
 			},
 			rules: {
 				company: {
@@ -41,6 +45,9 @@ export default {
 	},
 	created() {
 		this.form = Object.assign(this.form,this.$store.state.user)
+	},
+	components: {
+		cheader
 	},
 	methods: {
 		back() {
@@ -90,6 +97,7 @@ export default {
 			})
 		},
 		submit(form) {
+			console.log(this.form)
 			this.$refs[form].validate((valid) => {
         if (valid) {
 					this.$http.post('/api/user/register1', this.form).then((res) => {
@@ -97,10 +105,10 @@ export default {
 							window.setTimeout(() => {
 								this.$router.push('/register2')
 							},1000)
+						}else{
+							this.$message.warning(res.data.message)
 						}
 					})
-        } else {
-          this.$message.warning(res.data.message)
         }
       })
 		}

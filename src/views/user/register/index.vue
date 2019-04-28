@@ -1,5 +1,8 @@
 <template>
   <el-container>
+	  <el-header class='w-100'>
+		  <cheader activeIndex='/'></cheader>
+		</el-header>
 	  <el-main>
 			<el-steps v-bind:active="active" finish-status="success">
 				<el-step title="填写账号信息"></el-step>
@@ -15,6 +18,11 @@
 						<el-radio label="业务员" value='业务员'></el-radio>
 					</el-radio-group>
 				</el-form-item>
+				<el-form-item>
+				  <i v-if='form.type == "供应商"'>适合药品生产企业、厂家等，提供药品招商、代理及货品供应</i>
+					<i v-if='form.type == "采购商"'>仅批发采购账户，适合药品批发/零售、医疗机构、计划生育服务机构、医疗科研和教学 科研、军队的医疗机构等</i>
+					<i v-if='form.type == "业务员"'>供应商管理下授权的业务员，拥有供应商账号类型的功能</i>
+				</el-form-item>
 				<el-form-item prop='name'>
 					<el-input v-model="form.name" placeholder='用户名'></el-input>
 				</el-form-item>
@@ -28,7 +36,7 @@
 					<el-input v-model="form.phone" type='tel' placeholder='手机号'></el-input>
 				</el-form-item>
 				<el-form-item prop='vcode'>
-				  <el-input v-model="form.vcode" type='number' placeholder='验证码' min='0'>
+				  <el-input v-model="form.vcode" type='text' placeholder='验证码' min='0'>
 					  <el-button slot="append" v-bind:disabled='!ableSend' v-on:click='sendCode'>{{btntext}}</el-button>
 					</el-input>
 				</el-form-item>

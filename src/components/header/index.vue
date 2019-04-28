@@ -33,7 +33,7 @@
 				</el-submenu>
 			</el-col>
 		</el-row>
-		<el-dialog title="方式选择" v-bind:visible.sync="isWayShow" width='60%' class='way-dialog'>
+		<el-dialog title="方式选择" v-bind:visible.sync="isWayShow" width='60%' class='way-dialog' style='position: fixed;z-index: 100'>
 		  <el-row>
 			  <el-col :md='12' :sm='24'>
 	  		  <el-card class="box-card">

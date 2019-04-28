@@ -127,7 +127,7 @@
 					  <el-button type='text' size='small' v-on:click='goodCreateVisable = true'>手动添加</el-button>
 					</el-form-item>
 				</el-form>
-				<el-table v-bind:data="goods" class='goods-table'>
+				<el-table v-bind:data="goods" class='goods-table' v-bind:empty-text='emptyText'>
 				  <el-table-column type="expand" width='40'>
             <template slot-scope="scope">
 						  <el-form label-position="left" inline class='good-other'>

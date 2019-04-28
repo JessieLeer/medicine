@@ -4,9 +4,11 @@
 		  <cheader activeIndex='/'></cheader>
 		</el-header>
 	  <el-main>
-		  <el-carousel indicator-position="outside">
+		  <el-carousel indicator-position="outside" :autoplay='false' height='400px'>
 			  <a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index'>
-				  <el-carousel-item  v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center;`'></el-carousel-item>
+				  <el-carousel-item v-bind:name='item.name' class='f-tac'>
+					  <img v-bind:src='`${serverUrl}${item.photos}`'>
+					</el-carousel-item>
 				</a>
 			</el-carousel>
 			<br>
@@ -28,7 +30,7 @@
         </slider>
 		  </el-card>
 			<br>
-			<el-card class="box-card">
+			<el-card class="box-card" v-if='user.type != "采购商"'>
 				<header slot="header" class="clearfix">
 				  <el-row>
 					  <el-col :span='12'>
