@@ -381,6 +381,9 @@ export default {
           return false
         }
       })
+		},
+		refresher() {
+			window.location.reload()
 		}
 	}
 }

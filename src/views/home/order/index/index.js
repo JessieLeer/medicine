@@ -6,6 +6,7 @@ export default {
 		return {
 			order: {
 				createBy: {},
+				updateBy: {},
 				supplierProductList: []
 			},
 			search: {
@@ -78,6 +79,7 @@ export default {
       return sums
     },
 		submit() {
+			console.log(this.subGoods)
 			this.$http.post('/api/inquiry/saveEnquiry',{userId: this.user.id, inquiryId: this.$route.params.id, data: this.subGoods}).then((res) => {
 				if(res.data.success) {
 					this.$router.push(`/order/result/${res.data.data}`)

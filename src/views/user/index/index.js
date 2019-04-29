@@ -12,6 +12,7 @@ export default {
 	name: 'user',
 	data() {
 		return {
+			serverUrl: this.$store.state.config.serverUrl,
 			ranking: '',
 			cusNum: '',
 			turnover: {

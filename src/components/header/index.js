@@ -10,7 +10,8 @@ export default {
 		return {
 			unread: 0,
 			isWayShow: false,
-			fileList: []
+			fileList: [],
+			serverUrl: this.$store.state.config.serverUrl
 		}
 	},
 	computed: {

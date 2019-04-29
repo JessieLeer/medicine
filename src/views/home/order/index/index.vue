@@ -14,9 +14,9 @@
 								<b>{{order.name}}</b>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='order.createBy.photo' width='40' class='f-pa'>
+								<img v-bind:src='order.updateBy.photo' width='40' class='f-pa'>
 								<el-button type="text" class='card-opera' v-on:click='go(`/quote/qualification/${order.createBy.id}`)'>
-									<i class='unit f-fsn'>{{order.createBy.name}}</i>
+									<i class='unit f-fsn'>{{order.updateBy.name}}</i>
 								</el-button>	
 							</el-form-item>
 							<el-form-item label="联系人">{{order.contact}} / {{order.phone}}</el-form-item>

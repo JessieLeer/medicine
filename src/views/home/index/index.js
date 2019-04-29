@@ -11,15 +11,16 @@ export default {
 			suppliers: [],
 			options: {
         currentPage: 0,
-        thresholdDistance: 500,
+        thresholdDistance: 0,
         thresholdTime: 100,
-        autoplay: false,
+        autoplay: true,
         loop: true,
         direction: 'horizontal',
         loopedSlides: 0,
-        slidesToScroll: 1,
+        slidesToScroll: 0,
         timingFunction: 'ease',
-        speed: 300
+        speed: 300,
+				infinite: 0,
       },
 			hots: [],
 			orders: []
@@ -60,28 +61,13 @@ export default {
 		// 获取优选商品
 		optimalIndex() {
 			this.$http.get('/api/optimal').then((res) => {
-				for(let item of res.data.data) {
-					this.goods.push({
-						id: item.id,
-						style: {
-							background: `url(${item.image}) no-repeat`
-						}
-					})
-				}
+				this.goods = res.data.data.splice(0,8)
 			})
 		},
 		// 获取优选供应商
 		supplierIndex() {
 			this.$http.get('/api/supplier').then((res) => {
-				for(let item of res.data.data) {
-					item.image == '' ? item.image = '/static/a.jpg' : item.image = item.image
-					this.suppliers.push({
-						id: item.id,
-						style: {
-							background: `url(${this.serverUrl}${item.image}) no-repeat`
-						}
-					})
-				}
+				this.suppliers = res.data.data
 			})
 		},
 		// 获取热门询价

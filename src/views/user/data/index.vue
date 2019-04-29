@@ -21,7 +21,7 @@
 											accept=".jpg,.jpeg,.png,.gif"
 						          :http-request='uploadAvatar'
 											v-bind:show-file-list="false">
-											<img v-if="form.headpic" v-bind:src="form.headpic" class="avatar">
+											<img v-if="form.headpic" v-bind:src="serverUrl + form.headpic" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											<i slot="tip" class="el-upload__tip">头像</i>
 										</el-upload>
@@ -59,7 +59,7 @@
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadLicense'
 											:show-file-list="false">
-											<img v-if="form.license" :src="form.license" class="avatar">
+											<img v-if="form.license" :src="serverUrl + form.license" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											<i slot="tip" class="el-upload__tip">营业执照</i>
 										</el-upload>
@@ -71,7 +71,7 @@
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadGsp'
 											:show-file-list="false">
-											<img v-if="form.gsp" :src="form.gsp" class="avatar">
+											<img v-if="form.gsp" :src="serverUrl + form.gsp" class="avatar" width='100'>
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											<i slot="tip" class="el-upload__tip">gsp证书</i>
 										</el-upload>
@@ -83,7 +83,7 @@
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadCommission'
 											:show-file-list="false">
-											<img v-if="form.commission" :src="form.commission" class="avatar">
+											<img v-if="form.commission" :src="serverUrl + form.commission" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											<i slot="tip" class="el-upload__tip">业务员委托书</i>
 										</el-upload>

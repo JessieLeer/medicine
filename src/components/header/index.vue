@@ -26,7 +26,7 @@
 				</el-menu-item>
 				<el-submenu index="/user" class='f-ib' v-if='user.id'>
 					<template slot="title">
-						<img v-bind:src='user.headpic' width='40' class='headpic'>
+						<img v-bind:src='serverUrl + user.headpic' width='34' class='headpic'>
 					</template>
 					<el-menu-item index="/user">个人中心</el-menu-item>
 					<el-menu-item v-on:click='logout'>退出</el-menu-item>

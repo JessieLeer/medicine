@@ -12,7 +12,7 @@
 				  <el-card>
 						<el-row>
 							<el-col :md='12' :sm='12'>
-								<img v-bind:src='user.headpic ? user.headpic : "http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg"' width='30' class='headpic f-fl'>
+								<img v-bind:src='serverUrl + user.headpic' width='30' class='headpic f-fl'>
 								<i class='name f-fsn f-fl'>Hello<b> {{user.name}}</b>！<i class='f-fs1 f-fsn'>({{user.type}})</i></i>
 							</el-col>
 							<el-col :md='12' :sm='12' class='f-tar'>

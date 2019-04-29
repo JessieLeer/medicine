@@ -295,7 +295,7 @@
 				<br>
 				<el-pagination class='f-tac' layout="prev, pager, next" v-bind:total="offerTotal" v-bind:current-page='offerCur' v-on:current-change='offerIndex'></el-pagination>
 			</el-dialog>
-			<el-dialog title="操作反馈" :visible.sync="dialogResultVisible" class='cate-dialog'>
+			<el-dialog title="操作反馈" :visible.sync="dialogResultVisible" class='cate-dialog' v-on:close='refresher'>
 			  <el-alert title="操作成功，请耐心等待" type="success" center show-icon description=""></el-alert>
 				<br>
 				<el-row>

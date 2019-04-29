@@ -86,7 +86,7 @@ export default {
 							user.id = res.data.data.id
 							user.name = res.data.data.name
 							user.phone = res.data.data.phone
-							user.headpic = res.data.data.photo ? res.data.data.photo : 'http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg'
+							user.headpic = res.data.data.photo ? res.data.data.photo : '/static/front/images/avatar.png'
 							user.type = res.data.data.customerType
 							user.company = res.data.data.group.company
 							user.unit = res.data.data.group.unit

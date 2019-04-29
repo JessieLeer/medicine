@@ -28,6 +28,7 @@ export default {
       }
     }
 		return {
+			serverUrl: this.$store.state.config.serverUrl,
 			form: this.$store.state.user,
 			rules: {
 				headpic: {
@@ -100,7 +101,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.headpic = res.data.message
+					this.form.headpic = this.serverUrl + res.data.message
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -112,7 +113,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.license = res.data.message
+					this.form.license = this.serverUrl + res.data.message
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -124,7 +125,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.gsp = res.data.message
+					this.form.gsp = this.serverUrl + res.data.message
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -136,7 +137,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.commission = res.data.message
+					this.form.commission = this.serverUrl + res.data.message
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -151,7 +152,7 @@ export default {
 							user.id = res.data.data.id
 							user.name = res.data.data.name
 							user.phone = res.data.data.phone
-							user.headpic = res.data.data.photo ? res.data.data.photo : 'http://img1.imgtn.bdimg.com/it/u=1990481010,1624812997&fm=26&gp=0.jpg'
+							user.headpic = res.data.data.photo ? res.data.data.photo : '/static/front/images/avatar.png'
 							user.type = res.data.data.customerType
 							user.company = res.data.data.group.company
 							user.unit = res.data.data.group.unit
