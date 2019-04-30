@@ -14,9 +14,6 @@
 			  <el-form-item prop='company'>
 					<el-input v-model="form.company" placeholder='公司全称'></el-input>
 				</el-form-item>
-				<el-form-item prop='unit' v-if='form.type != "业务员"'>
-					<el-input v-model="form.unit" placeholder='单位名称'></el-input>
-				</el-form-item>
 				<el-form-item prop='license' v-if='form.type != "业务员"'>
 					<el-upload
 						class="upload-demo"

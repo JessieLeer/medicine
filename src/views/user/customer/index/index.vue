@@ -16,13 +16,6 @@
 						<el-form-item prop='name'>
 							<el-input v-model="search.name" placeholder="名称"></el-input>
 						</el-form-item>
-						<el-form-item prop='status'>
-							<el-select v-model="search.status" placeholder="状态">
-								<el-option label="正常" value="0"></el-option>
-								<el-option label="冻结" value="1"></el-option>
-								<el-option label="未激活" value="-1"></el-option>
-							</el-select>
-						</el-form-item>
 						<el-form-item>
 							<el-button type="primary" v-on:click='index(1)'>查询</el-button>
 							<el-button v-on:click="resetForm('form')">重置</el-button>
@@ -38,7 +31,6 @@
 							</template>
 						</el-table-column>
 						<el-table-column label='注册地址' prop='regaddress'></el-table-column>
-						<el-table-column label='状态' prop='status' width='80'></el-table-column>
 						<el-table-column label='注册时间' prop='createDate' width='160'></el-table-column>
 					</el-table>	
 					<br>

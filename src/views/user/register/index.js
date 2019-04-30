@@ -92,7 +92,7 @@ export default {
 		},
 		sendCode() {
 			this.countdown = 60
-			this.$http.get('/static/vcode.json',{phone: this.form.phone}).then((res) => {
+			this.$http.get('/api/user/sendCode',{params: {phone: this.form.phone}}).then((res) => {
 				if(res.data.success){
 					let count = setInterval(() => {
 						if(this.countdown > 0){

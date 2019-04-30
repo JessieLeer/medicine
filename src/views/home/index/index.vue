@@ -49,7 +49,7 @@
 						  <h4 class='card-title f-ib'>热门询价</h4>
 					  </el-col>
 						<el-col :span='12' class='f-tar'>
-						  <router-link to='/inquiry' v-if='user.type == "供应商"'>
+						  <router-link to='/inquiry/none' v-if='user.type == "供应商"'>
 						    <el-button type="text" class='card-opera'>查看更多</el-button>
 							</router-link>
 						</el-col>
@@ -89,7 +89,7 @@
 						  <h4 class='card-title f-ib'>{{user.type == '供应商' ? '我的报价' : '我的询价'}}</h4>
 					  </el-col>
 						<el-col :span='12' class='f-tar'>
-						  <router-link to='/inquiry'>
+						  <router-link :to='`/inquiry/${user.id}`'>
 						    <el-button type="text" class='card-opera'>查看更多</el-button>
 							</router-link>
 						</el-col>

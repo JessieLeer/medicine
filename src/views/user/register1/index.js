@@ -19,11 +19,6 @@ export default {
           message: '请输入公司名称',
           trigger: 'blur'
 				},
-				unit: {
-					required: true, 
-          message: '请输入单位名称',
-          trigger: 'blur'
-				},
 				license: {
 					required: true, 
           message: '请上传营业执照',
@@ -97,7 +92,6 @@ export default {
 			})
 		},
 		submit(form) {
-			console.log(this.form)
 			this.$refs[form].validate((valid) => {
         if (valid) {
 					this.$http.post('/api/user/register1', this.form).then((res) => {

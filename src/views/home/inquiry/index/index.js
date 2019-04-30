@@ -8,7 +8,7 @@ export default {
 			search: {
 				name: '',
 				range: 'all',
-				quoted: false
+				quoted: this.$route.params.uid == 'none' ? false : true
 			},
 			activeName: 'all',
 			datas: [],

@@ -23,6 +23,7 @@ import UserGood from '@/views/user/good/index/index.vue'
 import UserGoodCreate from '@/views/user/good/create/index.vue'
 import UserCustomer from '@/views/user/customer/index/index.vue'
 import UserCustomerCreate from '@/views/user/customer/create/index.vue'
+import UserCustomerApplier from '@/views/user/customer/applier/index.vue'
 import UserErp from '@/views/user/erp/index.vue'
 import UserMessage from '@/views/user/message/index/index.vue'
 import UserMessageShow from '@/views/user/message/show/index.vue'
@@ -37,7 +38,7 @@ export default new Router({
       component: Index
     },
 		{
-      path: '/inquiry',
+      path: '/inquiry/:uid',
       name: 'inquiry',
       component: Inquiry
     },
@@ -163,6 +164,11 @@ export default new Router({
 			path: '/user/customer/create',
 			name: 'user_customer_create',
 			component: UserCustomerCreate
+		},
+		{
+			path: '/user/customer/applier',
+			name: 'user_customer_applier',
+			component: UserCustomerApplier
 		},
 		{
 			path: '/user/erp',

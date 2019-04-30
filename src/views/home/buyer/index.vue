@@ -49,7 +49,7 @@
 						<ul class='newers'>
 							<li v-for='(item,index) in newers' v-bind:key='index' class='newer'>
 								<img v-bind:src='serverUrl + item.logo' width='30' class='f-ib'>
-								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b>与{{item.created_at.substr(0,10)}}入驻</i>
+								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b>于{{item.created_at.substr(0,10)}}入驻</i>
 							</li>
 						</ul>
 					</vue-seamless-scroll>

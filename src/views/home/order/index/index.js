@@ -57,7 +57,6 @@ export default {
 						this.order.pay.value ='微信'
 						break
 				}
-				console.log(this.order.supplierProductList)
 				for(let item of this.order.supplierProductList){
 					item.available = item.available ? item.available : item.expected
 					item.ticket = item.ticket ? item.ticket : '0'

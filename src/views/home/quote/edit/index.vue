@@ -38,14 +38,16 @@
 						</el-form>
 					</el-col>
 					<el-col v-bind:span='6'>
-					  <el-steps v-bind:active="parseInt(order.status)" finish-status="success">
+					  <el-steps v-bind:active="parseInt(order.status) + 1" finish-status="success">
 						  <el-step title="已询价"></el-step>
 							<el-step title="报价中"></el-step>
 							<el-step title="已定单"></el-step>
 						</el-steps>
-						<el-row v-if='order.status == "2"'>
-						  <el-col>中标状态：{{order.isBidding == true ? "中标" : '未中标'}}</el-col>
-						</el-row>
+						<el-form v-if='order.status == "2"'> 
+						  <el-form-item label='中标状态'>
+							  {{order.isBidding == true ? "中标" : '未中标'}}
+							</el-form-item>
+						</el-form>
 					</el-col>
 				</el-row>
 			</el-card>

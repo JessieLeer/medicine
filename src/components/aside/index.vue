@@ -28,6 +28,7 @@
 			<el-menu-item-group>
 				<el-menu-item index="/user/customer">对口商列表</el-menu-item>
 				<el-menu-item index="/user/customer/create">添加对口商</el-menu-item>
+				<el-menu-item index="/user/customer/applier">申请列表</el-menu-item>
 			</el-menu-item-group>
 		</el-submenu>
 		<el-menu-item index="/user/erp">

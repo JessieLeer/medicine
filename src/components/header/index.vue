@@ -8,7 +8,7 @@
 			</el-col>
 			<el-col :md='10' :sm='11'>
 			  <el-menu-item index="/" class='f-ib'>首页</el-menu-item>
-			  <el-menu-item index="/inquiry" class='f-ib'>询价比价</el-menu-item>
+			  <el-menu-item index="/inquiry/none" class='f-ib'>询价比价</el-menu-item>
 		    <el-menu-item index="/buyer" class='f-ib'>优选采购商</el-menu-item>
 		    <el-menu-item index="/supplier" class='f-ib'>优选供应商</el-menu-item>
 			</el-col>

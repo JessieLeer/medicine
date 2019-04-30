@@ -21,6 +21,14 @@ export default {
 			}
 		}
 		return {
+			customerDialogShow: false,
+			search: {
+				name: ''
+			},
+			customers: [],
+			emptyText: '记载中...',
+			total: 0,
+			curpage: 1,
 			form: {
 				creator: this.$store.state.user.id
 			},
@@ -43,11 +51,6 @@ export default {
 				company: {
 					required: true,
 					message: '请输入公司名称',
-					trigger: 'blur'
-				},
-				unit: {
-					required: true,
-					message: '请输入单位简称',
 					trigger: 'blur'
 				},
 				license: {
@@ -75,6 +78,26 @@ export default {
 		}
 	},
 	methods: {
+		customerIndex(page) {
+			this.customerDialogShow = true
+			this.$http.get('/api/ucenter/findNoneLinkList', {params: {userId: this.user.id, name: this.search.name, page: page, pageSize: 10}}).then((res) => {
+				res.data.data = res.data.data ? res.data.data : []
+				if(res.data.data.length == 0) {
+					this.emptyText = '暂无数据'
+				}
+				this.customers = res.data.data
+				this.total = res.data.total
+			})
+		},
+		adder(cid) {
+			this.$http.post('/api/ucenter/toApplyLink', {userId: this.user.id, customerId: cid}).then((res) => {
+				if(res.data.success){
+					this.$message.success(res.data.message)
+					this.customerDialogShow = false
+					this.customers = []
+				}
+			})
+		},
 		handleRemove(file, fileList) {
     },
     handlePreview(file) {
