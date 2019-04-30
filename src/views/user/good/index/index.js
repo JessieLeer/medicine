@@ -95,13 +95,15 @@ export default {
 	},
 	created() {
 		this.index(1)
-		this.cateIndex()
-		this.brandIndex()
-		this.presclassIndex()
 	},
 	methods: {
+		go(url) {
+			this.$router.push(url)
+		},
 		index(page) {
 			this.$http.get('/api/ucenter/product', {params: {userId: this.user.id, search: this.search, page: page, pageSize: 10}}).then((res) => {
+				res.data.data = res.data.data ? res.data.data : []
+				console.log(res.data.data)
 				for(let item of res.data.data) {
 					if(item.image == ''){
 						item.image = []
@@ -130,25 +132,6 @@ export default {
 		handleSelectionChange(val) {
       this.selectedGoods = val
     },
-		cateIndex() {
-			this.$http.get('/api/category').then((res) => {
-				this.cates = res.data.data
-			})
-		},
-		brandIndex() {
-			this.$http.get('/api/brand').then((res) => {
-				this.brands = res.data.data
-			})
-		},
-		presclassIndex() {
-			this.$http.get('/api/chuffl').then((res) => {
-				this.presclass = res.data.data
-			})
-		},
-		handlEdit(good) {
-			this.form = good
-			this.editFormVisiable = true
-		},
 		uploadImage(param) {
 			let formData = new FormData()
 			formData.append('file',param.file)
@@ -159,22 +142,6 @@ export default {
 					this.$message.warning(res.data.message)
 				}
 			})
-		},
-		submit(form) {
-			this.$refs[form].validate((valid) => {
-        if (valid) {
-					this.$http.post('/api/ucenter/productAdd', this.form).then((res) => {
-						if(res.data.success){
-							this.$message.success(res.data.message)
-							this.index(this.curpage)
-						}else{
-							this.$message.error(res.data.message)
-						}
-					})
-        } else {
-          return false
-        }
-      })
 		}
 	}
 }

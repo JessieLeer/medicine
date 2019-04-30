@@ -32,7 +32,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/excelUpload',formData).then((res) => {
 				if(res.data.success){
-					this.$router.push(`/inquiry/create/excel/${res.data.data}`)
+					window.location.href = `/#/inquiry/create/excel/${res.data.data}`
 				}else{
 					this.$message.warning(res.data.message)
 				}

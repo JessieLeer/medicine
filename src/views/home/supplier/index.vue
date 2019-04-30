@@ -4,9 +4,11 @@
 		  <cheader activeIndex='/supplier'></cheader>
 		</el-header>
 	  <el-main>
-		  <el-carousel indicator-position="outside">
-				<a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index'>
-				  <el-carousel-item  v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center;`'></el-carousel-item>
+		  <el-carousel indicator-position="outside" :autoplay='false' height='400px'>
+			  <a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index' class='f-tac'>
+				  <el-carousel-item v-bind:name='item.name' >
+					  <div v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center; height: 400px;`'></div>
+					</el-carousel-item>
 				</a>
 			</el-carousel>
 			<el-container>
@@ -21,7 +23,7 @@
 							<el-col :md='8' :sm='12' :xs='24' v-for='(item,index) in suppliers' v-bind:key='index'>
 								<el-form label-width="60px" class='index-hot' label-position="left">
 									<el-form-item label="" label-width='0' class='f-pr'>
-										<img v-bind:src='item.image' width='40' class='logo f-pa'>
+										<img v-bind:src='serverUrl + item.image' width='40' class='logo f-pa'>
 										<el-button type='text' size='' title='查看资质' v-on:click='go(`/quote/qualification/${item.id}`)'>
 											<b class='name'>{{item.name}}</b>
 										</el-button>
@@ -45,8 +47,8 @@
 				  <vue-seamless-scroll v-bind:data="newers" class='seamless-warp'>
 						<ul class='newers'>
 							<li v-for='(item,index) in newers' v-bind:key='index' class='newer'>
-								<img v-bind:src='item.logo' width='30' class='f-ib'>
-								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b>与{{item.created_at}}入驻</i>
+								<img v-bind:src='serverUrl + item.logo' width='30' class='f-ib'>
+								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b>与{{item.created_at.substr(0,10)}}入驻</i>
 							</li>
 						</ul>
 					</vue-seamless-scroll>

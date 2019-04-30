@@ -4,9 +4,13 @@ export default {
 	name: 'quote_edit',
 	data() {
 		return {
+			serverUrl: this.$store.state.config.serverUrl,
 			order: {
 				createBy: {},
-				productList: []
+				updateBy: {},
+				productList: [],
+				pay: {},
+				endValue: ''
 			},
 			search: {
 				name: '',
@@ -43,6 +47,20 @@ export default {
 		index() {
 			this.$http.get('/api/inquiry/toApply', {params: {id: this.$route.params.id, userId: this.user.id}}).then((res) => {
 				this.order = res.data.data
+				switch(this.order.pay.value) {
+					case 'cash':
+						this.order.pay.value = '现金'
+						break
+					case 'card':
+						this.order.pay.value = '银行卡'
+						break
+					case 'alipay':
+						this.order.pay.value = '支付宝'
+						break
+					case 'wechat':
+						this.order.pay.value ='微信'
+						break
+				}
 				for(let item of this.order.productList){
 					item.available = item.available ? item.available : item.expected
 					item.ticket = item.ticket ? item.ticket : '0'

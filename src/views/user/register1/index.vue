@@ -12,9 +12,9 @@
 			<br>
 			<el-form ref="form" :model="form" v-bind:rules='rules' size='small'>
 			  <el-form-item prop='company'>
-					<el-input v-model="form.company" placeholder='公司名称'></el-input>
+					<el-input v-model="form.company" placeholder='公司全称'></el-input>
 				</el-form-item>
-				<el-form-item prop='unit'>
+				<el-form-item prop='unit' v-if='form.type != "业务员"'>
 					<el-input v-model="form.unit" placeholder='单位名称'></el-input>
 				</el-form-item>
 				<el-form-item prop='license' v-if='form.type != "业务员"'>
@@ -52,10 +52,10 @@
 						<i slot="tip" class="el-upload__tip">只能上传jpg/png文件</i>
 					</el-upload>
 				</el-form-item>
-				<el-form-item prop='firstService'>
+				<el-form-item prop='firstService' v-if='form.type != "采购商"'>
 					<el-input v-model="form.firstService" placeholder='首次服务采购商'></el-input>
 				</el-form-item>
-				<el-form-item prop='commission'>
+				<el-form-item prop='commission' v-if='form.type == "业务员"'>
 					<el-upload
 						class="upload-demo"
 						action="nourl"

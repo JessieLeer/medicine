@@ -8,19 +8,33 @@
 			  <header slot='header'>订单信息</header>
 				<el-row>
 				  <el-col v-bind:span='18'>
-					  <el-form label-width="80px">
+					  <el-form label-width="100px">
 							<el-form-item label="" label-width='12px'>
 								<b>{{order.name}}</b>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='order.createBy.photo' width='40' class='f-pa'>
+								<img v-bind:src='serverUrl + order.updateBy.photo' width='40' class='f-pa'>&nbsp;
 								<el-button type="text" class='card-opera' v-on:click='go(`/quote/qualification/${order.createBy.id}`)'>
 									<i class='unit f-fsn'>{{order.createBy.name}}</i>
 								</el-button>	
 							</el-form-item>
-							<el-form-item label="联系人">{{order.contact}} / {{order.phone}}</el-form-item>
-							<el-form-item label="截止日期">{{order.endValue}}</el-form-item>
-							<el-form-item label="" label-width='12px' class='remark'>{{order.remark}}</el-form-item>
+							<el-row>
+							  <el-col :md='12'>
+								  <el-form-item label="联系人">{{order.contact}} / {{order.phone}}</el-form-item>
+								</el-col>
+								<el-col :md='12'>
+								  <el-form-item label="付款方式">{{order.pay.value}}</el-form-item>
+								</el-col>
+							</el-row>
+							<el-row>
+							  <el-col :md='12'>
+								  <el-form-item label="是否发票">{{order.isTicket == true ? '是' : '否'}}</el-form-item>
+								</el-col>
+								<el-col :md='12'>
+								  <el-form-item v-bind:label="order.endValue.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{order.endValue}}</el-form-item>
+								</el-col>
+							</el-row>
+							<el-form-item label="" label-width='0px' class='remark'>{{order.remarks}}</el-form-item>
 						</el-form>
 					</el-col>
 					<el-col v-bind:span='6'>
@@ -29,6 +43,9 @@
 							<el-step title="报价中"></el-step>
 							<el-step title="已定单"></el-step>
 						</el-steps>
+						<el-row v-if='order.status == "2"'>
+						  <el-col>中标状态：{{order.isBidding == true ? "中标" : '未中标'}}</el-col>
+						</el-row>
 					</el-col>
 				</el-row>
 			</el-card>
@@ -48,26 +65,54 @@
 					</el-row>
 				</header>
 				<el-table v-bind:data="goodsFilter" class='w-100' max-height="500">
+				  <el-table-column type="expand">
+						<template slot-scope="scope">
+							<el-form label-position="left" inline >
+							  <el-row>
+								  <el-col :md='12' :sm='24'>
+									  <el-form-item label="生产厂家">
+											{{scope.row.product.manufacturer}}
+										</el-form-item>
+									</el-col>
+								  <el-col :md='3' :sm='12'>
+									  <el-form-item label="规格">
+											{{scope.row.product.specification}}
+										</el-form-item>
+									</el-col>
+									<el-col :md='3' :sm='12'>
+									  <el-form-item label="剂型">
+											{{scope.row.product.formulation}}
+										</el-form-item>
+									</el-col>
+									<el-col :md='3' :sm='12'>
+									  <el-form-item label="品牌">
+											{{scope.row.product.brand}}
+										</el-form-item>
+									</el-col>
+								</el-row>
+							</el-form>
+						</template>
+					</el-table-column>
 					<el-table-column prop="product.name" label="商品名称"></el-table-column>
 					<el-table-column prop="expected" label="需求数量" width="120"></el-table-column>
 					<el-table-column prop="expected" label="可供应数量" width='140'>
 					  <template slot-scope='scope'>
-						  <el-input v-model="scope.row.available" type='number' size='small' min='0'></el-input>
+						  <el-input v-model="scope.row.available" type='number' size='small' min='0' v-bind:disabled='order.status == "2" ? true : false'></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column prop="ticket" label="带票报价" width='140'>
 					  <template slot-scope='scope'>
-						  <el-input v-model="scope.row.ticket" type='number' size='small' min='0'></el-input>
+						  <el-input v-model="scope.row.ticket" type='number' size='small' min='0' v-bind:disabled='order.status == "2" ? true : false'></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column prop="unticket" label="不含票报价" width='140'>
 					  <template slot-scope='scope'>
-						  <el-input v-model="scope.row.unticket" type='number' size='small' min='0'></el-input>
+						  <el-input v-model="scope.row.unticket" type='number' size='small' min='0' v-bind:disabled='order.status == "2" ? true : false'></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column prop="remark" label="备注" width='200'>
 					  <template slot-scope='scope'>
-						  <el-input type="textarea" :rows="1" v-model="scope.row.remark"></el-input>
+						  <el-input type="textarea" :rows="1" v-model="scope.row.remark" v-bind:disabled='order.status == "2" ? true : false'></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column fixed="right" label="操作" width="80">
@@ -80,11 +125,11 @@
 				<br>
 				<el-form size='small' class='f-tac'>
 					<el-form-item label="">
-						<el-input v-model="remark" placeholder="备注" type='textarea' :rows='1'></el-input>
+						<el-input v-model="remark" placeholder="备注" type='textarea' :rows='1' v-bind:disabled='order.status == "2" ? true : false'></el-input>
 					</el-form-item>
 					<br>
 					<el-form-item>
-						<el-button type="primary" v-bind:disabled='subGoods.length == "0"' v-on:click='save'>提交</el-button>
+						<el-button type="primary" v-bind:disabled='subGoods.length == "0"' v-on:click='save' v-if='order.status != "2"'>提交</el-button>
 					</el-form-item>
 				</el-form>
 			</el-card>

@@ -101,7 +101,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.headpic = this.serverUrl + res.data.message
+					this.form.headpic = '/' + res.data.message
 				}else{
 					this.$message.warning(res.data.message)
 				}

@@ -6,8 +6,8 @@
 	  <el-main>
 		  <el-carousel indicator-position="outside" :autoplay='false' height='400px'>
 			  <a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index' class='f-tac'>
-				  <el-carousel-item v-bind:name='item.name' >
-					  <img v-bind:src='`${serverUrl}${item.photos}`'>
+				  <el-carousel-item v-bind:name='item.name'>
+					  <div v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center; height: 400px;`'></div>
 					</el-carousel-item>
 				</a>
 			</el-carousel>
@@ -57,7 +57,7 @@
 				</header>
 				<el-row>
 				  <el-col :md='6' :sm='8' :xs='12' v-for='(item,index) in hots' v-bind:key='index' >
-					  <el-form label-width="80px" class='index-hot w-100 f-ib'>
+					  <el-form label-width="100px" class='index-hot w-100 f-ib'>
 							<el-form-item label="" label-width='12px'>
 								<el-button type="text" class='card-opera'>
 								  <router-link v-bind:to='`/quote/edit/${item.id}`' v-if='user.id && user.type == "供应商"'>
@@ -74,7 +74,7 @@
 								<i class='unit f-fsn'>{{item.unit}}</i>
 							</el-form-item>
 							<el-form-item label="物资信息">{{item.info}}</el-form-item>
-							<el-form-item label="截止日期">{{item.deadline}}</el-form-item>
+							<el-form-item v-bind:label="item.deadline.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.deadline}}</el-form-item>
 							<el-form-item label="发布时间">{{item.created_at.substr(0,10)}}</el-form-item>
 						</el-form>
 						<hr color='#e5e5e5'>
@@ -97,9 +97,12 @@
 				</header>
 				<el-row>
 				  <el-col :md='6' :sm='8' :xs='12' v-for='(item,index) in orders' v-bind:key='index' >
-					  <el-form label-width="80px" class='index-hot w-100 f-ib'>
+					  <el-form label-width="100px" class='index-hot w-100 f-ib'>
 							<el-form-item label="" label-width='12px'>
-								<el-button type="text" class='card-opera' v-on:click='go(`/order/${item.id}`)'>
+								<el-button type="text" class='card-opera' v-if='user.type == "采购商"' v-on:click='go(`/order/${item.id}`)' >
+								  <b>{{item.title}}</b>
+							  </el-button>
+								<el-button type="text" class='card-opera' v-else v-on:click='go(`/quote/edit/${item.id}`)' >
 								  <b>{{item.title}}</b>
 							  </el-button>
 							</el-form-item>
@@ -108,7 +111,7 @@
 								<i class='unit f-fsn'>{{item.unit}}</i>
 							</el-form-item>
 							<el-form-item label="物资信息">{{item.info}}</el-form-item>
-							<el-form-item label="截止日期">{{item.deadline}}</el-form-item>
+							<el-form-item v-bind:label="item.deadline.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.deadline}}</el-form-item>
 							<el-form-item label="发布时间">{{item.created_at.substr(0,10)}}</el-form-item>
 						</el-form>
 						<hr color='#e5e5e5'>

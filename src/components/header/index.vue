@@ -7,6 +7,7 @@
 				</el-menu-item>
 			</el-col>
 			<el-col :md='10' :sm='11'>
+			  <el-menu-item index="/" class='f-ib'>首页</el-menu-item>
 			  <el-menu-item index="/inquiry" class='f-ib'>询价比价</el-menu-item>
 		    <el-menu-item index="/buyer" class='f-ib'>优选采购商</el-menu-item>
 		    <el-menu-item index="/supplier" class='f-ib'>优选供应商</el-menu-item>
@@ -50,7 +51,7 @@
 						<i class='remark f-fsn'>自主选择品种、供应商</i>
 					</el-card>
 				</el-col>
-				<el-col :md='12' :sm='24'>
+				<!--<el-col :md='12' :sm='24'>
 				  <el-card class="box-card">
 						<header slot="header" class="clearfix">
 							<el-row>
@@ -62,7 +63,7 @@
 						</header>
 						<i class='remark f-fsn'>从ERP的采购计划提取、生成询价比价</i>
 					</el-card>
-				</el-col>
+				</el-col>-->
 				<el-col :md='12' :sm='24'>
 				  <el-card class="box-card">
 						<header slot="header" class="clearfix">
@@ -76,13 +77,13 @@
 						<i class='remark f-fsn'>从历史采购记录中倒入采购模版</i>
 					</el-card>
 				</el-col>
-				<el-col :md='12' :sm='24'>
+				<!--<el-col :md='12' :sm='24'>
 				  <el-card class="box-card">
 						<header slot="header" class="clearfix">
 							<el-row>
 								<el-col :span='12'>EXCEL模版导入</el-col>
 								<el-col :span='12' class='f-tar'>
-									<a href='http://192.168.1.65:8088/static/doc/询价导入模板.xlsx'>
+									<a href='http://192.168.1.63:8080/static/doc/询价导入模板.xlsx'>
 									  <el-button type="text" class='chose'>下载</el-button>
 								  </a>
 									<el-upload 
@@ -103,7 +104,7 @@
 						</header>
 						<i class='remark f-fsn'>下载模版excel，根据模版填入询价内容</i>
 					</el-card>
-				</el-col>
+				</el-col>-->
 			</el-row>
 		</el-dialog>
 	</el-menu>

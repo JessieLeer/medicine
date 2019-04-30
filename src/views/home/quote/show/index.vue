@@ -21,7 +21,7 @@
 								</router-link>
 							</el-form-item>
 							<el-form-item label="物资信息">{{order.info}}</el-form-item>
-							<el-form-item label="截止日期">{{order.deadline}}</el-form-item>
+							<el-form-item v-bind:label="order.endValue.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{order.endValue}}</el-form-item>
 							<el-form-item label="" label-width='12px' class='remark'>{{order.remark}}</el-form-item>
 						</el-form>
 					</el-col>

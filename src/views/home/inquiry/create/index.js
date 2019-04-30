@@ -205,7 +205,7 @@ export default {
 				},
 				bagShl: {
 					required: true,
-					message: '请输入件包装',
+					message: '请输入件包装(只能输入数字)',
 					trigger: 'blur'
 				}
 			},
@@ -286,12 +286,15 @@ export default {
 						break
 				}
 				this.$http.get(url, {params: {id: this.$route.params.sid}}).then((res) => {
+					
 					if(this.$route.params.source == 'erp') {
 						for(let item of res.data.data) {
 							item.product.expected = item.expected
 							this.form.goods.push(item.product)
 						}
 					}else{
+						res.data.data = res.data.data ? res.data.data : {pay: '',productList: []}
+						
 						this.form.name = res.data.data.name
 						this.form.cutoff.type = res.data.data.type
 						this.form.cutoff.value = res.data.data.endValue
@@ -345,6 +348,7 @@ export default {
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
 					this.form.image.push(res.data.message)
+					
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -356,6 +360,8 @@ export default {
 					this.$http.post('/api/ucenter/productAdd', this.form1).then((res) => {
 						if(res.data.success){
 							this.$message.success(res.data.message)
+							this.goodCreateVisable = false
+							this.goodIndex()
 						}else{
 							this.$message.error(res.data.message)
 						}

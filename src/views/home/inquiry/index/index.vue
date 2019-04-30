@@ -29,9 +29,7 @@
 							  <el-form-item label="创建时间">
 									{{item.createDate}}
 								</el-form-item>
-								<el-form-item label="截止日期">
-									{{item.endValue}}
-								</el-form-item>
+								<el-form-item v-bind:label="item.endValue.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.endValue}}</el-form-item>
 								<el-form-item label="状态">
 									{{item.status == '1' ? '报价中' : '已定单'}}
 								</el-form-item>
