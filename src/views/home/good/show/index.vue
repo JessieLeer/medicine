@@ -15,7 +15,7 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 								<el-form-item prop='brand' label='品牌'>
-								  {{form.brand}}
+								  {{form.brand.name}}
 								</el-form-item>
 							</el-col>
 							<el-col :sm='12' :xs='24'>

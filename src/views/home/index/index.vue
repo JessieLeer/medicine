@@ -99,10 +99,13 @@
 				  <el-col :md='6' :sm='8' :xs='12' v-for='(item,index) in orders' v-bind:key='index' >
 					  <el-form label-width="100px" class='index-hot w-100 f-ib'>
 							<el-form-item label="" label-width='12px'>
-								<el-button type="text" class='card-opera' v-if='user.type == "采购商"' v-on:click='go(`/order/${item.id}`)' >
+								<el-button v-on:click='go(`/order/${item.id}`)' type='text' size='small' v-if='user.type == "采购商" && item.status == "1"'>
 								  <b>{{item.title}}</b>
-							  </el-button>
-								<el-button type="text" class='card-opera' v-else v-on:click='go(`/quote/edit/${item.id}`)' >
+								</el-button>
+								<el-button v-on:click='go(`/order/result/${item.enquiryId}`)' type='text' size='small' v-if='user.type == "采购商" && item.status == "2"'>
+								  <b>{{item.title}}</b>
+								</el-button>
+								<el-button type="text" class='card-opera' v-if='user.type == "供应商"' v-on:click='go(`/quote/edit/${item.id}`)' >
 								  <b>{{item.title}}</b>
 							  </el-button>
 							</el-form-item>

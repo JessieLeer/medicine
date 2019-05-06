@@ -83,7 +83,7 @@
 							<el-row>
 								<el-col :span='12'>EXCEL模版导入</el-col>
 								<el-col :span='12' class='f-tar'>
-									<a href='http://192.168.1.63:8080/static/doc/询价导入模板.xlsx'>
+									<a v-bind:href='serverUrl + "/static/doc/询价导入模板.xlsx"'>
 									  <el-button type="text" class='chose'>下载</el-button>
 								  </a>
 									<el-upload 

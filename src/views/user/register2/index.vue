@@ -3,7 +3,7 @@
 	  <el-header class='w-100'>
 		  <cheader activeIndex='/'></cheader>
 		</el-header>
-	  <el-main>
+	  <el-main class='main'>
 			<el-steps v-bind:active="active" finish-status="success">
 				<el-step title="填写账号信息"></el-step>
 				<el-step title="填写公司信息"></el-step>

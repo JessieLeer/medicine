@@ -28,7 +28,7 @@
 							<el-button v-on:click="resetForm('form')">重置</el-button>
 						</el-form-item>
 					</el-form>
-					<el-table ref="multipleTable" v-bind:data="goods" tooltip-effect="dark" v-on:selection-change="handleSelectionChange">
+					<el-table ref="multipleTable" v-bind:data="goods" tooltip-effect="dark" v-on:selection-change="handleSelectionChange" empty-text=‘加载中...’>
 						<el-table-column type="selection" width="30"></el-table-column>
 						<el-table-column label="商品名称" prop='name'></el-table-column>
 						<el-table-column prop="manufacturer" label="生产厂家"></el-table-column>

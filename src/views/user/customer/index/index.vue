@@ -25,7 +25,7 @@
 						<el-table-column type="selection" width="30"></el-table-column>
 						<el-table-column label='名称'>
 						  <template slot-scope='scope'>
-							  <router-link v-bind:to='`/quote/qualification/${scope.row.id}`' title='查看资质'>
+							  <router-link v-bind:to='`/quote/qualification/${scope.row.user.id}`' title='查看资质'>
 								  {{scope.row.name}}
 								</router-link>
 							</template>

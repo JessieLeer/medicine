@@ -3,7 +3,7 @@
 	  <el-header class='w-100'>
 		  <cheader activeIndex='/'></cheader>
 		</el-header>
-	  <el-main>
+	  <el-main class='main'>
 		  <el-tabs v-model="activeName">
 				<el-tab-pane label="账号密码登录" name="first">
 				  <el-form ref="form.account" :model="form.account" v-bind:rules='rules.account' size='small'>
