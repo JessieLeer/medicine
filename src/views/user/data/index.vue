@@ -46,6 +46,18 @@
 						  <el-col :md='12' :sm='24'>
 								<el-card>
 									<header slot="header" class="clearfix">公司信息</header>
+									<el-form-item prop='logo'>
+										<el-upload
+											class="avatar-uploader"
+											action="https://jsonplaceholder.typicode.com/posts/"
+											accept=".jpg,.jpeg,.png,.gif"
+											:http-request='uploadLogo'
+											:show-file-list="false">
+											<img v-if="form.logo" :src="serverUrl + form.logo" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<i slot="tip" class="el-upload__tip">公司logo</i>
+										</el-upload>
+									</el-form-item>
 									<el-form-item prop='company'>
 										<el-input v-model='form.company' placeholder='公司名称'></el-input>
 									</el-form-item>
@@ -71,12 +83,12 @@
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadGsp'
 											:show-file-list="false">
-											<img v-if="form.gsp" :src="serverUrl + form.gsp" class="avatar" width='100'>
+											<img v-if="form.gsp" :src="serverUrl + form.gsp" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											<i slot="tip" class="el-upload__tip">gsp证书</i>
 										</el-upload>
 									</el-form-item>
-									<el-form-item prop='commission'>
+									<el-form-item prop='commission' v-if='form.type == "业务员"'>
 										<el-upload
 											class="avatar-uploader"
 											action="nourl"

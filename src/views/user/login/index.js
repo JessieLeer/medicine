@@ -62,7 +62,7 @@ export default {
 	methods: {
 		sendCode() {
 			this.countdown = 60
-			this.$http.get('/api/user/sendCode',{params: {phone: this.form.phone}}).then((res) => {
+			this.$http.get('/api/user/sendCode',{params: {phone: this.form.phone.phone, type: 'login'}}).then((res) => {
 				if(res.data.success){
 					let count = setInterval(() => {
 						if(this.countdown > 0){
@@ -73,6 +73,7 @@ export default {
 					},1000)
 				}else{
 					this.countdown = 0
+					this.$message.warning(res.data.message)
 				}
 			})
 		},
@@ -90,6 +91,7 @@ export default {
 							user.type = res.data.data.customerType
 							user.company = res.data.data.group.company
 							user.unit = res.data.data.group.unit
+							user.logo = res.data.data.group.photos
 							user.license = res.data.data.group.license
 							user.gsp = res.data.data.group.gsp
 							user.firstService = res.data.data.group.firstService

@@ -82,6 +82,7 @@ export default {
 				let url = this.user.type == '供应商' ? '/api/myquate' : '/api/myinquiry'
 				this.$http.get(url, {params: {userId: this.user.id}}).then((res) => {
 					this.orders = res.data.data
+					console.log(res.data)
 				})
 			}
 		}

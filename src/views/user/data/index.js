@@ -28,7 +28,7 @@ export default {
       }
     }
 		return {
-			serverUrl: this.$store.state.config.serverUrl,
+			serverUrl: this.$store.state.config.serverUrl + '/',
 			form: this.$store.state.user,
 			rules: {
 				headpic: {
@@ -77,6 +77,11 @@ export default {
 					message: '请输入单位简称',
 					trigger: 'blur'
 				},
+				logo: {
+					required: true,
+					message: '请上传公司logo',
+					trigger: 'change'
+				},
 				license: {
 					required: true,
 					message: '请上传营业执照',
@@ -101,7 +106,19 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.headpic = '/' + res.data.message
+					this.form.headpic = res.data.message
+				}else{
+					this.$message.warning(res.data.message)
+				}
+			})
+		},
+		/*上传公司logo*/
+		uploadLogo(param) {
+			let formData = new FormData()
+			formData.append('file',param.file)
+			this.$http.post('/api/fileUpload',formData).then((res) => {
+				if(res.data.success){
+					this.$set(this.form,'logo',res.data.message)
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -113,7 +130,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.license = this.serverUrl + res.data.message
+					this.$set(this.form,'license', res.data.message)
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -124,8 +141,9 @@ export default {
 			let formData = new FormData()
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
+								console.log(res.data)
 				if(res.data.success){
-					this.form.gsp = this.serverUrl + res.data.message
+					this.$set(this.form,'gsp',res.data.message)
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -137,7 +155,7 @@ export default {
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
 				if(res.data.success){
-					this.form.commission = this.serverUrl + res.data.message
+					this.$set(this.form,'commission',res.data.message)
 				}else{
 					this.$message.warning(res.data.message)
 				}
@@ -147,6 +165,7 @@ export default {
 			this.$refs[form].validate((valid) => {
         if (valid) {
 					this.$http.post('/api/ucenter/update', this.form).then((res) => {
+						console.log(res.data)
 						if(res.data.success){
 						  let user = {}
 							user.id = res.data.data.id
@@ -157,6 +176,7 @@ export default {
 							user.company = res.data.data.group.company
 							user.unit = res.data.data.group.unit
 							user.license = res.data.data.group.license
+							user.logo = res.data.data.group.photos
 							user.gsp = res.data.data.group.gsp
 							user.firstService = res.data.data.group.firstService
 							user.commission = res.data.data.group.commission

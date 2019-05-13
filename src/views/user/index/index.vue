@@ -68,7 +68,7 @@
 						  <el-card class='user-card'>
 							  <el-form slot="header" class='info-form f-fs2'>
 								  <el-form-item label='已达成订单'>
-									  <b>{{order.reach.total}}</b>
+									  <b>{{order.reach.success}}</b>
 									</el-form-item>
 								  <el-form-item label='订单达成率'>
 									  <b>{{Math.round(order.reach.success/order.reach.total*100)}}%</b>
