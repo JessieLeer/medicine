@@ -4,10 +4,12 @@ export default {
 	name: 'good_show',
 	data() {
 	  return {
+			serverUrl: this.$store.state.config.serverUrl,
 			cates: [],
 			form: {
 				category: {},
-				image: []
+				image: [],
+				brand: {}
 			}
 		}	
 	},
@@ -20,7 +22,7 @@ export default {
 	},
 	methods: {
 		back() {
-			this.$router.go(-1)
+			this.$router.back()
 		},
 		cateIndex() {
 			this.$http.get('/api/category').then((res) => {
@@ -29,7 +31,10 @@ export default {
 		},
 		show() {
 			this.$http.get('/api/inquiry/productInfo', {params: {id: this.$route.params.id}}).then((res) => {
+				res.data.data.image = res.data.data.image.split('|')
+				res.data.data.image.shift()
 				this.form = res.data.data
+				console.log(this.form)
 			})
 		}
 	}

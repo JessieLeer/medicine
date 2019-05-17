@@ -10,6 +10,9 @@ export default {
 		}
 	},
 	computed: {
+		user() {
+			return this.$store.state.user
+		},
 		shows: {
 			get() {
 				return this.orders.map((item) => {

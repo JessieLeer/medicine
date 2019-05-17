@@ -24,7 +24,7 @@
 			<el-row>
 			  <el-col :span='24' class='f-tac'>
 				  <el-button type='success' size='small' v-on:click='importer'>导出Excel</el-button>
-					<el-button type='default' size='small' v-on:click='go("/inquiry")'>返回列表</el-button>
+					<el-button type='default' size='small' v-on:click='go(`/inquiry/${user.id}`)'>返回列表</el-button>
 				</el-col>
 			</el-row>
 		</el-main>

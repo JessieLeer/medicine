@@ -61,13 +61,11 @@
 									<el-form-item prop='company'>
 										<el-input v-model='form.company' placeholder='公司名称'></el-input>
 									</el-form-item>
-									<el-form-item prop='unit'>
-										<el-input v-model='form.unit' placeholder='单位简称'></el-input>
-									</el-form-item>
 									<el-form-item prop='license'>
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
+											disabled
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadLicense'
 											:show-file-list="false">
@@ -80,6 +78,7 @@
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
+											disabled
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadGsp'
 											:show-file-list="false">

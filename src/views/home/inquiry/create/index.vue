@@ -311,7 +311,7 @@
 				<br>
 				<el-row>
 				  <el-col :span='24' class='f-tac'>
-						<router-link to='/inquiry'>
+						<router-link v-bind:to='"/inquiry/"+user.id'>
 						  <el-button type='default' size='small'>返回列表</el-button>
 						</router-link>
 					</el-col>

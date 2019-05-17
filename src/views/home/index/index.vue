@@ -4,7 +4,7 @@
 		  <cheader activeIndex='/'></cheader>
 		</el-header>
 	  <el-main>
-		  <el-carousel indicator-position="outside" :autoplay='false' height='400px'>
+		  <el-carousel indicator-position="outside" :autoplay='false' height='400px' v-bind:arrow='banners.length > 1 ? "hover" : "never"'>
 			  <a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index' class='f-tac'>
 				  <el-carousel-item v-bind:name='item.name'>
 					  <div v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center; height: 400px;`'></div>
@@ -16,7 +16,7 @@
 			  <header slot="header" class="clearfix">优选商品</header>
 				<el-row>
 				  <el-col :md='3' :sm='6' v-for='(item,index) in goods' v-bind:key="index" class='f-tac'>
-					  <a :href='`/#/good/show/${item.id}`' target='_blank'>
+					  <a :href='`/#/good/show/${item.id}`' >
 						  <section class='image-wrapper f-tac'>
 							  <img v-bind:src='serverUrl + item.image' >
 							</section>
@@ -70,7 +70,7 @@
 							  </el-button>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='item.image' width='40' class='f-pa'>
+								<img v-bind:src='serverUrl + item.image' width='40' class='f-pa'>
 								<i class='unit f-fsn'>{{item.unit}}</i>
 							</el-form-item>
 							<el-form-item label="物资信息">{{item.info}}</el-form-item>
@@ -110,7 +110,7 @@
 							  </el-button>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='item.image' width='40' class='f-pa'>
+								<img v-bind:src='serverUrl + item.image' width='40' class='f-pa'>
 								<i class='unit f-fsn'>{{item.unit}}</i>
 							</el-form-item>
 							<el-form-item label="物资信息">{{item.info}}</el-form-item>
