@@ -30,7 +30,13 @@ export default {
 			total: 0,
 			curpage: 1,
 			form: {
-				creator: this.$store.state.user.id
+				creator: this.$store.state.user.id,
+				name: '',
+				phone: '',
+				email: '',
+				company: '',
+				license: '',
+				gsp: ''
 			},
 			rules: {
 				name: {
@@ -136,6 +142,9 @@ export default {
 					this.$http.post('/api/ucenter/customerAdd', this.form).then((res) => {
 						if(res.data.success){
 							this.$message.success(res.data.message)
+							window.setTimeout(() => {
+								this.$router.push('/user/customer')
+							},2000)
 						}else{
 							this.$message.error(res.data.message)
 						}
