@@ -14,9 +14,9 @@
 								<b>{{order.name}}</b>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='serverUrl + order.updateBy.photo' width='36' class='f-pa'> &nbsp;
-								<el-button type="text" class='card-opera' v-on:click='go(`/quote/qualification/${order.createBy.id}`)'>
-									<i class='unit f-fsn'>{{order.updateBy.name}}</i>
+								<img v-bind:src='serverUrl + order.updateByphoto' width='36' class='f-pa'> &nbsp;
+								<el-button type="text" class='card-opera' v-on:click='go(`/quote/qualification/${order.createByid}`)'>
+									<i class='unit f-fsn'>{{order.updateByname}}</i>
 								</el-button>	
 							</el-form-item>
 							<el-row>
@@ -58,7 +58,7 @@
 						</el-col>
 					</el-row>
 				</header>
-				<el-table v-bind:data="goodsFilter" class='w-100' max-height="500"  v-bind:span-method="objectSpanMethod" show-summary v-bind:summary-method="getSummaries">
+				<el-table v-bind:data="goodsFilter" class='w-100'  v-bind:span-method="objectSpanMethod" show-summary v-bind:summary-method="getSummaries">
 					<el-table-column label="商品信息" width=''>
 					  <template slot-scope='scope'>
 						  <el-form>

@@ -31,10 +31,10 @@
 				<el-menu-item index="/user/customer/applier">申请列表</el-menu-item>
 			</el-menu-item-group>
 		</el-submenu>
-		<el-menu-item index="/user/erp">
+		<!--<el-menu-item index="/user/erp">
       <i class="el-icon-setting"></i>
       <i class='f-fsn' slot="title">erp设置</i>
-    </el-menu-item>
+    </el-menu-item>-->
 		<el-menu-item index="/user/message">
       <i class="el-icon-message"></i>
       <i class='f-fsn' slot="title">消息管理</i>

@@ -38,7 +38,7 @@
 									{{item.remarks}}
 								</el-form-item>
 								<br>
-								<el-form-item label='已报价供应商'>
+								<el-form-item label='已报价供应商' v-if='user.type == "采购商"'>
 								  <img v-for='(supplier, i) in item.supplierProductList' v-bind:src='serverUrl + supplier.supplier.user.photo' class='avatar'>
 									<img v-for='(supplier, i) in item.supplierProductList' v-bind:src='serverUrl + supplier.supplier.user.photo' class='avatar'>
 								</el-form-item>

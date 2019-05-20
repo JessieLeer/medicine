@@ -102,6 +102,10 @@ export default {
 						}
 					},1000)
 				}else{
+					this.$message({
+						message: res.data.message,
+						type: 'error'
+					})
 					this.countdown = 0
 				}
 			})

@@ -6,8 +6,6 @@ export default {
 		return {
 			serverUrl: this.$store.state.config.serverUrl,
 			order: {
-				createBy: {},
-				updateBy: {},
 				productList: [],
 				pay: {},
 				endValue: ''
@@ -72,7 +70,9 @@ export default {
 		save() {
 			this.$http.post('/api/inquiry/pushOffer', {id: this.$route.params.id, userId: this.user.id, goods: this.subGoods, remark: this.remark}).then((res) => {
 				if(res.data.success) {
-					this.$message.success(res.data.message)
+					this.$alert(res.data.message, '', {
+						confirmButtonText: '确定',
+					})
 				}
 			})
 		}

@@ -7,6 +7,7 @@ export default {
 	name: 'quote_qualification',
 	data() {
 		return {
+			serverUrl: this.$store.state.config.serverUrl,
 			company: {},
 			option : {
 				tooltip: {

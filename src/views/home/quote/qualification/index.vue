@@ -104,12 +104,12 @@
 					</el-col>
 					<el-col :md='8' :sm='12'>
 					  <el-form-item label="营业执照">
-							<img v-bind:src='company.license' />
+							<img v-bind:src='serverUrl + "/" + company.license' />
 						</el-form-item>
 					</el-col>
 					<el-col :md='8' :sm='12'>
 					  <el-form-item label="gsp证书">
-							<img v-bind:src='company.gsp' />
+							<img v-bind:src='serverUrl + "/" + company.gsp' />
 						</el-form-item>
 					</el-col>
 					<el-col :md='8' :sm='12'>

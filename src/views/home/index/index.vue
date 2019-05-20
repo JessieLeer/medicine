@@ -110,8 +110,7 @@
 							  </el-button>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='serverUrl + item.image' width='40' class='f-pa'>
-								<i class='unit f-fsn'>{{item.unit}}</i>
+								<i class='f-fsn'>{{item.unit}}</i>
 							</el-form-item>
 							<el-form-item label="物资信息">{{item.info}}</el-form-item>
 							<el-form-item v-bind:label="item.deadline.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.deadline}}</el-form-item>
