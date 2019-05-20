@@ -117,8 +117,8 @@
 						  <el-input type="textarea" :rows="1" v-model="scope.row.remark" v-bind:disabled='order.status == "2" ? true : false'></el-input>
 						</template>
 					</el-table-column>
-					<el-table-column fixed="right" label="状态" width="80" v-if='order.status == 1' prop='status'></el-table-column>	
-					<el-table-column fixed="right" label="操作" width="80" v-if='order.status == 2'>
+					<el-table-column fixed="right" label="状态" width="80" v-if='order.status == "1"' prop='status'></el-table-column>	
+					<el-table-column fixed="right" label="操作" width="80" v-if='order.status == "2"'>
 						<template slot-scope="scope">
 							<el-button type="warning" size="small" v-if='scope.row.flag == "default"' v-on:click='scope.row.flag = "ignored"'>忽略</el-button>
 							<el-button type="primary" size="small" v-if='scope.row.flag == "ignored"' v-on:click='scope.row.flag = "default"'>还原</el-button>
