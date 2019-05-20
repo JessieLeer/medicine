@@ -29,7 +29,7 @@
 							</el-row>
 							<el-row>
 							  <el-col :md='12'>
-								  <el-form-item label="是否发票">{{order.isTicket == true ? '是' : '否'}}</el-form-item>
+								  <el-form-item label="是否发票">{{order.isTicket == "true" ? '是' : '否'}}</el-form-item>
 								</el-col>
 								<el-col :md='12'>
 								  <el-form-item v-bind:label="order.endValue.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{order.endValue}}</el-form-item>
@@ -90,8 +90,8 @@
 					<el-table-column prop="product.specification" label="规格" width='100'></el-table-column>
 					<el-table-column prop="product.formulation" label="剂型" width='66'></el-table-column>
 					<el-table-column prop="product.prounit" label="单位" width='50'></el-table-column>
-					<el-table-column prop="ticket" label="含票报价" width='80'></el-table-column>
-					<el-table-column prop="unticket" label="不含票报价" width='100'>
+					<el-table-column prop="ticket" v-if='order.isTicket == "true"' label="含票报价" width='80'></el-table-column>
+					<el-table-column prop="unticket" v-if='order.isTicket == "false"' label="不含票报价" width='100'>
 					</el-table-column>
 					<el-table-column prop="product.bagShl" label="件包装" width='65'></el-table-column>
 					<el-table-column prop="expected" label="计划采购量" width='100'></el-table-column>

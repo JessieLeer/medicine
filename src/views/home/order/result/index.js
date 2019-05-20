@@ -5,6 +5,7 @@ export default {
 	data() {
 		return {
 			serverUrl: this.$store.state.config.serverUrl,
+			isTicket: '',
 			orders: [
 			],
 		}
@@ -44,6 +45,7 @@ export default {
 		},
 		show() {
 			this.$http.get('/api/inquiry/getEnquiry', {params: {id: this.$route.params.id}}).then((res) => {
+				this.isTicket = res.data.data.inquiryPrice.isTicket
 				this.orders = res.data.data.supplierProductList
 			})
 		},

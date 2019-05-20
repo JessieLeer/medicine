@@ -66,7 +66,7 @@
 						</el-col>
 					</el-row>
 				</header>
-				<el-table v-bind:data="goodsFilter" class='w-100' max-height="500">
+				<el-table v-bind:data="goodsFilter" class='w-100'>
 				  <el-table-column type="expand">
 						<template slot-scope="scope">
 							<el-form label-position="left" inline >

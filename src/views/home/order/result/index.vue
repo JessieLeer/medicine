@@ -12,8 +12,8 @@
 						<el-table-column prop="product.name" label="商品名称" width=""></el-table-column>
 						<el-table-column prop="product.specification" label="规格"></el-table-column>
 						<el-table-column prop="product.manufacturer" label="生产厂家"></el-table-column>
-						<el-table-column prop="ticket" label="含票报价"></el-table-column>
-						<el-table-column prop="unticket" label="不含票报价"></el-table-column>
+						<el-table-column prop="ticket" label="含票报价" v-if='isTicket == "true"'></el-table-column>
+						<el-table-column prop="unticket" label="不含票报价" v-if='isTicket == "false"'></el-table-column>
 						<el-table-column prop="expected" label="计划采购量"></el-table-column>
 						<el-table-column prop="available" label="可供应量"></el-table-column>
 						<el-table-column prop="remark" label="优惠政策"></el-table-column>
