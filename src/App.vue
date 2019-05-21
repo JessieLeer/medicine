@@ -29,6 +29,7 @@ export default {
       var m = ua.match(re)
       sys.browser = m[1].replace(/version/, "safari")
       sys.ver = m[2]
+			console.log(sys)
 			if(sys.browser == 'msie'){
 			  alert('您的浏览器版本太低，请使用谷歌或火狐浏览器')
 			}

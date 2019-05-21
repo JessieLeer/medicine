@@ -16,7 +16,7 @@
 					</el-input>
 				</el-form-item>
 				<el-form-item v-if='user.type == "供应商" || user.type == "业务员"'>
-					<el-checkbox v-model="search.quoted">我的报价</el-checkbox>
+					<el-checkbox v-model="search.quoted" v-on:change='index(1)'>我的报价</el-checkbox>
 				</el-form-item>
 			</el-form>
 			<br>

@@ -53,10 +53,10 @@
 						<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="expected" label="计划采购数量" width='140'>
 						  <template slot-scope='scope'>
-							  <el-input-number v-model="scope.row.expected" v-bind:min="1"  controls-position="right"></el-input-number>
+							  <el-input v-model="scope.row.expected"></el-input>
 							</template>
 						</el-table-column>
-						<el-table-column label="操作" width='50'>
+						<el-table-column label="操作" width='70'>
 						  <template slot-scope='scope'>
 							  <el-button type="danger" v-on:click='deleteForm("goods",scope.row)'>删除</el-button>
 							</template>
@@ -199,7 +199,7 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 							  <el-form-item prop='recnumber'>
-								  <el-input v-model="form1.recnumber" placeholder='推荐文号'></el-input>
+								  <el-input v-model="form1.recnumber" placeholder='批准文号'></el-input>
 						    </el-form-item>
 							</el-col>
 							<el-col :sm='12' :xs='24'>
@@ -295,7 +295,7 @@
 				<br>
 				<el-pagination class='f-tac' layout="prev, pager, next" v-bind:total="offerTotal" v-bind:current-page='offerCur' v-on:current-change='offerIndex'></el-pagination>
 			</el-dialog>
-			<el-dialog title="操作反馈" :visible.sync="dialogResultVisible" class='cate-dialog' v-on:close='refresher'>
+			<el-dialog title="操作反馈" :visible.sync="dialogResultVisible" class='cate-dialog' v-on:close='go("/inquiry/"+user.id)'>
 			  <el-alert title="操作成功，请耐心等待" type="success" center show-icon description=""></el-alert>
 				<br>
 				<el-row>

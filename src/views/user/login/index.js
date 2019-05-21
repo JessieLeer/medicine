@@ -87,8 +87,12 @@ export default {
 							user.id = res.data.data.id
 							user.name = res.data.data.name
 							user.phone = res.data.data.phone
+							user.email = res.data.data.email
 							user.headpic = res.data.data.photo ? res.data.data.photo : '/static/front/images/avatar.png'
 							user.type = res.data.data.customerType
+							user.province = res.data.data.group.province ? res.data.data.group.province : ''
+							user.city = res.data.data.group.city ? res.data.data.group.city : ''
+							user.region = res.data.data.group.region ? res.data.data.group.region : ''
 							user.company = res.data.data.group.company
 							user.unit = res.data.data.group.unit
 							user.logo = res.data.data.group.photos

@@ -90,12 +90,12 @@
 					<el-table-column prop="product.specification" label="规格" width='100'></el-table-column>
 					<el-table-column prop="product.formulation" label="剂型" width='66'></el-table-column>
 					<el-table-column prop="product.prounit" label="单位" width='50'></el-table-column>
-					<el-table-column prop="ticket" v-if='order.isTicket == "true"' label="含票报价" width='80'></el-table-column>
-					<el-table-column prop="unticket" v-if='order.isTicket == "false"' label="不含票报价" width='100'>
-					</el-table-column>
 					<el-table-column prop="product.bagShl" label="件包装" width='65'></el-table-column>
 					<el-table-column prop="expected" label="计划采购量" width='100'></el-table-column>
 					<el-table-column prop="available" label="可供应数量" width='100'></el-table-column>
+					<el-table-column prop="ticket" v-if='order.isTicket == "true"' label="含票报价" width='80'></el-table-column>
+					<el-table-column prop="unticket" v-if='order.isTicket == "false"' label="不含票报价" width='100'>
+					</el-table-column>
 					<el-table-column prop="remark" label="优惠政策" width='100'></el-table-column>
 				</el-table>
 				<br>

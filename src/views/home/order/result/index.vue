@@ -16,7 +16,7 @@
 						<el-table-column prop="unticket" label="不含票报价" v-if='isTicket == "false"'></el-table-column>
 						<el-table-column prop="expected" label="计划采购量"></el-table-column>
 						<el-table-column prop="available" label="可供应量"></el-table-column>
-						<el-table-column prop="remark" label="优惠政策"></el-table-column>
+						<el-table-column prop="remark" label="备注"></el-table-column>
 					</el-table>
 				</el-collapse-item>
 			</el-collapse>	

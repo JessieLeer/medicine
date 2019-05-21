@@ -77,7 +77,7 @@
 							<el-form-item v-bind:label="item.deadline.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.deadline}}</el-form-item>
 							<el-form-item label="发布时间">{{item.created_at.substr(0,10)}}</el-form-item>
 						</el-form>
-						<hr color='#e5e5e5'>
+						<hr color='#ffffff'>
 					</el-col>
 				</el-row>
 			</el-card>
@@ -116,7 +116,6 @@
 							<el-form-item v-bind:label="item.deadline.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.deadline}}</el-form-item>
 							<el-form-item label="发布时间">{{item.created_at.substr(0,10)}}</el-form-item>
 						</el-form>
-						<hr color='#e5e5e5'>
 					</el-col>
 				</el-row>
 			</el-card>

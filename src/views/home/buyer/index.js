@@ -32,6 +32,7 @@ export default {
 		index(page) {
 			this.$http.get('/api/purchaserPage', {params: {name: this.search.name, page: page, pageSize: 9}}).then((res) => {
 				this.suppliers = res.data.data
+				console.log(this.suppliers)
 			})
 		},
 		bannerIndex() {
@@ -42,6 +43,7 @@ export default {
 		newerIndex() {
 			this.$http.get('/api/latestJoin').then((res) => {
 				this.newers = res.data.latestPurchasers
+				console.log(this.newers)
 			})
 		}
 	}

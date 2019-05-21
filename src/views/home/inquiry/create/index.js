@@ -235,6 +235,9 @@ export default {
 		this.goodInit()
 	},
 	methods: {
+		go(url) {
+			this.$router.push(url)
+		},
 		cateChange(val) {
 		},
 		/*-- 获取用户联系方式 --*/

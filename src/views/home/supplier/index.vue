@@ -29,7 +29,6 @@
 										</el-button>
 									</el-form-item>
 								</el-form>
-								<hr color='#e5e5e5'>
 							</el-col>
 						</el-row>
 						<el-pagination

@@ -75,7 +75,7 @@
 							</el-col>
 							<el-col :sm='12' :xs='24'>
 								<el-form-item label='图片'>
-								  <img v-for='(item,index) in form.image' v-bind:key='index' v-bind:src='serverUrl + item'>
+								  <img v-for='(item,index) in form.image' v-bind:key='index' v-bind:src='serverUrl + item' width='100'>
 								</el-form-item>
 							</el-col>
 							<el-col :span='24' class='f-tac'>

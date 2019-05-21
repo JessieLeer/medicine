@@ -30,7 +30,6 @@
 									</el-form-item>
 									<el-form-item label="订单数">{{item.orderCount}}</el-form-item>
 								</el-form>
-								<hr color='#e5e5e5'>
 							</el-col>
 						</el-row>
 						<el-pagination

@@ -92,14 +92,91 @@ export default {
 					message: '请上传gsp证书',
 					trigger: 'change'
 				}
-			}
+			},
+			mapJson:'../../../assets/map.json',
+      province:'',
+      shi1: [],
+      qu1: [],
+      city:'',
+      block:'',
 		}
 	},
 	components: {
 		cheader,
 		caside
 	},
+	mounted() {
+	},
+	created() {
+		this.getCityData()
+	},
 	methods: {
+		getCityData(){
+      var that = this
+      this.$http.get('https://raw.githubusercontent.com/LLJJTT/threelink/master/static/json/map.json').then(function(response){
+        if (response.status==200) {
+          var data = response.data
+          that.province = []
+          that.city = []
+          that.block = []
+          // 省市区数据分类
+          for (var item in data) {
+            if (item.match(/0000$/)) {//省
+              that.province.push({id: item, value: data[item], children: []})
+            } else if (item.match(/00$/)) {//市
+              that.city.push({id: item, value: data[item], children: []})
+            } else {//区
+              that.block.push({id: item, value: data[item]})
+            }
+          }
+          // 分类市级
+          for (var index in that.province) {
+            for (var index1 in that.city) {
+              if (that.province[index].id.slice(0, 2) === that.city[index1].id.slice(0, 2)) {
+                that.province[index].children.push(that.city[index1])
+              }
+            }
+          }
+          // 分类区级
+          for(var item1 in that.city) {
+            for(var item2 in that.block) {
+              if (that.block[item2].id.slice(0, 4) === that.city[item1].id.slice(0, 4)) {
+                that.city[item1].children.push(that.block[item2])
+              }
+            }
+          }
+        }else{
+          console.log(response.status)
+        }}
+																																																					      ).catch((error) => {console.log(typeof+ error)})
+    },
+    // 选省
+    choseProvince(e) {
+      for (var index2 in this.province) {
+        if (e === this.province[index2].id) {
+          this.shi1 = this.province[index2].children
+          this.form.city = this.province[index2].children[0].value
+          this.qu1 =this.province[index2].children[0].children
+          this.form.region = this.province[index2].children[0].children[0].value
+          this.E = this.qu1[0].id
+        }
+      }
+    },
+    // 选市
+    choseCity(e) {
+      for (var index3 in this.city) {
+        if (e === this.city[index3].id) {
+          this.qu1 = this.city[index3].children
+          this.form.region = this.city[index3].children[0].value
+          this.E = this.qu1[0].id
+        }
+      }
+    },
+    // 选区
+    choseBlock(e) {
+      this.E = e
+    },
+		
 		/*上传头像*/
 		uploadAvatar(param) {
 			let formData = new FormData()
@@ -141,7 +218,6 @@ export default {
 			let formData = new FormData()
 			formData.append('file',param.file)
 			this.$http.post('/api/fileUpload',formData).then((res) => {
-								console.log(res.data)
 				if(res.data.success){
 					this.$set(this.form,'gsp',res.data.message)
 				}else{
@@ -165,14 +241,19 @@ export default {
 			this.$refs[form].validate((valid) => {
         if (valid) {
 					this.$http.post('/api/ucenter/update', this.form).then((res) => {
-						console.log(res.data)
 						if(res.data.success){
+							console.log(res.data)
 						  let user = {}
+							console.log(res.data)
 							user.id = res.data.data.id
 							user.name = res.data.data.name
 							user.phone = res.data.data.phone
+							user.email = res.data.data.email
 							user.headpic = res.data.data.photo ? res.data.data.photo : '/static/front/images/avatar.png'
 							user.type = res.data.data.customerType
+							user.province = res.data.data.group.province ? res.data.data.group.province : ''
+							user.city = res.data.data.group.city ? res.data.data.group.city : ''
+							user.region = res.data.data.group.region ? res.data.data.group.region : ''
 							user.company = res.data.data.group.company
 							user.unit = res.data.data.group.unit
 							user.license = res.data.data.group.license

@@ -5,9 +5,9 @@
 		</el-header>
 	  <el-main>
 		  <el-table v-bind:data="shoppings">
-				<el-table-column label="单据编号">
+				<el-table-column label="询价名称">
 				  <template slot-scope='scope'>
-					  {{scope.row.numbering ? scope.row.numbering : scope.row.id}}
+					  {{scope.row.numbering ? scope.row.numbering : scope.row.name}}
 					</template>
 				</el-table-column>
 				<el-table-column prop="variety" label="品种数" width='80'></el-table-column>

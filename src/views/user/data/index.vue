@@ -27,10 +27,10 @@
 										</el-upload>
 									</el-form-item>
 									<el-form-item prop='name'>
-										<el-input placeholder='用户名' v-model='form.name'></el-input>
+										<el-input placeholder='用户名' v-model='form.name' disabled></el-input>
 									</el-form-item>
 									<el-form-item prop='phone'>
-										<el-input placeholder='手机号' v-model='form.phone'></el-input>
+										<el-input placeholder='手机号' v-model='form.phone' disabled></el-input>
 									</el-form-item>
 									<el-form-item prop='email'>
 										<el-input placeholder='邮箱' v-model='form.email' type='email'></el-input>
@@ -58,8 +58,43 @@
 											<i slot="tip" class="el-upload__tip">公司logo</i>
 										</el-upload>
 									</el-form-item>
+									<el-form-item>
+										<el-select
+											v-model="form.province"
+											@change="choseProvince"
+											placeholder="省级地区">
+											<el-option
+												v-for="item in province"
+												:key="item.id"
+												:label="item.value"
+												:value="item.id">
+											</el-option>
+										</el-select>
+										<el-select
+											v-model="form.city"
+											@change="choseCity"
+											placeholder="市级地区">
+											<el-option
+												v-for="item in shi1"
+												:key="item.id"
+												:label="item.value"
+												:value="item.id">
+											</el-option>
+										</el-select>
+										<el-select
+											v-model="form.region"
+											@change="choseBlock"
+											placeholder="区级地区">
+											<el-option
+												v-for="item in qu1"
+												:key="item.id"
+												:label="item.value"
+												:value="item.id">
+											</el-option>
+										</el-select>
+                  </el-form-item>
 									<el-form-item prop='company'>
-										<el-input v-model='form.company' placeholder='公司名称'></el-input>
+										<el-input v-model='form.company' placeholder='公司名称' disabled></el-input>
 									</el-form-item>
 									<el-form-item prop='license'>
 										<el-upload

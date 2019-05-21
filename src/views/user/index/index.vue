@@ -17,7 +17,7 @@
 							</el-col>
 							<el-col :md='12' :sm='12' class='f-tar'>
 							  <el-form inline class='form-nomar'>
-								  <el-form-item label='排名'>{{ranking}}</el-form-item>
+								  <!--<el-form-item label='排名'>{{ranking}}</el-form-item>-->
 									<el-form-item label='客户数量'>{{cusNum}}</el-form-item>
 								</el-form>
 							</el-col>

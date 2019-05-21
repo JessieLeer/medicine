@@ -23,11 +23,11 @@
 		<el-submenu index="3">
 			<template slot="title">
 				<i class="el-icon-mobile-phone"></i>
-				<i class='f-fsn'>对口商</i>
+				<i class='f-fsn'>往来单位</i>
 			</template>
 			<el-menu-item-group>
-				<el-menu-item index="/user/customer">对口商列表</el-menu-item>
-				<el-menu-item index="/user/customer/create">添加对口商</el-menu-item>
+				<el-menu-item index="/user/customer">往来单位列表</el-menu-item>
+				<el-menu-item index="/user/customer/create">添加往来单位</el-menu-item>
 				<el-menu-item index="/user/customer/applier">申请列表</el-menu-item>
 			</el-menu-item-group>
 		</el-submenu>

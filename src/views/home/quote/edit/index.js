@@ -67,6 +67,11 @@ export default {
 				}
 			})
 		},
+		importer() {
+			this.$http.get('/api/inquiry/exportSupplierEnquiry', {params: {id: this.$route.params.id, userId: this.user.id}}).then((res) => {
+				window.location.href = this.serverUrl + res.data.data
+			})
+		},
 		save() {
 			this.$http.post('/api/inquiry/pushOffer', {id: this.$route.params.id, userId: this.user.id, goods: this.subGoods, remark: this.remark}).then((res) => {
 				if(res.data.success) {

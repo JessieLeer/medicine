@@ -28,6 +28,7 @@
 				<el-submenu index="/user" class='f-ib' v-if='user.id'>
 					<template slot="title">
 						<img v-bind:src='serverUrl + user.headpic' width='34' class='headpic'>
+						{{user.name}}({{user.type}})
 					</template>
 					<el-menu-item index="/user">个人中心</el-menu-item>
 					<el-menu-item v-on:click='logout'>退出</el-menu-item>
@@ -42,7 +43,7 @@
 							<el-row>
 								<el-col :span='16'>线上手动询价</el-col>
 								<el-col :span='8' class='f-tar'>
-								  <router-link to='/inquiry/create/manual/none'>
+								  <router-link to='/inquiry/create/manual/none' target="_blank">
 									  <el-button type="text" class='chose'>选择</el-button>
 									</router-link>
 								</el-col>
