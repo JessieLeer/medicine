@@ -53,7 +53,7 @@
 						<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="expected" label="计划采购数量" width='140'>
 						  <template slot-scope='scope'>
-							  <el-input v-model="scope.row.expected"></el-input>
+								<el-input-number v-model="scope.row.expected" :min="1" ></el-input-number>
 							</template>
 						</el-table-column>
 						<el-table-column label="操作" width='70'>
@@ -161,7 +161,7 @@
 					<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 					<el-table-column label="操作" fixed="right" width='50'>
 					  <template slot-scope='scope'>
-						  <el-button type="text" size='small' v-on:click='appendForm("goods",scope.row)' v-bind:disabled='form.goods.indexOf(scope.row) == -1 ? false : true' v-bind:title='form.goods.indexOf(scope.row) == -1 ? "" : "已选择"'>选择</el-button>
+						  <el-button type="text" size='small' v-on:click='appendForm("goods",scope.row)' v-bind:disabled='form.goods.filter((itemer) => {return itemer.id == scope.row.id}).length > 0 ? true : false' v-bind:title='form.goods.filter((itemer) => {return itemer.id == scope.row.id}).length > 0 ? "已选择" : ""'>选择</el-button>
 						</template>
 					</el-table-column>
 				</el-table>

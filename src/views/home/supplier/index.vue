@@ -46,7 +46,7 @@
 				  <vue-seamless-scroll v-bind:data="newers" class='seamless-warp' :class-option='classOption'>
 						<ul class='newers'>
 							<li v-for='(item,index) in newers' v-bind:key='index' class='newer'>
-								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b></i>
+								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b>已入驻</i>
 							</li>
 						</ul>
 					</vue-seamless-scroll>

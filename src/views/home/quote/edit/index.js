@@ -77,6 +77,9 @@ export default {
 				if(res.data.success) {
 					this.$alert(res.data.message, '', {
 						confirmButtonText: '确定',
+						callback: action => {
+							this.$router.back()
+						}
 					})
 				}
 			})

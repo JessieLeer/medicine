@@ -292,7 +292,7 @@ export default {
 					
 					if(this.$route.params.source == 'erp') {
 						for(let item of res.data.data) {
-							item.product.expected = item.expected
+							this.$set(item.product, 'expected', item.expected)
 							this.form.goods.push(item.product)
 						}
 					}else{
@@ -309,7 +309,7 @@ export default {
 						this.form.address = res.data.data.address
 						this.form.remark = res.data.data.remark
 						for(let item of res.data.data.productList) {
-							item.product.expected = item.expected
+							this.$set(item.product, 'expected', item.expected)
 							this.form.goods.push(item.product)
 						}
 					}
@@ -326,7 +326,7 @@ export default {
 				}
 				this.goods = res.data.data
 				for(let item of this.goods){
-					item.expected = 1
+					this.$set(item, 'expected', 1)
 				}
 				this.goodTotal = res.data.total
 			})
@@ -339,6 +339,12 @@ export default {
 			})
 		},
 		appendForm(field,item) {
+			console.log(item)
+			console.log(this.form.goods)
+			let len = this.form.goods.filter((itemer) => {
+				return itemer.id == item.id
+			}).length
+			console.log(len)
 			this.form[field].push(item)
 		},
 		deleteForm(field,item) {
@@ -370,7 +376,6 @@ export default {
 						}
 					})
         } else {
-					console.log('error')
           return false
         }
       })
