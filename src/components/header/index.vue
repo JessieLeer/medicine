@@ -3,7 +3,7 @@
 	  <el-row>
 		  <el-col :md='4' :sm='3'>
 			  <el-menu-item index="/" class='f-ib'>
-					<img src="../../assets/image/logo.png" width='170'>
+					<img src="../../assets/image/logo.png" width='120'>
 				</el-menu-item>
 			</el-col>
 			<el-col :md='10' :sm='11'>
