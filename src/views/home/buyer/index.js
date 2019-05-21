@@ -13,7 +13,13 @@ export default {
 			total: 0,
 			curpage: 1,
 			suppliers: [],
-			newers: []
+			newers: [],
+			classOption: {
+				step: 0.5,
+				limitMoveNum: 1,
+				openTouch: false,
+				hoverStop: true
+			}
 		}
 	},
 	components: {
@@ -43,7 +49,6 @@ export default {
 		newerIndex() {
 			this.$http.get('/api/latestJoin').then((res) => {
 				this.newers = res.data.latestPurchasers
-				console.log(this.newers)
 			})
 		}
 	}

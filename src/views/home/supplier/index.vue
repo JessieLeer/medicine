@@ -43,11 +43,10 @@
 				</el-main>
 				<el-aside width='260px'>
 				  <h4>最新入驻</h4>
-				  <vue-seamless-scroll v-bind:data="newers" class='seamless-warp'>
+				  <vue-seamless-scroll v-bind:data="newers" class='seamless-warp' :class-option='classOption'>
 						<ul class='newers'>
 							<li v-for='(item,index) in newers' v-bind:key='index' class='newer'>
-								<img v-bind:src='serverUrl + item.logo' width='30' class='f-ib'>
-								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b>于{{item.created_at.substr(0,10)}}入驻</i>
+								<i class='f-ib f-vat f-fsn'><b>{{item.name}}</b></i>
 							</li>
 						</ul>
 					</vue-seamless-scroll>

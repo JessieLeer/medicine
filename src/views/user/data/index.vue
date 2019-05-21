@@ -23,7 +23,7 @@
 											v-bind:show-file-list="false">
 											<img v-if="form.headpic" v-bind:src="serverUrl + form.headpic" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											<i slot="tip" class="el-upload__tip">头像</i>
+											<i slot="tip" class="el-upload__tip">头像,请上传长宽比为1:1的图片</i>
 										</el-upload>
 									</el-form-item>
 									<el-form-item prop='name'>
@@ -59,38 +59,15 @@
 										</el-upload>
 									</el-form-item>
 									<el-form-item>
-										<el-select
-											v-model="form.province"
-											@change="choseProvince"
-											placeholder="省级地区">
-											<el-option
-												v-for="item in province"
-												:key="item.id"
-												:label="item.value"
-												:value="item.id">
+									  <el-select v-model="form.province" placeholder="请选择">
+											<el-option v-for="(option,index) in arr" :value="option.name" v-bind:label='option.name' v-bind:key='index'>
 											</el-option>
 										</el-select>
-										<el-select
-											v-model="form.city"
-											@change="choseCity"
-											placeholder="市级地区">
-											<el-option
-												v-for="item in shi1"
-												:key="item.id"
-												:label="item.value"
-												:value="item.id">
-											</el-option>
+										<el-select v-model="form.city">
+											<el-option v-for="(option,index) in cityArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
 										</el-select>
-										<el-select
-											v-model="form.region"
-											@change="choseBlock"
-											placeholder="区级地区">
-											<el-option
-												v-for="item in qu1"
-												:key="item.id"
-												:label="item.value"
-												:value="item.id">
-											</el-option>
+										<el-select v-model="form.region">
+											<el-option v-for="(option,index) in districtArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
 										</el-select>
                   </el-form-item>
 									<el-form-item prop='company'>

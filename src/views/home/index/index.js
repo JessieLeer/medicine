@@ -68,7 +68,6 @@ export default {
 		supplierIndex() {
 			this.$http.get('/api/supplier').then((res) => {
 				this.suppliers = res.data.data
-				console.log(this.suppliers)
 			})
 		},
 		// 获取热门询价

@@ -96,7 +96,7 @@
 					<el-table-column prop="ticket" v-if='order.isTicket == "true"' label="含票报价" width='80'></el-table-column>
 					<el-table-column prop="unticket" v-if='order.isTicket == "false"' label="不含票报价" width='100'>
 					</el-table-column>
-					<el-table-column prop="remark" label="优惠政策" width='100'></el-table-column>
+					<el-table-column prop="remark" label="备注" width='100'></el-table-column>
 				</el-table>
 				<br>
 				<el-form size='small' class='f-tac'>

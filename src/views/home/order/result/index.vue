@@ -7,7 +7,7 @@
 		  <el-alert title="成功生成报价单" type="success" center show-icon v-bind:description='`总共 ${orders.length} 项,总价${total}元`'></el-alert>
 			<br>
 			<el-collapse v-model="shows">
-  			<el-collapse-item v-for='(item,index) in orders' v-bind:title="item.supplier.user.name" v-bind:name="item.supplier.user.id" v-bind:key='index'>
+  			<el-collapse-item v-for='(item,index) in orders' v-bind:title="item.supplier.user.name + '/' + item.supplier.company + '/' + item.supplier.phone" v-bind:name="item.supplier.user.id" v-bind:key='index'>
 				  <el-table v-bind:data="item.productList" show-summary>
 						<el-table-column prop="product.name" label="商品名称" width=""></el-table-column>
 						<el-table-column prop="product.specification" label="规格"></el-table-column>

@@ -8,8 +8,8 @@
 			  <el-row>
 				  <el-col :span='24'>
 					  <el-form-item label="" class='f-pr'>
-							<img v-bind:src='company.logo' width='40' class='f-pa'>
-							<b class='unit'>{{company.name}}</b>
+							<img v-bind:src='company.photos ? serverUrl + company.photos : serverUrl + "/static/front/images/companylogo.png"' width='40' class='f-pa'>
+							<b class='unit'>{{company.company}}</b>
 						</el-form-item>
 					</el-col>
 				  <el-col :md='8' :sm='12'>

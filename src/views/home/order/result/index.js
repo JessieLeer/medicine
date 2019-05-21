@@ -27,7 +27,7 @@ export default {
 			let total = 0
 			for(let order of this.orders){
 				for(let good of order.productList){
-					total += good.available * good.ticket
+					total += good.available * (this.isTicket == 'true' ? good.ticket : good.unticket)
 				}
 			}
 			return total

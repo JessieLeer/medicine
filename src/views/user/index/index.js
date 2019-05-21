@@ -308,7 +308,6 @@ export default {
 					this.order.reach.total = result.reach.total
 					this.order.reach.success = result.reach.success
 					this.order.reach.series[0].data[0].value = result.reach.total - result.reach.success
-					
 					this.order.reach.series[0].data[1].value = result.reach.success
 				}
 			})

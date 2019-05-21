@@ -13,7 +13,13 @@ export default {
 			suppliers: [],
 			total: 0,
 			newers: [],
-			serverUrl: this.$store.state.config.serverUrl
+			serverUrl: this.$store.state.config.serverUrl,
+			classOption: {
+				step: 0.5,
+				limitMoveNum: 1,
+				openTouch: false,
+				hoverStop: true
+			}
 		}
 	},
 	components: {
