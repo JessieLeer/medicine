@@ -2108,6 +2108,7 @@ export default {
 		caside
 	},
 	created() {
+		console.log(this.form)
 		this.updateCity()
 		this.updateDistrict()
 	},
@@ -2209,7 +2210,6 @@ export default {
 		submit(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					console.log(this.form)
 					this.$http.post('/api/ucenter/update', this.form).then((res) => {
 						if(res.data.success){
 						  let user = {}
