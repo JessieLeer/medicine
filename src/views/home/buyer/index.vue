@@ -4,7 +4,7 @@
 		  <cheader activeIndex='/buyer'></cheader>
 		</el-header>
 	  <el-main>
-			<el-carousel indicator-position="outside" :autoplay='false' height='400px' v-bind:arrow='banners.length > 1 ? "hover" : "never"'>
+			<el-carousel indicator-position="outside" :autoplay='true' height='400px' v-bind:arrow='banners.length > 1 ? "hover" : "never"'>
 			  <a v-bind:href='item.url' target='_blank' v-for='(item,index) in banners' v-bind:key='index' class='f-tac'>
 				  <el-carousel-item v-bind:name='item.name' >
 					  <div v-bind:style='`background: url(${serverUrl}${item.photos}) no-repeat center; height: 400px;`'></div>
