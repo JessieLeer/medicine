@@ -23,7 +23,7 @@ export default {
 			countdown: 0,
 			form: {
 				type: '',
-        name: '',
+        name: '', 
 				password: '',
 				password_repeat: '',
 				phone: '',
@@ -87,9 +87,18 @@ export default {
 	components: {
 		cheader
 	},
+	created() {
+		this.initForm()
+	},
 	methods: {
 		go(url){
 			this.$router.push(url)
+		},
+		initForm() {
+			let keys = Object.keys(this.$store.state.user)
+			for(let item of keys) {
+				this.$set(this.form, item, this.$store.state.user[item])
+			}
 		},
 		sendCode() {
 			this.countdown = 60

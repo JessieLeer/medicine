@@ -45,8 +45,14 @@ export default {
 		cheader
 	},
 	methods: {
+		go(url) {
+			this.$router.push(url)
+		},
 		back() {
-			this.$router.back()
+			this.$confirm('确认返回上一步？当前未保存的信息将丢失')
+      .then(_ => {
+        this.$router.back()
+      }).catch(_ => {})
 		},
 		handleRemove(file, fileList) {
     },

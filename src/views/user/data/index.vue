@@ -46,7 +46,7 @@
 						  <el-col :md='12' :sm='24'>
 								<el-card>
 									<header slot="header" class="clearfix">公司信息</header>
-									<el-form-item prop='logo'>
+									<el-form-item>
 										<el-upload
 											class="avatar-uploader"
 											action="https://jsonplaceholder.typicode.com/posts/"
