@@ -33,7 +33,7 @@
 				  <el-col :md='3' :sm='6' v-for='(item,index) in suppliers' v-bind:key="index" class='f-tac'>
 					  <a :href='`/#/quote/qualification/${item.id}`' target='_blank'>
 						  <section class='image-wrapper f-tac'>
-							  <img v-bind:src='serverUrl + item.image' >
+							  <img v-bind:src='item.image ? serverUrl + item.image : serverUrl + "/static/front/images/companylogo.png"' >
 							</section>
 							<br>
 							{{item.name}}
@@ -70,7 +70,7 @@
 							  </el-button>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='serverUrl + item.image' width='40' class='f-pa'>
+								<img v-bind:src='item.image ? serverUrl + item.image : serverUrl + "/static/front/images/companylogo.png"' width='40' class='f-pa'>
 								<i class='unit f-fsn'>{{item.unit}}</i>
 							</el-form-item>
 							<el-form-item label="物资信息">{{item.info}}</el-form-item>

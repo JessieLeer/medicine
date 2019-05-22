@@ -14,7 +14,7 @@
 								<b>{{order.name}}</b>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
-								<img v-bind:src='serverUrl + order.updateByphoto' width='36' class='f-pa'> &nbsp;
+								<img v-bind:src='order.updateByphoto ? serverUrl + order.updateByphoto : serverUrl + "/static/front/images/companylogo.png"' width='36' class='f-pa'> &nbsp;
 								<el-button type="text" class='card-opera' v-on:click='go(`/quote/qualification/${order.createByid}`)'>
 									<i class='unit f-fsn'>{{order.updateByname}}</i>
 								</el-button>	

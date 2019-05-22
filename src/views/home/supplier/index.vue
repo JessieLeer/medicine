@@ -23,7 +23,7 @@
 							<el-col :md='8' :sm='12' :xs='24' v-for='(item,index) in suppliers' v-bind:key='index'>
 								<el-form label-width="60px" class='index-hot' label-position="left">
 									<el-form-item label="" label-width='0' class='f-pr'>
-										<img v-bind:src='serverUrl + item.image' width='40' class='logo f-pa'>
+										<img v-bind:src='item.image ? serverUrl + item.image : serverUrl + "/static/front/images/companylogo.png"' width='40' class='logo f-pa'>
 										<el-button type='text' size='' title='查看资质' v-on:click='go(`/quote/qualification/${item.id}`)'>
 											<b class='name'>{{item.name}}</b>
 										</el-button>

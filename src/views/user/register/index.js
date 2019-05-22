@@ -25,6 +25,7 @@ export default {
 				type: '',
         name: '',
 				password: '',
+				password_repeat: '',
 				phone: '',
 				vcode: ''
       },
