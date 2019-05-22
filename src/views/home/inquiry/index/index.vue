@@ -30,9 +30,15 @@
 									{{item.createDate}}
 								</el-form-item>
 								<el-form-item v-bind:label="item.endValue.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{item.endValue}}</el-form-item>
-								<el-form-item label="状态">
-									{{item.status == '1' ? '报价中' : '已定单'}}
+								<el-form-item label="询价状态">
+									{{item.status == '1' ? '询价中' : '已定单'}}
 								</el-form-item>
+                <el-form-item label="报价状态" v-if="user.type == '供应商'">
+                  {{item.isQuoted == 'true' ? '已报价' : '未报价'}}
+                </el-form-item>
+                <el-form-item label="中标状态" v-if="item.status == '2' && user.type == '供应商'">
+                  {{item.isBidding == 'true' ? '已中标' : '未中标'}}
+                </el-form-item>
 								<br v-if='item.remarks != ""'>
 								<el-form-item label="" class='remark'>
 									{{item.remarks}}

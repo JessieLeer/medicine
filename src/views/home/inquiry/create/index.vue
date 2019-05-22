@@ -110,7 +110,7 @@
 				  <el-input v-model='form.remark' type='textarea'></el-input>
 				</el-form-item>
 				<el-form-item>
-				  <el-button type='primary' size='small' v-on:click='inquiryCreate("form")'>提交</el-button>
+				  <el-button type='primary' size='small' v-on:click='inquiryCreate("form")' v-bind:disabled='!submitAble'>提交</el-button>
 				</el-form-item>
 			</el-form>
 			<el-dialog title="选择产品" :visible.sync="goodsDialogShow" class='cate-dialog'>

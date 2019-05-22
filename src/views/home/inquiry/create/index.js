@@ -17,6 +17,7 @@ export default {
           return time.getTime() < Date.now() - 8.64e7
         },
 			},
+			submitAble: true,
 			form: {
 				userId: this.$store.state.user.id,
 				source: this.$route.params.source,
@@ -383,12 +384,14 @@ export default {
 		inquiryCreate(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
+					this.submitAble = false
 					this.$http.post('/api/inquiry/save', this.form).then((res) => {
 						if(res.data.success){
 							this.dialogResultVisible = true
 						}else{
 							this.$message.error(res.data.message)
 						}
+						this.submitAble = true
 					})
         } else {
 					console.log('error')
