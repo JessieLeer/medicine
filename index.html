@@ -8,5 +8,28 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+		<script>
+		function checkBrowser(){
+		  var sys = {}
+			var ua = navigator.userAgent.toLowerCase()
+      var re =/(msie|firefox|chrome|opera|version).*?([\d.]+)/
+      var m = ua.match(re)
+      sys.browser = m[1].replace(/version/, "safari")
+      sys.ver = m[2]
+			if(sys.browser == 'msie'){
+			  alert('您的浏览器版本太低，请使用谷歌或火狐浏览器')
+			}
+			checkIe11()
+    }
+		function checkIe11() {
+			var u = window.navigator.userAgent.toLocaleLowerCase(),
+			ie11 = /(trident)\/([\d.]+)/,
+			b = u.match(ie11);
+			if(b){
+				alert("您的浏览器版本太低，请使用谷歌或火狐浏览器");       
+			}
+		}	
+		window.onload = checkBrowser()
+		</script>
   </body>
 </html>
