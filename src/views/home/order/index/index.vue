@@ -84,7 +84,7 @@
 					</el-table-column>
 					<el-table-column prop="" label="供应商" width="260">
 					  <template slot-scope='scope'>
-						  {{scope.row.supplier.name}}{{(scope.row.supplier.company)}}
+						  {{scope.row.supplier.name}}<br>{{(scope.row.supplier.company)}}
 						</template>
 					</el-table-column>
 					<el-table-column prop="product.specification" label="规格" width='100'></el-table-column>
