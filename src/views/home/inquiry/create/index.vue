@@ -75,7 +75,7 @@
 				  <el-table v-bind:data="form.aims" class='goods-table mt-20' v-if='form.aims.length > 0'>
 					  <el-table-column prop='name' label='名称'></el-table-column>
 						<el-table-column prop='company' label='公司'></el-table-column>
-						<el-table-column width='50' label='操作'>
+						<el-table-column width='70' label='操作'>
 						  <template slot-scope='scope'>
 							  <el-button type="danger" v-on:click='deleteForm("aims",scope.row)'>删除</el-button>
 							</template>

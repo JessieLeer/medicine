@@ -2034,7 +2034,7 @@ export default {
     }
 		return {
 			serverUrl: this.$store.state.config.serverUrl + '/',
-			form: this.$store.state.user,
+			form: {},
 			rules: {
 				headpic: {
 					required: true,
@@ -2108,7 +2108,7 @@ export default {
 		caside
 	},
 	created() {
-		console.log(this.form)
+		this.initForm()
 		this.updateCity()
 		this.updateDistrict()
 	},
@@ -2122,6 +2122,12 @@ export default {
 		}
 	},
 	methods: {
+		initForm() {
+			let keys = Object.keys(this.$store.state.user)
+			for(let item of keys) {
+				this.$set(this.form, item, this.$store.state.user[item])
+			}
+		},
 		updateCity() {
 			for (var i in this.arr) {
 				var obj = this.arr[i]
