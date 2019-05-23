@@ -23,7 +23,7 @@
 											v-bind:show-file-list="false">
 											<img v-if="form.headpic" v-bind:src="serverUrl + form.headpic" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-											<i slot="tip" class="el-upload__tip">头像,请上传长宽比为1:1的图片</i>
+											<i slot="tip" class="el-upload__tip">头像,<span class='color-warning'>请上传长宽比为1:1的图片</span></i>
 										</el-upload>
 									</el-form-item>
 									<el-form-item prop='name'>
