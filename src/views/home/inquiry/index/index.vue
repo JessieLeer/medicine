@@ -50,8 +50,8 @@
 							</el-col>
 							<el-col :span='4' class='f-tar'>
 								<el-form-item>
-									<el-button v-on:click='go(`/quote/edit/${item.id}`)' type='primary' size='small' v-if='user.type == "供应商" && item.status == "1"'>我要报价</el-button>
-									<el-button v-on:click='go(`/quote/edit/${item.id}`)' type='primary' size='small' v-if='user.type == "供应商" && item.status == "2"'>查看询价</el-button>
+									<el-button v-on:click='go(`/quote/edit/${item.id}`)' type='primary' size='small' v-if='user.type == "供应商" && item.status == "1" || user.type == "业务员" && item.status == "1"'>我要报价</el-button>
+									<el-button v-on:click='go(`/quote/edit/${item.id}`)' type='primary' size='small' v-if='user.type == "供应商" && item.status == "2" || user.type == "业务员" && item.status == "2"'>查看询价</el-button>
 									<el-button v-on:click='go(`/order/${item.id}`)' type='primary' size='small' v-if='user.type == "采购商" && item.status == "1"'>查看报价</el-button>
 									<el-button v-on:click='go(`/order/result/${item.enquiryId}`)' type='primary' size='small' v-if='user.type == "采购商" && item.status == "2"'>查看报价</el-button>
 								</el-form-item>

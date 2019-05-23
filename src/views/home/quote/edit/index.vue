@@ -28,7 +28,7 @@
 							</el-row>
 							<el-row>
 							  <el-col :md='12'>
-								  <el-form-item label="是否发票">{{order.isTicket == true ? '是' : '否'}}</el-form-item>
+								  <el-form-item label="是否发票">{{order.isTicket == "true" ? '是' : '否'}}</el-form-item>
 								</el-col>
 								<el-col :md='12'>
 								  <el-form-item v-bind:label="order.endValue.indexOf('-') == -1 ? '最大报价量' : '截止日期'">{{order.endValue}}</el-form-item>

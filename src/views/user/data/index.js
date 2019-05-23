@@ -2082,11 +2082,6 @@ export default {
 					message: '请输入单位简称',
 					trigger: 'blur'
 				},
-				logo: {
-					required: true,
-					message: '请上传公司logo',
-					trigger: 'change'
-				},
 				license: {
 					required: true,
 					message: '请上传营业执照',

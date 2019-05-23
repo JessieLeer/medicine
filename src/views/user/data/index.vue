@@ -58,18 +58,6 @@
 											<i slot="tip" class="el-upload__tip">公司logo</i>
 										</el-upload>
 									</el-form-item>
-									<el-form-item>
-									  <el-select v-model="form.province" placeholder="请选择">
-											<el-option v-for="(option,index) in arr" :value="option.name" v-bind:label='option.name' v-bind:key='index'>
-											</el-option>
-										</el-select>
-										<el-select v-model="form.city">
-											<el-option v-for="(option,index) in cityArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
-										</el-select>
-										<el-select v-model="form.region">
-											<el-option v-for="(option,index) in districtArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
-										</el-select>
-                  </el-form-item>
 									<el-form-item prop='company'>
 										<el-input v-model='form.company' placeholder='公司名称' disabled></el-input>
 									</el-form-item>
@@ -103,6 +91,7 @@
 										<el-upload
 											class="avatar-uploader"
 											action="nourl"
+											disabled
 											accept=".jpg,.jpeg,.png,.gif"
 											:http-request='uploadCommission'
 											:show-file-list="false">
@@ -114,6 +103,18 @@
 									<el-form-item prop='regnum'>
 										<el-input v-model="form.regnum" placeholder='工商注册号'></el-input>
 									</el-form-item>
+									<el-form-item>
+									  <el-select v-model="form.province" placeholder="请选择">
+											<el-option v-for="(option,index) in arr" :value="option.name" v-bind:label='option.name' v-bind:key='index'>
+											</el-option>
+										</el-select>
+										<el-select v-model="form.city">
+											<el-option v-for="(option,index) in cityArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
+										</el-select>
+										<el-select v-model="form.region">
+											<el-option v-for="(option,index) in districtArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
+										</el-select>
+                  </el-form-item>
 									<el-form-item prop='regaddress'>
 										<el-input v-model="form.regaddress" placeholder='注册地址'></el-input>
 									</el-form-item>

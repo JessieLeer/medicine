@@ -86,7 +86,7 @@
 				<header slot="header" class="clearfix">
 				  <el-row>
 					  <el-col :span='12'>
-						  <h4 class='card-title f-ib'>{{user.type == '供应商' ? '我的报价' : '我的询价'}}</h4>
+						  <h4 class='card-title f-ib'>{{user.type == '采购商' ? '我的询价' : '我的报价'}}</h4>
 					  </el-col>
 						<el-col :span='12' class='f-tar'>
 						  <router-link :to='`/inquiry/${user.id}`'>

@@ -14,7 +14,8 @@ import './assets/css/mine.styl'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-axios.defaults.baseURL = 'http://114.115.159.94:8088/'
+axios.defaults.baseURL = 'http://192.168.1.65:8088/'
+//axios.defaults.baseURL = 'http://114.115.159.94:8088/'
 Vue.prototype.$http = axios
 
 /* eslint-disable no-new */

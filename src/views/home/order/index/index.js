@@ -68,12 +68,15 @@ export default {
 					if(arr.filter((itemer) => {
 						return itemer.productId == item.productId
 					}).length > 1){
+						return 'noid'
 					}else{
 						return item.id
 					}
 				})
+				this.subGoods = new Set(this.subGoods)
+				this.subGoods = [...this.subGoods]
 				this.subGoods.forEach((item,index,arr) => {
-					if(item == undefined){
+					if(item == 'noid'){
 						arr.splice(index, 1)
 					}
 				})

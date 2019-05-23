@@ -2,7 +2,7 @@
   <el-menu v-bind:default-active="activeIndex" class="el-menu" mode="horizontal" v-on:select='' router>
 	  <el-row>
 		  <el-col :md='4' :sm='3'>
-			  <el-menu-item index="/" class='f-ib'>
+			  <el-menu-item v-on:click='go("/")' class='logo f-ib'>
 					<img src="../../assets/image/logo.png" width='120'>
 				</el-menu-item>
 			</el-col>
