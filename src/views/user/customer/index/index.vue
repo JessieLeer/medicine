@@ -30,6 +30,8 @@
 								</router-link>
 							</template>
 						</el-table-column>
+						<el-table-column prop="company" label="公司名称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="user.customerLabel.label" width='80' label="用户类型" show-overflow-tooltip></el-table-column>
 						<el-table-column label='注册地址' prop='regaddress'></el-table-column>
 						<el-table-column label='注册时间' prop='createDate' width='160'></el-table-column>
 					</el-table>	

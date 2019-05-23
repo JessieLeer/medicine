@@ -2027,6 +2027,8 @@ export default {
 		}
 		let confirmPass = (rule, value, callback) => {
       if (value !== this.form.password) {
+				console.log(value)
+				console.log(this.form.password)
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -2118,6 +2120,7 @@ export default {
 	},
 	methods: {
 		initForm() {
+			this.$set(this.form, 'password_repeat', '')
 			let keys = Object.keys(this.$store.state.user)
 			for(let item of keys) {
 				this.$set(this.form, item, this.$store.state.user[item])
@@ -2214,7 +2217,6 @@ export default {
 					this.$http.post('/api/ucenter/update', this.form).then((res) => {
 						if(res.data.success){
 						  let user = {}
-							console.log(res.data)
 							user.id = res.data.data.id
 							user.name = res.data.data.name
 							user.phone = res.data.data.phone
