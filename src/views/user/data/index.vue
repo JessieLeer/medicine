@@ -104,11 +104,11 @@
 										<el-input v-model="form.regnum" placeholder='工商注册号' v-bind:disabled='user.type == "业务员" ? true : false'></el-input>
 									</el-form-item>
 									<el-form-item>
-									  <el-select v-model="form.province" placeholder="请选择" v-bind:disabled='user.type == "业务员" ? true : false'>
+									  <el-select v-model="form.province" placeholder="请选择" v-bind:disabled='user.type == "业务员" ? true : false' v-on:change='updateCity(false)'>
 											<el-option v-for="(option,index) in arr" :value="option.name" v-bind:label='option.name' v-bind:key='index'>
 											</el-option>
 										</el-select>
-										<el-select v-model="form.city" v-bind:disabled='user.type == "业务员" ? true : false'>
+										<el-select v-model="form.city" v-bind:disabled='user.type == "业务员" ? true : false' v-on:change='updateDistrict(false)'>
 											<el-option v-for="(option,index) in cityArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
 										</el-select>
 										<el-select v-model="form.region" v-bind:disabled='user.type == "业务员" ? true : false'>

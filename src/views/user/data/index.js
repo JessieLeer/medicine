@@ -2109,17 +2109,17 @@ export default {
 	},
 	created() {
 		this.initForm()
-		this.updateCity()
-		this.updateDistrict()
+		this.updateCity(true)
+		this.updateDistrict(true)
 	},
 	watch: {
-		'form.province'() {
-			this.updateCity()
-			this.updateDistrict()
+		/*'form.province'() {
+			this.updateCity(false)
+			this.updateDistrict(false)
 		},
 		'form.city'() {
-			this.updateDistrict()
-		}
+			this.updateDistrict(false)
+		}*/
 	},
 	methods: {
 		initForm() {
@@ -2129,9 +2129,8 @@ export default {
 			for(let item of keys) {
 				this.$set(this.form, item, this.$store.state.user[item])
 			}
-			console.log(this.form.city)
 		},
-		updateCity() {
+		updateCity(isInit) {
 			for (var i in this.arr) {
 				var obj = this.arr[i]
 				if (obj.name == this.form.province) {
@@ -2139,22 +2138,23 @@ export default {
 					break
 				}
 			}
-			this.form.city = this.cityArr[1].name
-			console.log(this.form.city)
+			if(isInit){
+			}else{
+				this.form.city = this.cityArr[1].name
+				this.updateDistrict(false)
+			}
 		},
-		updateDistrict() {
+		updateDistrict(isInit) {
 			for (var i in this.cityArr) {
 				var obj = this.cityArr[i]
 				if (obj.name == this.form.city) {
-					
 					this.districtArr = obj.sub
 					break
 				}
 			}
-			if(this.districtArr && this.districtArr.length > 0 && this.districtArr[1].name) {
+			if(isInit){
+			}else{
 				this.form.region = this.districtArr[1].name
-			} else {
-				this.form.region = ''
 			}
 		},
 		
