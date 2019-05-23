@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
+		<cfooter></cfooter>
   </div>
 </template>
 
@@ -16,11 +17,15 @@
 </style>
 
 <script>
+import cfooter from '@/components/footer/index.vue'
 export default {
   name: 'App',
 	created() {
 	},
 	methods: {
+	},
+	components: {
+	  cfooter
 	}
 }
 </script>

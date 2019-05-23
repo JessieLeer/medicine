@@ -12,7 +12,7 @@
 		    <el-menu-item index="/buyer" class='f-ib'>优选采购商</el-menu-item>
 		    <el-menu-item index="/supplier" class='f-ib'>优选供应商</el-menu-item>
 				<el-menu-item class='f-ib'>
-				  <a href='http://www.yaozhicai.cn:8081/' style='color: #303133;'>药追溯平台</a>
+				  <a href='http://www.yaozhicai.cn:8081/' target='_blank' style='color: #f54100;'>药追溯平台</a>
 				</el-menu-item>
 			</el-col>
 			<el-col :md='10' :sm='10' class='f-tar'>

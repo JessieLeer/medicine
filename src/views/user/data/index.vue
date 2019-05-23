@@ -101,22 +101,22 @@
 										</el-upload>
 									</el-form-item>
 									<el-form-item prop='regnum'>
-										<el-input v-model="form.regnum" placeholder='工商注册号'></el-input>
+										<el-input v-model="form.regnum" placeholder='工商注册号' v-bind:disabled='user.type == "业务员" ? true : false'></el-input>
 									</el-form-item>
 									<el-form-item>
-									  <el-select v-model="form.province" placeholder="请选择">
+									  <el-select v-model="form.province" placeholder="请选择" v-bind:disabled='user.type == "业务员" ? true : false'>
 											<el-option v-for="(option,index) in arr" :value="option.name" v-bind:label='option.name' v-bind:key='index'>
 											</el-option>
 										</el-select>
-										<el-select v-model="form.city">
+										<el-select v-model="form.city" v-bind:disabled='user.type == "业务员" ? true : false'>
 											<el-option v-for="(option,index) in cityArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
 										</el-select>
-										<el-select v-model="form.region">
+										<el-select v-model="form.region" v-bind:disabled='user.type == "业务员" ? true : false'>
 											<el-option v-for="(option,index) in districtArr" :value="option.name" v-bind:label='option.name' v-bind:key='index'></el-option>
 										</el-select>
                   </el-form-item>
 									<el-form-item prop='regaddress'>
-										<el-input v-model="form.regaddress" placeholder='注册地址'></el-input>
+										<el-input v-bind:disabled='user.type == "业务员" ? true : false' v-model="form.regaddress" placeholder='注册地址'></el-input>
 									</el-form-item>
 								</el-card>
 						  </el-col>

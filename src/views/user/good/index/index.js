@@ -103,7 +103,6 @@ export default {
 		index(page) {
 			this.$http.get('/api/ucenter/product', {params: {userId: this.user.id, search: this.search, page: page, pageSize: 10}}).then((res) => {
 				res.data.data = res.data.data ? res.data.data : []
-				console.log(res.data.data)
 				for(let item of res.data.data) {
 					if(item.image == ''){
 						item.image = []

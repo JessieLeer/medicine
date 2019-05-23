@@ -57,7 +57,6 @@ export default {
 				  arr.push(item.id)
 		  	}
 				this.$http.delete('/api/ucenter/customerDel', {data: {userId: this.user.id, customers: arr}}).then((res) => {
-					console.log(res)
 					this.$message.info(res.data.message)
 					this.index(this.curpage)
 				})

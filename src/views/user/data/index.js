@@ -2027,8 +2027,6 @@ export default {
 		}
 		let confirmPass = (rule, value, callback) => {
       if (value !== this.form.password) {
-				console.log(value)
-				console.log(this.form.password)
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -2100,6 +2098,11 @@ export default {
 	  	districtArr: []
 		}
 	},
+	computed: {
+		user() {
+			return this.$store.state.user
+		}
+	},
 	components: {
 		cheader,
 		caside
@@ -2126,7 +2129,7 @@ export default {
 			for(let item of keys) {
 				this.$set(this.form, item, this.$store.state.user[item])
 			}
-			console.log(this.form)
+			console.log(this.form.city)
 		},
 		updateCity() {
 			for (var i in this.arr) {
@@ -2137,11 +2140,13 @@ export default {
 				}
 			}
 			this.form.city = this.cityArr[1].name
+			console.log(this.form.city)
 		},
 		updateDistrict() {
 			for (var i in this.cityArr) {
 				var obj = this.cityArr[i]
 				if (obj.name == this.form.city) {
+					
 					this.districtArr = obj.sub
 					break
 				}

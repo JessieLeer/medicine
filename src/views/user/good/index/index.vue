@@ -11,7 +11,7 @@
 				<el-main class='pt-0'>
 				  <el-form inline :model="search" size='small' ref='form' class='f-tar'>
 					  <el-form-item class='f-fl' v-if='selectedGoods.length > 0'>
-						  <el-button type="primary" size='small'>批量采购</el-button>
+						  <!--<el-button type="primary" size='small'>批量采购</el-button>-->
 						</el-form-item>
 						<el-form-item prop='name'>
 							<el-input v-model="search.name" placeholder="商品名/生产厂家"></el-input>
@@ -29,7 +29,6 @@
 						</el-form-item>
 					</el-form>
 					<el-table ref="multipleTable" v-bind:data="goods" tooltip-effect="dark" v-on:selection-change="handleSelectionChange" empty-text=‘加载中...’>
-						<el-table-column type="selection" width="30"></el-table-column>
 						<el-table-column label="商品名称" prop='name'></el-table-column>
 						<el-table-column prop="manufacturer" label="生产厂家"></el-table-column>
 						<el-table-column prop="specification" label="规格" width='120'></el-table-column>
