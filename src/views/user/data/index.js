@@ -2120,11 +2120,13 @@ export default {
 	},
 	methods: {
 		initForm() {
+			this.$set(this.form, 'password', '')
 			this.$set(this.form, 'password_repeat', '')
 			let keys = Object.keys(this.$store.state.user)
 			for(let item of keys) {
 				this.$set(this.form, item, this.$store.state.user[item])
 			}
+			console.log(this.form)
 		},
 		updateCity() {
 			for (var i in this.arr) {
