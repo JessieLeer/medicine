@@ -105,7 +105,7 @@
 								<el-button v-on:click='go(`/order/result/${item.enquiryId}`)' type='text' size='small' v-if='user.type == "采购商" && item.status == "2"'>
 								  <b>{{item.title}}</b>
 								</el-button>
-								<el-button type="text" class='card-opera' v-if='user.type == "供应商"' v-on:click='go(`/quote/edit/${item.id}`)' >
+								<el-button type="text" class='card-opera' v-if='user.type == "供应商" || user.type == "业务员"' v-on:click='go(`/quote/edit/${item.id}`)' >
 								  <b>{{item.title}}</b>
 							  </el-button>
 							</el-form-item>

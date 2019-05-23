@@ -80,7 +80,7 @@ export default {
 		// 获取我的报价或者询价
 		orderIndex() {
 			if(this.user) {
-				let url = this.user.type == '供应商' ? '/api/myquate' : '/api/myinquiry'
+				let url = this.user.type == '采购商' ? '/api/myinquiry' : '/api/myquate'
 				this.$http.get(url, {params: {userId: this.user.id}}).then((res) => {
 					this.orders = res.data.data
 				})
