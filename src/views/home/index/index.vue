@@ -66,7 +66,7 @@
 									<router-link to='/login' v-if='!user.id'>
 								    <b>{{item.title}}</b>
 									</router-link>
-									<b v-if='user.id && user.type != "供应商"'>{{item.title}}</b>
+									<b v-if='user.id && user.type != "供应商" && user.type != "业务员"'>{{item.title}}</b>
 							  </el-button>
 							</el-form-item>
 							<el-form-item label="询价单位" class='f-pr'>
