@@ -49,7 +49,7 @@
 						  <h4 class='card-title f-ib'>热门询价</h4>
 					  </el-col>
 						<el-col :span='12' class='f-tar'>
-						  <router-link to='/inquiry/none' v-if='user.type == "供应商"'>
+						  <router-link to='/inquiry/none' v-if='user.type == "供应商" || user.type == "业务员"'>
 						    <el-button type="text" class='card-opera'>查看更多</el-button>
 							</router-link>
 						</el-col>
@@ -60,7 +60,7 @@
 					  <el-form label-width="100px" class='index-hot w-100 f-ib'>
 							<el-form-item label="" label-width='12px'>
 								<el-button type="text" class='card-opera'>
-								  <router-link v-bind:to='`/quote/edit/${item.id}`' v-if='user.id && user.type == "供应商"'>
+								  <router-link v-bind:to='`/quote/edit/${item.id}`' v-if='user.id && user.type == "供应商" || user.id && user.type == "业务员"'>
 								    <b>{{item.title}}</b>
 									</router-link>
 									<router-link to='/login' v-if='!user.id'>

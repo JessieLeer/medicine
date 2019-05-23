@@ -33,10 +33,10 @@
 								<el-form-item label="询价状态">
 									{{item.status == '1' ? '询价中' : '已定单'}}
 								</el-form-item>
-                <el-form-item label="报价状态" v-if="user.type == '供应商'">
+                <el-form-item label="报价状态" v-if="user.type == '供应商' || user.type == '业务员'">
                   {{item.isQuoted == 'true' ? '已报价' : '未报价'}}
                 </el-form-item>
-                <el-form-item label="中标状态" v-if="item.status == '2' && user.type == '供应商'">
+                <el-form-item label="中标状态" v-if="item.status == '2' && user.type == '供应商' || item.status == '2' && user.type == '业务员'">
                   {{item.isBidding == 'true' ? '已中标' : '未中标'}}
                 </el-form-item>
 								<br v-if='item.remarks != ""'>
