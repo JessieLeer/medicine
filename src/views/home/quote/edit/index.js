@@ -81,6 +81,13 @@ export default {
 							this.$router.back()
 						}
 					})
+				}else{
+					this.$alert(res.data.message, '', {
+						confirmButtonText: '确定',
+						callback: action => {
+							
+						}
+					})
 				}
 			})
 		}
