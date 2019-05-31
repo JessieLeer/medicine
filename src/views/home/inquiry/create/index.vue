@@ -133,8 +133,8 @@
 						  <el-form label-position="left" inline class='good-other'>
 							  <el-row>
 								  <el-col :sm='12' :xs='24'>
-									  <el-form-item label='规格'>
-											{{scope.row.specification}}
+									  <el-form-item label='编号'>
+											{{scope.row.numbering}}
 										</el-form-item>
 									</el-col>
 									<el-col :sm='12' :xs='24'>
@@ -157,7 +157,7 @@
 			      </template>
 			    </el-table-column>
 					<el-table-column prop="name" label="商品名称" show-overflow-tooltip></el-table-column>
-					<el-table-column prop="numbering" label="编号" width='90' show-overflow-tooltip></el-table-column>
+					<el-table-column prop="specification" label="规格" width='90' show-overflow-tooltip></el-table-column>
 					<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 					<el-table-column label="操作" fixed="right" width='50'>
 					  <template slot-scope='scope'>
