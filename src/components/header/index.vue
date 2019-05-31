@@ -72,13 +72,13 @@
 				  <el-card class="box-card">
 						<header slot="header" class="clearfix">
 							<el-row>
-								<el-col :span='16'>历史采购计划倒入</el-col>
+								<el-col :span='16'>历史采购计划导入</el-col>
 								<el-col :span='8' class='f-tar'>
 								  <el-button type="text" class='chose' v-on:click='go("/shopping/history")'>选择</el-button>
 								</el-col>
 							</el-row>
 						</header>
-						<i class='remark f-fsn'>从历史采购记录中倒入采购模版</i>
+						<i class='remark f-fsn'>从历史采购记录中导入采购模版</i>
 					</el-card>
 				</el-col>
 				<!--<el-col :md='12' :sm='24'>
