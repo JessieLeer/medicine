@@ -20,8 +20,13 @@
 							<el-table-column prop="name" label="用户名" show-overflow-tooltip></el-table-column>
 							<el-table-column prop="company" label="公司名称" show-overflow-tooltip></el-table-column>
 							<el-table-column prop="user.customerLabel.label" width='80' label="用户类型" show-overflow-tooltip></el-table-column>
+							<el-table-column prop="status" width='80' label="状态" show-overflow-tooltip>
+							  <template slot-scope='scope'>
+								  {{scope.row.status == '0' ? '已同意' : scope.row.status == '1' ? '已驳回' : '待审核'}}
+								</template>
+							</el-table-column>
 							<el-table-column label="操作" fixed="right" width='160'>
-								<template slot-scope='scope'>
+								<template slot-scope='scope' v-if='scope.row.status == 2'>
 								  <el-button type='success' v-on:click='opera(scope.row.user.id,true)' size='mini'>同意</el-button>
 									<el-button type='warning' v-on:click='opera(scope.row.user.id,false)' size='mini'>驳回</el-button>
 								</template>
