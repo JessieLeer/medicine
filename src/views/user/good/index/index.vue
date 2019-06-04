@@ -52,7 +52,7 @@
 									</el-form-item>
 								</el-col>
 								<el-col :sm='12' :xs='24'>
-									<el-form-item prop='brand'>
+									<el-form-item>
 										<el-select v-model="form.brand" placeholder="品牌" value-key='id' v-bind:disabled='form.productType == "公共库" ? true : false'>
 											<el-option v-for='(item, index) in brands' v-bind:key='index' v-bind:label='item.name' v-bind:value='item.id'></el-option>
 										</el-select>

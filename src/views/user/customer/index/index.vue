@@ -13,6 +13,9 @@
 					  <el-form-item class='f-fl' v-if='selectedCustomers.length > 0'>
 							<el-button type='danger' v-on:click='del'>批量删除</el-button>
 						</el-form-item>
+						<el-form-item>
+						  <el-button type='success' v-on:click='go("/user/customer/create")'>添加往来单位</el-button>
+						</el-form-item>
 						<el-form-item prop='name'>
 							<el-input v-model="search.name" placeholder="名称"></el-input>
 						</el-form-item>

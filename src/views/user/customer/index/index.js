@@ -33,6 +33,9 @@ export default {
 		caside
 	},
 	methods: {
+		go(url) {
+			this.$router.push(url)
+		},
 		index(page) {
 			this.$http.get('/api/ucenter/customer', {params: {userId: this.user.id, page: page, pageSize: 10, search: this.search}}).then((res) => {
 				this.customers = res.data.data
