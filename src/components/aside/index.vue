@@ -28,7 +28,8 @@
 			<el-menu-item-group>
 				<el-menu-item index="/user/customer">往来单位列表</el-menu-item>
 				<el-menu-item index="/user/customer/create">添加往来单位</el-menu-item>
-				<el-menu-item index="/user/customer/applier">申请列表</el-menu-item>
+				<el-menu-item index="/user/customer/applier">我收到的申请</el-menu-item>
+				<el-menu-item index="/user/customer/applier1">我发出的申请</el-menu-item>
 			</el-menu-item-group>
 		</el-submenu>
 		<!--<el-menu-item index="/user/erp">

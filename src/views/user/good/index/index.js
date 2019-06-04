@@ -18,7 +18,6 @@ export default {
 			presclass: [],
 			editFormVisiable: false,
 			form: {
-				
 			},
 			rules: {
 				name: {
@@ -95,6 +94,9 @@ export default {
 	},
 	created() {
 		this.index(1)
+		this.cateIndex()
+		this.brandIndex()
+		this.presclassIndex()
 	},
 	methods: {
 		go(url) {
@@ -124,9 +126,28 @@ export default {
 				this.total = res.data.total
 			})
 		},
+		cateIndex() {
+			this.$http.get('/api/category').then((res) => {
+				this.cates = res.data.data
+			})
+		},
+		brandIndex() {
+			this.$http.get('/api/brand').then((res) => {
+				this.brands = res.data.data
+			})
+		},
+		presclassIndex() {
+			this.$http.get('/api/chuffl').then((res) => {
+				this.presclass = res.data.data
+			})
+		},
 		resetForm(form) {
 			this.$refs[form].resetFields()
 			this.index(1)
+		},
+		handlEdit(good) {
+			this.form = good
+			this.editFormVisiable = true
 		},
 		handleSelectionChange(val) {
       this.selectedGoods = val
@@ -141,6 +162,25 @@ export default {
 					this.$message.warning(res.data.message)
 				}
 			})
+		},
+		submit(form) {
+			this.$refs[form].validate((valid) => {
+        if (valid) {
+					this.$set(this.form,'userId',this.$store.state.user.id)
+					this.$http.post('/api/ucenter/productAdd', this.form).then((res) => {
+						if(res.data.success){
+							this.$message.success(res.data.message)
+							window.setTimeout(() => {
+								window.location.reload()
+							},1500)
+						}else{
+							this.$message.error(res.data.message)
+						}
+					})
+        } else {
+          return false
+        }
+      })
 		}
 	}
 }

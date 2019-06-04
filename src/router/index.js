@@ -24,6 +24,7 @@ import UserGoodCreate from '@/views/user/good/create/index.vue'
 import UserCustomer from '@/views/user/customer/index/index.vue'
 import UserCustomerCreate from '@/views/user/customer/create/index.vue'
 import UserCustomerApplier from '@/views/user/customer/applier/index.vue'
+import UserCustomerApplier1 from '@/views/user/customer/applier1/index.vue'
 import UserErp from '@/views/user/erp/index.vue'
 import UserMessage from '@/views/user/message/index/index.vue'
 import UserMessageShow from '@/views/user/message/show/index.vue'
@@ -169,6 +170,11 @@ export default new Router({
 			path: '/user/customer/applier',
 			name: 'user_customer_applier',
 			component: UserCustomerApplier
+		},
+		{
+			path: '/user/customer/applier1',
+			name: 'user_customer_applier1',
+			component: UserCustomerApplier1
 		},
 		{
 			path: '/user/erp',

@@ -11,7 +11,8 @@ export default {
 			brands: [],
 			presclass: [],
 			form: {
-				image: []
+				image: [],
+				userId: this.$store.state.user.id
 			},
 			rules: {
 				name: {
@@ -86,6 +87,11 @@ export default {
 		this.cateIndex()
 		this.brandIndex()
 		this.presclassIndex()
+	},
+	computed: {
+		user() {
+			return this.$store.state.user
+		}
 	},
 	components: {
 		cheader,

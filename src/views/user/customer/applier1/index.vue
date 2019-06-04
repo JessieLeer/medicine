@@ -6,7 +6,7 @@
 	  <el-main>
 		  <el-container direction='horizontal'>
 				<el-aside width='200px'>
-					<caside active='/user/customer/applier'></caside>
+					<caside active='/user/customer/applier1'></caside>
 				</el-aside>
 				<el-main class='pt-0'>
 				  <el-form v-bind:inline="true" size='small'>
@@ -23,12 +23,6 @@
 						<el-table-column prop="status" width='80' label="状态" show-overflow-tooltip>
 						  <template slot-scope='scope'>
 								{{scope.row.status == '0' ? '已同意' : scope.row.status == '1' ? '已驳回' : '待审核'}}
-							</template>
-						</el-table-column>
-						<el-table-column label="操作" fixed="right" width='160'>
-							<template slot-scope='scope' v-if='scope.row.status == 2'>
-								 <el-button type='success' v-on:click='opera(scope.row.user.id,true)' size='mini'>同意</el-button>
-								<el-button type='warning' v-on:click='opera(scope.row.user.id,false)' size='mini'>驳回</el-button>
 							</template>
 						</el-table-column>
 					</el-table>
