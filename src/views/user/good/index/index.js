@@ -170,9 +170,7 @@ export default {
 					this.$http.post('/api/ucenter/productAdd', this.form).then((res) => {
 						if(res.data.success){
 							this.$message.success(res.data.message)
-							window.setTimeout(() => {
-								window.location.reload()
-							},1500)
+							this.editFormVisiable = false
 						}else{
 							this.$message.error(res.data.message)
 						}
