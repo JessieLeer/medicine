@@ -53,7 +53,7 @@
 						<el-table-column prop="manufacturer" label="生产厂家" show-overflow-tooltip></el-table-column>
 						<el-table-column prop="expected" label="计划采购数量" width='140'>
 						  <template slot-scope='scope'>
-								<el-input-number v-model="scope.row.expected" :min="1" ></el-input-number>
+							  <el-input-number v-model="scope.row.expected" :min="0" v-bind:ref='"expected" + scope.row.id'></el-input-number>
 							</template>
 						</el-table-column>
 						<el-table-column label="操作" width='70'>

@@ -128,6 +128,7 @@ export default {
 			offersDialogShow: false,
 			offers: [],
 			goodCreateVisable: false,
+			errorExpected: '',
 			form1: {
 				name: '',
 				brand: '',
@@ -217,6 +218,15 @@ export default {
 	computed: {
 		user() {
 			return this.$store.state.user
+		},
+		expectedAble() {
+			for(let item of this.form.goods) {
+				if(item.expected == 0) {
+					this.errorExpected = 'expected' + item.id
+					return false
+				}
+			}
+			return true
 		}
 	},
 	watch: {
@@ -327,7 +337,7 @@ export default {
 				}
 				this.goods = res.data.data
 				for(let item of this.goods){
-					this.$set(item, 'expected', 1)
+					this.$set(item, 'expected', '')
 				}
 				this.goodTotal = res.data.total
 			})
@@ -340,12 +350,9 @@ export default {
 			})
 		},
 		appendForm(field,item) {
-			console.log(item)
-			console.log(this.form.goods)
 			let len = this.form.goods.filter((itemer) => {
 				return itemer.id == item.id
 			}).length
-			console.log(len)
 			this.form[field].push(item)
 		},
 		deleteForm(field,item) {
@@ -384,15 +391,20 @@ export default {
 		inquiryCreate(form) {
 			this.$refs[form].validate((valid) => {
         if (valid) {
-					this.submitAble = false
-					this.$http.post('/api/inquiry/save', this.form).then((res) => {
-						if(res.data.success){
-							this.dialogResultVisible = true
-						}else{
-							this.$message.error(res.data.message)
-						}
-						this.submitAble = true
-					})
+					if(this.expectedAble) {
+						this.submitAble = false
+						this.$http.post('/api/inquiry/save', this.form).then((res) => {
+							if(res.data.success){
+								this.dialogResultVisible = true
+							}else{
+								this.$message.error(res.data.message)
+							}
+							this.submitAble = true
+						})
+					}else{
+						this.$refs[this.errorExpected].focus()
+						this.$message.error('计划采购量不能为空')
+					}
         } else {
 					console.log('error')
           return false

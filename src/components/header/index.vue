@@ -37,7 +37,6 @@
 				</el-submenu>
 				</div>
 			</el-col>
-
 		</el-row>
 		<el-dialog title="方式选择" v-bind:visible.sync="isWayShow" width='60%' class='way-dialog' style='position: fixed;z-index: 100'>
 		  <el-row>

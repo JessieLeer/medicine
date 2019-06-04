@@ -2223,26 +2223,31 @@ export default {
         if (valid) {
 					this.$http.post('/api/ucenter/update', this.form).then((res) => {
 						if(res.data.success){
-						  let user = {}
-							user.id = res.data.data.id
-							user.name = res.data.data.name
-							user.phone = res.data.data.phone
-							user.email = res.data.data.email
-							user.headpic = res.data.data.photo ? res.data.data.photo : '/static/front/images/avatar.png'
-							user.type = res.data.data.customerType
-							user.province = res.data.data.group.province ? res.data.data.group.province : '北京'
-							user.city = res.data.data.group.city ? res.data.data.group.city : '北京'
-							user.region = res.data.data.group.region ? res.data.data.group.region : '东城区'
-							user.company = res.data.data.group.company
-							user.unit = res.data.data.group.unit
-							user.license = res.data.data.group.license
-							user.logo = res.data.data.group.photos
-							user.gsp = res.data.data.group.gsp
-							user.firstService = res.data.data.group.firstService
-							user.commission = res.data.data.group.commission
-							user.regnum = res.data.data.group.regnum
-							user.regaddress = res.data.data.group.regaddress
-							this.$store.commit('login',user)
+							if(res.data.data.pwdEdit == 'true') {
+								this.$store.commit('logout')
+								this.$router.push('/login')
+							}else{
+								let user = {}
+								user.id = res.data.data.id
+								user.name = res.data.data.name
+								user.phone = res.data.data.phone
+								user.email = res.data.data.email
+								user.headpic = res.data.data.photo ? res.data.data.photo : '/static/front/images/avatar.png'
+								user.type = res.data.data.customerType
+								user.province = res.data.data.group.province ? res.data.data.group.province : '北京'
+								user.city = res.data.data.group.city ? res.data.data.group.city : '北京'
+								user.region = res.data.data.group.region ? res.data.data.group.region : '东城区'
+								user.company = res.data.data.group.company
+								user.unit = res.data.data.group.unit
+								user.license = res.data.data.group.license
+								user.logo = res.data.data.group.photos
+								user.gsp = res.data.data.group.gsp
+								user.firstService = res.data.data.group.firstService
+								user.commission = res.data.data.group.commission
+								user.regnum = res.data.data.group.regnum
+								user.regaddress = res.data.data.group.regaddress
+								this.$store.commit('login',user)
+							}
 							this.$message.success(res.data.message)
 						}else{
 							this.$message.warning(res.data.message)
