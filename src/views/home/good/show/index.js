@@ -38,7 +38,7 @@ export default {
 			})
 		},
 		show() {
-			this.$http.get('/api/inquiry/productInfo', {params: {id: this.$route.params.id}}).then((res) => {
+			this.$http.get('/api/inquiry/productInfo', {params: {id: this.$route.params.id, userId: this.$store.state.user.id}}).then((res) => {
 				res.data.data.image = res.data.data.image.split('|')
 				res.data.data.image.shift()
 				this.form = res.data.data
