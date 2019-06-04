@@ -6,7 +6,7 @@
 					<img src="../../assets/image/logo.png" width='120'>
 				</el-menu-item>
 			</el-col>
-			<el-col :md='10' :sm='11'>
+			<el-col :md='20' :sm='21'>
 			  <el-menu-item index="/" class='f-ib'>首页</el-menu-item>
 			  <el-menu-item index="/inquiry/none" class='f-ib'>询价比价</el-menu-item>
 		    <el-menu-item index="/buyer" class='f-ib'>优选采购商</el-menu-item>
@@ -14,9 +14,8 @@
 				<el-menu-item class='f-ib'>
 				  <a href='http://www.yaozhicai.cn:8081/' target='_blank' style='color: #f54100;'>药追溯平台</a>
 				</el-menu-item>
-			</el-col>
-			<el-col :md='10' :sm='10' class='f-tar'>
-			  <el-menu-item v-on:click='isWayShow = true' class='f-ib' v-if='user.id && user.type == "采购商"'>
+				<div class='f-tar f-ib f-fr'>
+				  <el-menu-item v-on:click='isWayShow = true' class='f-ib' v-if='user.id && user.type == "采购商"'>
 					<el-button type='primary' size='small'>发布询价</el-button>
 				</el-menu-item>
 				<el-menu-item index="/register" class='f-ib' v-if='!user.id'>注册</el-menu-item>
@@ -30,13 +29,15 @@
 				</el-menu-item>
 				<el-submenu index="/user" class='f-ib' v-if='user.id'>
 					<template slot="title">
-						<img v-bind:src='serverUrl + user.headpic' width='34' class='headpic'>
-						{{user.name}}({{user.type}})
+						<img v-bind:src='serverUrl + user.headpic' width='28' class='headpic'>
+						{{user.name.substr(0,4)}}<i v-if='user.name.length > 4'>...</i>({{user.type}})
 					</template>
 					<el-menu-item index="/user">个人中心</el-menu-item>
 					<el-menu-item v-on:click='logout'>退出</el-menu-item>
 				</el-submenu>
+				</div>
 			</el-col>
+
 		</el-row>
 		<el-dialog title="方式选择" v-bind:visible.sync="isWayShow" width='60%' class='way-dialog' style='position: fixed;z-index: 100'>
 		  <el-row>
