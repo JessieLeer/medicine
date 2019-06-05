@@ -130,6 +130,9 @@ export default {
 					this.$http.post('/api/ucenter/productAdd', this.form).then((res) => {
 						if(res.data.success){
 							this.$message.success(res.data.message)
+							window.setTimeout(() => {
+								this.$router.push('/user/good')
+							},1500)
 						}else{
 							this.$message.error(res.data.message)
 						}

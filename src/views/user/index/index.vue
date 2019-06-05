@@ -71,7 +71,7 @@
 									  <b>{{order.reach.success}}</b>
 									</el-form-item>
 								  <el-form-item label='订单达成率'>
-									  <b>{{Math.round(order.reach.success/order.reach.total*100)}}%</b>
+									  <b>{{order.reach.total ?  0 : Math.round(order.reach.success/order.reach.total*100)}}%</b>
 									</el-form-item>
 								</el-form>
 								<echart v-bind:options="order.reach" class='w-100 intro-canvas'/>
